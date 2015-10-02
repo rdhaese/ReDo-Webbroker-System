@@ -14,6 +14,11 @@
         <module>ear-module</module>
     </modules>
 
+
+
+
+
+
     <dependencyManagement>
         <dependencies>
             <dependency>
