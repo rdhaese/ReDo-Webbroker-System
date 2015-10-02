@@ -9,10 +9,10 @@ import javax.persistence.Persistence;
 /**
  * Created by RDEAX37 on 2/10/2015.
  */
-public class sdfqdfg {
+public class AbcTest {
 
     @Test
-    public void sdpfjiosdfsdf(){
+    public void sdpfjiosdfsdfTest() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyTestPersistenceUnit");
         EntityManager em = emf.createEntityManager();
         EntityTransaction t = em.getTransaction();
