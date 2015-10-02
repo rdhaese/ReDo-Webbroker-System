@@ -19,7 +19,7 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>dbunit</groupId>
             <artifactId>dbunit</artifactId>
