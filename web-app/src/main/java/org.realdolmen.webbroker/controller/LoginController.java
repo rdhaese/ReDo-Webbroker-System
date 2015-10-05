@@ -25,15 +25,18 @@ public class LoginController implements Serializable {
     @NotNull(message = "Please enter a password")
     private String password;
 
-    public void login() {
+    private boolean loginError = false;
+
+    public String login() {
         User user = userRepository.getUserByUsername(username);
 
         // TODO: hashing and salting of input password
         if(user == null || !password.equals(user.getPassword())) {
-            System.out.println("Login failed");
+            loginError = true;
+            return "loginForm";
         } else {
-            System.out.println("Login success");
             loggedInUserController.setLoggedInUser(user);
+            return "index";
         }
     }
 
@@ -51,5 +54,9 @@ public class LoginController implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean getLoginError() {
+        return loginError;
     }
 }
