@@ -6,4 +6,10 @@
     <users id="2" DTYPE="users" lastName="Flinstone" firstName="Wilma" userName="wflinstone" password="qwerty" />
     <users id="3" DTYPE="users" lastName="Detest" firstName="Jan" userName="jdetest" password="123456" />
     <users id="4" DTYPE="users" lastName="Detest" firstName="Anne" userName="adetest" password="987654" />
+
+    <users id="5" DTYPE="AirlineCompanyEmployee" lastName="De Vlieger" firstName="Geert" userName="gdevlieger" password="wxcvbn" />
+    <users id="6" DTYPE="AirlineCompanyEmployee" lastName="De Vlieger" firstName="Els" userName="edevlieger" password="qsdfgh" />
+
+    <users id="7" DTYPE="TravelAgencyEmployee" lastName="Van Ver" firstName="Jos" userName="jvanver" password="poiuyt" />
+    <users id="8" DTYPE="TravelAgencyEmployee" lastName="Van Ver" firstName="Gertrude" userName="gvanver" password="mlkjhg" />
 </dataset>

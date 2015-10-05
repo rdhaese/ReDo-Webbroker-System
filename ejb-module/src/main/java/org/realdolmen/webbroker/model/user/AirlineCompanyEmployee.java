@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 public class AirlineCompanyEmployee extends User {
 
     @NotNull
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private AirlineCompany company;
 
     public AirlineCompany getCompany() {

@@ -26,7 +26,6 @@ public class UserRepository implements Serializable{
         return resultList.size() == 0 ? null : resultList.get(0);
     }
 
-
     public void add(User entity) {
         entityManager.persist(entity);
     }
@@ -44,7 +43,14 @@ public class UserRepository implements Serializable{
 
     public void remove(User user) {
         entityManager.remove(entityManager.merge(user));
+        entityManager.flush();
     }
 
+    public List<User> getAllUsers(){
+        return entityManager.createQuery("SELECT u FROM users u", User.class).getResultList();
+    }
 
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 }

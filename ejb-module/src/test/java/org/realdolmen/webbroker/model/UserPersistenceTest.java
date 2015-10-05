@@ -69,7 +69,7 @@ public class UserPersistenceTest extends DataSetPersistenceTest {
 
     @Test
     public void testCanAllUsersBeFound() {
-        assertEquals(4, entityManager().createQuery("SELECT u FROM users u", User.class).getResultList().size());
+        assertEquals(8, entityManager().createQuery("SELECT u FROM users u", User.class).getResultList().size());
     }
 
     @Test
