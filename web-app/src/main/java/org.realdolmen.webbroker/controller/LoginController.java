@@ -1,6 +1,10 @@
 package org.realdolmen.webbroker.controller;
 
+import org.realdolmen.webbroker.model.user.User;
+import org.realdolmen.webbroker.repository.UserRepository;
+
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -9,6 +13,12 @@ import java.io.Serializable;
 @Named
 public class LoginController implements Serializable {
 
+    @Inject
+    UserRepository userRepository;
+
+    @Inject
+    LoggedInUserController loggedInUserController;
+
     @NotNull(message = "Please enter a username")
     private String username;
 
@@ -16,7 +26,15 @@ public class LoginController implements Serializable {
     private String password;
 
     public void login() {
-        System.out.println("Login with: " + username + " " + password);
+        User user = userRepository.getUserByUsername(username);
+
+        // TODO: hashing and salting of input password
+        if(user == null || !password.equals(user.getPassword())) {
+            System.out.println("Login failed");
+        } else {
+            System.out.println("Login success");
+            loggedInUserController.setLoggedInUser(user);
+        }
     }
 
     public String getPassword() {
