@@ -11,7 +11,7 @@ import javax.validation.ConstraintViolationException;
 /**
  * Created by RDEAX37 on 5/10/2015.
  */
-public class AirlineEmployeeTest extends DataSetPersistenceTest {
+public class AirlineEmployeePersistenceTest extends DataSetPersistenceTest {
 
     private AirlineCompanyEmployee user;
 

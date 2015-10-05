@@ -1,13 +1,22 @@
 package org.realdolmen.webbroker.model;
 
+import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by RDEAX37 on 2/10/2015.
  */
+@Entity
 public class Address extends BaseEntity{
+    @NotNull
     private String country;
+    @NotNull
     private String street;
+    @NotNull
     private String number;
+    @NotNull
     private String postalCode;
+    @NotNull
     private String city;
 
     public String getCountry() {

@@ -12,7 +12,7 @@ import javax.validation.ConstraintViolationException;
 /**
  * Created by RDEAX37 on 5/10/2015.
  */
-public class TravelAgencyEmployeeTest extends DataSetPersistenceTest {
+public class TravelAgencyEmployeePersistenceTest extends DataSetPersistenceTest {
 
     private TravelAgencyEmployee user;
 

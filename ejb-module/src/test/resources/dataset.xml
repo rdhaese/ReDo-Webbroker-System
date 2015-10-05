@@ -12,4 +12,8 @@
 
     <users id="7" DTYPE="TravelAgencyEmployee" lastName="Van Ver" firstName="Jos" userName="jvanver" password="poiuyt" />
     <users id="8" DTYPE="TravelAgencyEmployee" lastName="Van Ver" firstName="Gertrude" userName="gvanver" password="mlkjhg" />
+
+    <address id="1" country="Belgium" city="Gent" postalCode="9000" street="Kerkstraat" number="10" />
+    <address id="2" country="Belgium" city="Aalst" postalCode="9300" street="Stationsstraat" number="5" />
+
 </dataset>
