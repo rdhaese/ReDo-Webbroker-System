@@ -32,7 +32,7 @@ public class LoginControllerTest {
     public void userCanLogin() throws Exception {
         User userFromDatabase = new User();
         userFromDatabase.setUserName("root");
-        userFromDatabase.setPassword("root");
+        userFromDatabase.setPassword("password");
         when(userRepository.getUserByUsername("root")).thenReturn(userFromDatabase);
         controller.setUsername(userFromDatabase.getUserName());
         controller.setPassword(userFromDatabase.getPassword());

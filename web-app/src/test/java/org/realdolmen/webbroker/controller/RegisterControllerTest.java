@@ -35,7 +35,7 @@ public class RegisterControllerTest {
         controller.setFirstName("root");
         controller.setLastName("root");
         controller.setUserName("root");
-        controller.setPassword("root");
+        controller.setPassword("password");
 
         assertEquals("register-succes", controller.registerUser());
         assertNull(controller.getErrorMessage());
