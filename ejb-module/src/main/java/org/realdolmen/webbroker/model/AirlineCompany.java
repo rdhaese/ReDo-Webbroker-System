@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 /**
  * Created by RDEAX37 on 2/10/2015.
  */
+
 @Entity
 public class AirlineCompany extends BaseEntity{
 
