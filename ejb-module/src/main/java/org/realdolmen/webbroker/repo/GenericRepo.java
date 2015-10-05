@@ -17,6 +17,7 @@ import javax.persistence.PersistenceContext;
 public class GenericRepo<T extends BaseEntity> {
 
     @PersistenceContext
+    protected
     EntityManager entityManager;
 
     /**
