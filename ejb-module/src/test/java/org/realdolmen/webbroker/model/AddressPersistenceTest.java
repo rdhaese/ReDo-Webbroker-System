@@ -42,31 +42,35 @@ public class AddressPersistenceTest extends DataSetPersistenceTest {
 
     @Test (expected = ConstraintViolationException.class)
     public void addressCantBePersistedWithoutStreet(){
-
+        address.setStreet(null);
+        entityManager().persist(address);
     }
 
     @Test (expected = ConstraintViolationException.class)
     public void addressCantBePersistedWithoutNumber(){
-
+        address.setNumber(null);
+        entityManager().persist(address);
     }
 
     @Test (expected = ConstraintViolationException.class)
     public void addressCantBePersistedWithoutPostalCode(){
-
+        address.setPostalCode(null);
+        entityManager().persist(address);
     }
 
     @Test (expected = ConstraintViolationException.class)
     public void addressCantBePersistedWithoutCity(){
-
+        address.setCity(null);
+        entityManager().persist(address);
     }
 
     @Test
     public void canAllAddressesBeFound(){
-
+        assertEquals(2, entityManager().createQuery("SELECT a FROM Address a").getResultList().size());
     }
 
     @Test
     public void canAddressBeFoundOnId(){
-
+        assertNotNull(entityManager().find(Address.class, 1L));
     }
 }
