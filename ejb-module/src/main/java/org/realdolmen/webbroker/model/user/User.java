@@ -2,14 +2,13 @@ package org.realdolmen.webbroker.model.user;
 
 import org.realdolmen.webbroker.model.BaseEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
  * Created by RDEAX37 on 2/10/2015.
  */
-@Entity (name = "users")
+@Entity(name = "users")
 @Inheritance
 public class User extends BaseEntity {
     @NotNull
@@ -50,8 +49,16 @@ public class User extends BaseEntity {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    /**
+     * @param password
+     * @throws IllegalArgumentException If the password length is < 6
+     */
+    public void setPassword(String password) throws IllegalArgumentException{
+        if ((password == null) || (password.length() >= 6)) {
+            this.password = password;
+        } else {
+            throw new IllegalArgumentException("Password should be at least 6 characters long");
+        }
     }
 
     public String getSalt() {

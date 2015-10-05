@@ -1,4 +1,9 @@
 <dataset>
-    <airlinecompany id="1" name="blabla1"/>
-    <airlinecompany id="2" name="blabla2"/>
+    <airlinecompany id="1" name="Boeing"/>
+    <airlinecompany id="2" name="Airbus"/>
+
+    <users id="1" DTYPE="users" lastName="Flinstone" firstName="Fred" userName="fflinstone" password="azerty" />
+    <users id="2" DTYPE="users" lastName="Flinstone" firstName="Wilma" userName="wflinstone" password="qwerty" />
+    <users id="3" DTYPE="users" lastName="Detest" firstName="Jan" userName="jdetest" password="123456" />
+    <users id="4" DTYPE="users" lastName="Detest" firstName="Anne" userName="adetest" password="987654" />
 </dataset>
