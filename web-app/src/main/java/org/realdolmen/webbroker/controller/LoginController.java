@@ -75,7 +75,7 @@ public class LoginController implements Serializable {
         this.password = password;
     }
 
-    public boolean getLoginError() {
+    public boolean isLoginError() {
         return loginError;
     }
 }
