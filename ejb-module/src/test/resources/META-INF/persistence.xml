@@ -55,7 +55,11 @@
         <class>com.realdolmen.course.domain.Plane</class>
         <class>com.realdolmen.course.persistence.PassengerRepository</class>-->
         <class>org.realdolmen.webbroker.model.AirlineCompany</class>
+        <class>org.realdolmen.webbroker.model.TravelAgency</class>
         <class>org.realdolmen.webbroker.model.BaseEntity</class>
+        <class>org.realdolmen.webbroker.model.user.User</class>
+        <class>org.realdolmen.webbroker.model.user.AirlineCompanyEmployee</class>
+        <class>org.realdolmen.webbroker.model.user.TravelAgencyEmployee</class>
 
         <properties>
 

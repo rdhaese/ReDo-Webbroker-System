@@ -1,5 +1,6 @@
 import org.junit.Test;
 import org.realdolmen.webbroker.model.AirlineCompany;
+import org.realdolmen.webbroker.model.user.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -19,6 +20,12 @@ public class AbcTest {
         t.begin();
         AirlineCompany ac = new AirlineCompany();
         ac.setName("blabla");
+        User u = new User();
+        u.setFirstName("sd");
+        u.setLastName("dsf");
+        u.setUserName("sqd");
+        u.setPassword("sdfs");
+        em.persist(u);
         em.persist(ac);
         t.commit();
         em.close();
