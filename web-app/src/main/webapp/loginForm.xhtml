@@ -6,11 +6,23 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<h:form>
-    <h:outputLabel>Username:</h:outputLabel>
-    <h:inputText id="usernameInput" value="#{loginController.username}"/>
-    <h:outputLabel>Password:</h:outputLabel>
-    <h:inputText id="passwordInput" value="#{loginController.password}"/>
-</h:form>
+<ui:composition template="template.xhtml" >
+    <ui:define name="pageTitle">Login form</ui:define>
+    <ui:define name="pageContent">
+        <h:form>
+            <h:panelGrid columns="3">
+                <h:outputLabel for="usernameInput">Username:</h:outputLabel>
+                <h:inputText id="usernameInput" value="#{loginController.username}" />
+                <h:message for="usernameInput" />
+
+                <h:outputLabel for="passwordInput">Password:</h:outputLabel>
+                <h:inputSecret id="passwordInput" value="#{loginController.password}"/>
+                <h:message for="passwordInput" />
+            </h:panelGrid>
+
+            <h:commandButton action="#{loginController.login}" value="Login" />
+        </h:form>
+    </ui:define>
+</ui:composition>
 
 </html>
