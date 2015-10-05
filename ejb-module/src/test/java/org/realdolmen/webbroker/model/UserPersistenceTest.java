@@ -2,16 +2,13 @@ package org.realdolmen.webbroker.model;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.realdolmen.webbroker.PersistenceTest;
+import org.realdolmen.webbroker.DataSetPersistenceTest;
 import org.realdolmen.webbroker.model.user.User;
-
-import javax.persistence.EntityManager;
-import java.time.Period;
 
 /**
  * Created by RDEAX37 on 5/10/2015.
  */
-public class UserPersistenceTest extends PersistenceTest {
+public class UserPersistenceTest extends DataSetPersistenceTest {
 
     private User user;
 
