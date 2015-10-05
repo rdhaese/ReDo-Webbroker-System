@@ -20,6 +20,12 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * Mocking test for the {@link AccessFilter} to test whether it correctly blocks/allows access
+ * attempts to secure and non-secure servlet paths.
+ *
+ * @author Youri Flement
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class AccessFilterTest {
 

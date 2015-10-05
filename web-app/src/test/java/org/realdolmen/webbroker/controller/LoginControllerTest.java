@@ -5,16 +5,17 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.realdolmen.webbroker.controller.LoggedInUserController;
-import org.realdolmen.webbroker.controller.LoginController;
 import org.realdolmen.webbroker.model.user.User;
 import org.realdolmen.webbroker.repository.UserRepository;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
+/**
+ * Mocking test for the {@link LoginController} to verify that a user can log in.
+ *
+ * @author Youri Flement
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class LoginControllerTest {
 

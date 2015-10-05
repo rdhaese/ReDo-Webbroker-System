@@ -6,6 +6,12 @@ import org.realdolmen.webbroker.model.user.User;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit test for the {@link LoggedInUserController} to verify that the logged in user is maintained correctly and that
+ * the logged in user can logout.
+ *
+ * @author Youri Flement
+ */
 public class LoggedInUserControllerTest {
 
     protected LoggedInUserController controller;
