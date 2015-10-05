@@ -16,4 +16,7 @@
     <address id="1" country="Belgium" city="Gent" postalCode="9000" street="Kerkstraat" number="10" />
     <address id="2" country="Belgium" city="Aalst" postalCode="9300" street="Stationsstraat" number="5" />
 
+    <region id="1000" name="Europe" code="EU" />
+    <region id="2000" name="North America" code="NA" />
+    <region id="3000" name="South America" code="SA" />
 </dataset>
