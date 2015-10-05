@@ -27,6 +27,12 @@ public class LoginController implements Serializable {
 
     private boolean loginError = false;
 
+    /**
+     * Attempt to login with the provided credentials. The user is redirected to the login form if the login
+     * was not successful and is redirected to the homepage if the login was successful.
+     *
+     * @return The homepage if the login was successful, the login form otherwise.
+     */
     public String login() {
         User user = userRepository.getUserByUsername(username);
 
@@ -36,6 +42,7 @@ public class LoginController implements Serializable {
             return "loginForm";
         } else {
             loggedInUserController.setLoggedInUser(user);
+            // TODO: return to page the user was on
             return "index";
         }
     }
