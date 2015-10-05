@@ -2,6 +2,8 @@ package org.realdolmen.webbroker.filter;
 
 import org.realdolmen.webbroker.controller.LoggedInUserController;
 import org.realdolmen.webbroker.model.user.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.*;
@@ -14,6 +16,8 @@ import java.util.Collection;
 
 @WebFilter(urlPatterns = "/*")
 public class AccessFilter implements Filter {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccessFilter.class);
 
     private Collection<String> securePages;
 
@@ -32,7 +36,9 @@ public class AccessFilter implements Filter {
         if (request instanceof HttpServletRequest) {
             HttpServletRequest httpServlet = (HttpServletRequest) request;
             String servletPath = httpServlet.getServletPath();
-            if(!hasPermission(controller.getLoggedInUser(), servletPath)) {
+            User user = controller.getLoggedInUser();
+            if(!hasPermission(user, servletPath)) {
+                LOGGER.warn("Blocked access attempt at: " + servletPath + " by user: " + user);
                 // TODO: hardcoded URL...
                 ((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/index.faces");
             }

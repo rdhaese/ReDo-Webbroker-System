@@ -46,11 +46,16 @@ public class LoggedInUserController implements Serializable {
     }
 
     /**
-     * Logout the current user and return to the cur
+     * Logout the current user and return to the homepage.
      *
-     * @return
+     * @return The homepage.
      */
     public String logout() {
+        if(loggedInUser == null) {
+            LOGGER.warn("Logout of user even though there is no logged in user.");
+        } else {
+            LOGGER.info("User '" + loggedInUser.getUserName() + "' has logged out.");
+        }
         loggedInUser = null;
         return "index";
     }
