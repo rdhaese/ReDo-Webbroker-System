@@ -24,8 +24,8 @@ public class LoggedInUserController implements Serializable {
         return loggedInUser != null;
     }
 
-    public void logout() {
-        // TODO: is this correct?
+    public String logout() {
         loggedInUser = null;
+        return "index";
     }
 }
