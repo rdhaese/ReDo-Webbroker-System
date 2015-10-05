@@ -70,6 +70,14 @@ public class AccessFilter implements Filter {
         return true;
     }
 
+    public Collection<String> getSecurePages() {
+        return securePages;
+    }
+
+    public void setSecurePages(Collection<String> securePages) {
+        this.securePages = securePages;
+    }
+
     @Override
     public void destroy() {
 
