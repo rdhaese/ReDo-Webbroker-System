@@ -1,4 +1,4 @@
-package org.realdolmen.webbroker;
+package org.realdolmen.webbroker.controller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

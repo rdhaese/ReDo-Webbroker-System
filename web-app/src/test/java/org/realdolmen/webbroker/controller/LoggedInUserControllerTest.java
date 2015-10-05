@@ -1,13 +1,10 @@
-package org.realdolmen.webbroker;
+package org.realdolmen.webbroker.controller;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.realdolmen.webbroker.controller.LoggedInUserController;
 import org.realdolmen.webbroker.model.user.User;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class LoggedInUserControllerTest {
 
