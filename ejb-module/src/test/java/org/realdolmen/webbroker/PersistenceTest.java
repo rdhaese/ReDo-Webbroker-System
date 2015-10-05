@@ -1,3 +1,5 @@
+package org.realdolmen.webbroker;
+
 import org.dbunit.DBTestCase;
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;
 import org.dbunit.dataset.IDataSet;
@@ -20,6 +22,7 @@ import java.io.FileInputStream;
 public class PersistenceTest extends DBTestCase {
 
     private EntityManagerFactory emf;
+    private EntityManager em;
     private EntityTransaction t;
 
     public PersistenceTest()
@@ -28,25 +31,28 @@ public class PersistenceTest extends DBTestCase {
         System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS, "com.mysql.jdbc.Driver" );
         System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL, "jdbc:mysql://localhost:3306/webbroker" );
         System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME, "root" );
-        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD, "root" );
+        System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD, "root");
         // System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_SCHEMA, "" );
     }
 
     @Before
-    public void setup() throws Exception {
+    public void setUp() throws Exception {
         t = entityManager().getTransaction();
         t.begin();
     }
 
     @After
-    public void teardown() throws Exception {
+    public void tearDown() throws Exception {
         t.commit();
         entityManager().close();
-        emf.close();
+        getEmf().close();
     }
 
     protected EntityManager entityManager() {
-        return getEmf().createEntityManager();
+        if ((em == null) || !(em.isOpen())){
+            em = getEmf().createEntityManager();
+        }
+        return em;
     }
 
     @Override
@@ -65,7 +71,7 @@ public class PersistenceTest extends DBTestCase {
     }
 
     public EntityManagerFactory getEmf(){
-        if (emf == null){
+        if ((emf == null) || !(emf.isOpen())){
             emf = Persistence.createEntityManagerFactory("MyTestPersistenceUnit");
         }
         return emf;
