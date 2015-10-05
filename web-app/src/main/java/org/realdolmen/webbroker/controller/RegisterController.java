@@ -1,4 +1,4 @@
-package org.realdolmen.webbroker.service;
+package org.realdolmen.webbroker.controller;
 
 import org.realdolmen.webbroker.model.user.User;
 import org.realdolmen.webbroker.repository.UserRepository;
@@ -9,7 +9,8 @@ import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 
 /**
- * Created by RDEAX37 on 5/10/2015.
+ *
+ * @author Robin D'Haese
  */
 @Named
 @RequestScoped
@@ -29,7 +30,7 @@ public class RegisterController {
 
     private String errorMessage;
 
-    public String registerPassenger(){
+    public String registerUser(){
         errorMessage = null;
         if (userRepo.getUserByUsername(userName) == null){
             //Register user
