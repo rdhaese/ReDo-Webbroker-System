@@ -3,12 +3,14 @@ package org.realdolmen.webbroker.model.user;
 import org.realdolmen.webbroker.model.BaseEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
 import javax.validation.constraints.NotNull;
 
 /**
  * Created by RDEAX37 on 2/10/2015.
  */
-@Entity
+@Entity (name = "users")
+@Inheritance
 public class User extends BaseEntity {
     @NotNull
     private String lastName;
