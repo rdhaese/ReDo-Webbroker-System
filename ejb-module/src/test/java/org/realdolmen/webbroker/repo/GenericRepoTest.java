@@ -7,7 +7,7 @@ import javax.persistence.Persistence;
 /**
  * Created by RDEAX37 on 4/10/2015.
  */
-public class GenericRepoTest extends PersistenceTest {
+public class GenericRepoTest  { //extends PersistenceTest
 
     @Test
     public void canDifferentEntitiesBeAdded(){
