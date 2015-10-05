@@ -7,6 +7,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by RDEAX37 on 5/10/2015.
@@ -25,6 +26,7 @@ public class RegisterController {
     @NotNull (message = "Username is required!")
     private String userName;
     @NotNull (message = "Password name is required!")
+    @Size (min = 6, message = "Password should be at least 6 characters long!")
     private String password;
 
     private String errorMessage;
@@ -39,7 +41,7 @@ public class RegisterController {
             user.setUserName(userName);
             user.setPassword(password);
             userRepo.add(user);
-            return "register-succes";
+            return "register-success";
         }else {
             //user already exists
             errorMessage = "Username is already in use!";
