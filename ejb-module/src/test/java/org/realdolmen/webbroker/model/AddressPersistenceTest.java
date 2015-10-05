@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.realdolmen.webbroker.DataSetPersistenceTest;
 import org.realdolmen.webbroker.model.user.User;
 
+import javax.validation.ConstraintViolationException;
+
 /**
  * Created by RDEAX37 on 5/10/2015.
  */
@@ -32,27 +34,28 @@ public class AddressPersistenceTest extends DataSetPersistenceTest {
         assertEquals(originalSize + 1, entityManager().createQuery("SELECT a From Address a", Address.class).getResultList().size());
     }
 
-    @Test
+    @Test (expected = ConstraintViolationException.class)
     public void addressCantBePersistedWithoutCountry(){
-
+        address.setCountry(null);
+        entityManager().persist(address);
     }
 
-    @Test
+    @Test (expected = ConstraintViolationException.class)
     public void addressCantBePersistedWithoutStreet(){
 
     }
 
-    @Test
+    @Test (expected = ConstraintViolationException.class)
     public void addressCantBePersistedWithoutNumber(){
 
     }
 
-    @Test
+    @Test (expected = ConstraintViolationException.class)
     public void addressCantBePersistedWithoutPostalCode(){
 
     }
 
-    @Test
+    @Test (expected = ConstraintViolationException.class)
     public void addressCantBePersistedWithoutCity(){
 
     }

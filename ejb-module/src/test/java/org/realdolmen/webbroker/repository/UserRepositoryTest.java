@@ -2,10 +2,6 @@ package org.realdolmen.webbroker.repository;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.realdolmen.webbroker.DataSetPersistenceTest;
 import org.realdolmen.webbroker.model.user.User;
 

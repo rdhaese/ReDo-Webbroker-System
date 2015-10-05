@@ -60,6 +60,7 @@
         <class>org.realdolmen.webbroker.model.user.User</class>
         <class>org.realdolmen.webbroker.model.user.AirlineCompanyEmployee</class>
         <class>org.realdolmen.webbroker.model.user.TravelAgencyEmployee</class>
+        <class>org.realdolmen.webbroker.model.Address</class>
 
         <properties>
 
