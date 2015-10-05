@@ -8,9 +8,8 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>web-module</artifactId>
     <packaging>war</packaging>
-    <name>web-module Maven Webapp</name>
-    <dependencies>
 
+    <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>ejb-module</artifactId>
@@ -30,11 +29,22 @@
             <version>5.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
 
-        <!-- <dependency>
-         <groupId>junit</groupId>
-         <artifactId>junit</artifactId>
-         <scope>test</scope>
-     </dependency>-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 </project>
