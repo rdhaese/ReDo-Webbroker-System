@@ -15,29 +15,21 @@
     <ui:define name="header"><ct:header title="Register User"/> </ui:define>
     <ui:define name="pageContent">
         <h:form>
-
-            <h:panelGrid columns="3">
+            #{registerController.errorMessage}
+            <p:panelGrid columns="2">
             <p:outputLabel value="Enter your name: "/>
+                <h:message for="lastName" />
             <p:inputText id="lastName" value="#{registerController.lastName}"/>
-                <h:outputLabel><h:message for="lastName" /></h:outputLabel>
-
             <p:outputLabel value="Enter your first name: "/>
-            <p:inputText id="firstName" value="#{registerController.firstName}"/>
-                <h:outputLabel> <h:message for="firstName" /></h:outputLabel>
-
+            <p:inputText value="#{registerController.firstName}"/>
             <p:outputLabel value="Enter your username: "/>
-            <p:inputText id="userName" value="#{registerController.userName}"/>
-                <h:outputLabel><h:message for="userName" />  #{registerController.errorMessage}</h:outputLabel>
-
+            <p:inputText value="#{registerController.userName}"/>
             <p:outputLabel value="Enter your password: "/>
-            <p:password id="password" value="#{registerController.password}" match="repeated_password" validatorMessage="Password should be the same!"/>
-                <h:outputLabel><h:message for="password" /></h:outputLabel>
-
-            <h:inputHidden />
+            <p:password id="password" value="#{registerController.password}" match="repeated_password" />
+                <h:inputHidden/>
             <p:password id="repeated_password" value="#{registerController.password}"/>
-            </h:panelGrid>
-
-            <p:commandButton value="Register" action="#{registerController.registerPassenger()}" ajax="false"/>
+            </p:panelGrid>
+            <p:commandButton value="Add Ticket" action="#{registerController.registerUser()}" />
         </h:form>
     </ui:define>
 </ui:composition>
