@@ -8,6 +8,11 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 
+/**
+ * Controller which keeps tracked of the logged in user and provides a method to log him out.
+ *
+ * @author Youri Flement
+ */
 @Named
 @SessionScoped
 public class LoggedInUserController implements Serializable {

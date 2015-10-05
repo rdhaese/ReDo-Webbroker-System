@@ -14,6 +14,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Primitive access filter which listens to all HTTP requests and redirects the visitor to the homepage if he
+ * is not logged in and is trying to access a secure page. The list of secure pages is currently hardcoded.
+ *
+ * @author Youri Flement
+ */
 @WebFilter(urlPatterns = "/*")
 public class AccessFilter implements Filter {
 

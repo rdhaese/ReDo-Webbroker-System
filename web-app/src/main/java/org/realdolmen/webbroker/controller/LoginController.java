@@ -11,6 +11,11 @@ import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+/**
+ * Controller for the login functionality, based on a username and password.
+ *
+ * @author Youri Flement
+ */
 @RequestScoped
 @Named
 public class LoginController implements Serializable {
