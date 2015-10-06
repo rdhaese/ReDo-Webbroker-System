@@ -7,6 +7,12 @@
 
     <persistence-unit name="MyPersistenceUnit" transaction-type="JTA">
         <jta-data-source>java:/MyDataSource</jta-data-source>
+        <class>org.realdolmen.webbroker.converter.LocalDateTimePersistenceConverter</class>
+        <properties>
+            <property name="hibernate.default_schema" value="webbroker"/>
+        </properties>
+
     </persistence-unit>
+
 
 </persistence>

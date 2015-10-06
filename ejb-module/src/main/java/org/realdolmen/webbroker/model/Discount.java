@@ -1,12 +1,41 @@
 package org.realdolmen.webbroker.model;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.persistence.Entity;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 /**
- * Created by RDEAX37 on 2/10/2015.
+ * Entity which represents the various discounts.
+ *
+ * @author Youri Flement
  */
-public class Discount extends BaseEntity{
+@Entity
+public class Discount extends BaseEntity {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Discount.class);
+
+    @NotNull
     private String name;
+
+    @NotNull
+    @Min(value = 0)
     private Double quantity;
-    private Boolean percentage;
+
+    @NotNull
+    private Boolean isPercentage;
+
+    public Discount() {
+    }
+
+    public Discount(String name, Double quantity, Boolean isPercentage) {
+        this.name = name;
+        this.quantity = quantity;
+        this.isPercentage = isPercentage;
+    }
 
     public String getName() {
         return name;
@@ -21,14 +50,17 @@ public class Discount extends BaseEntity{
     }
 
     public void setQuantity(Double quantity) {
+        if(quantity != null && quantity < 0) {
+            throw new IllegalArgumentException("Quantity must be positive");
+        }
         this.quantity = quantity;
     }
 
-    public Boolean getPercentage() {
-        return percentage;
+    public Boolean isPercentage() {
+        return isPercentage;
     }
 
-    public void setPercentage(Boolean percentage) {
-        this.percentage = percentage;
+    public void setIsPercentage(Boolean isPercentage) {
+        this.isPercentage = isPercentage;
     }
 }

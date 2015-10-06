@@ -54,8 +54,22 @@
         <class>com.realdolmen.course.domain.Airport</class>
         <class>com.realdolmen.course.domain.Plane</class>
         <class>com.realdolmen.course.persistence.PassengerRepository</class>-->
+        <class>org.realdolmen.webbroker.model.Airport</class>
         <class>org.realdolmen.webbroker.model.AirlineCompany</class>
+        <class>org.realdolmen.webbroker.model.TravelAgency</class>
         <class>org.realdolmen.webbroker.model.BaseEntity</class>
+        <class>org.realdolmen.webbroker.model.user.User</class>
+        <class>org.realdolmen.webbroker.model.user.AirlineCompanyEmployee</class>
+        <class>org.realdolmen.webbroker.model.user.TravelAgencyEmployee</class>
+        <class>org.realdolmen.webbroker.model.user.ReDoAirEmployee</class>
+        <class>org.realdolmen.webbroker.model.Address</class>
+        <class>org.realdolmen.webbroker.model.Region</class>
+        <class>org.realdolmen.webbroker.model.Discount</class>
+        <class>org.realdolmen.webbroker.model.Trip</class>
+        <class>org.realdolmen.webbroker.model.Flight</class>
+        <class>org.realdolmen.webbroker.model.Booking</class>
+
+        <class>org.realdolmen.webbroker.converter.LocalDateTimePersistenceConverter</class>
 
         <properties>
 

@@ -1,13 +1,28 @@
 package org.realdolmen.webbroker.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by RDEAX37 on 2/10/2015.
  */
+@Entity
 public class Flight extends BaseEntity {
+    @NotNull
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private AirlineCompany company;
+    @NotNull
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private Airport departure;
+    @NotNull
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private Airport arrival;
+    @NotNull
+    @Min(value = 0)
     private Double price;
+    @NotNull
+    @Min(value = 0)
     private Integer availableSeats;
 
     public AirlineCompany getCompany() {
