@@ -41,7 +41,12 @@ public class RegisterController {
             user.setFirstName(firstName);
             user.setUserName(userName);
             user.setPassword(password);
-            userRepo.add(user);
+            try {
+                userRepo.add(user);
+            } catch (Exception e){
+                errorMessage = "Something went wrong registering.";
+                return "register-user";
+            }
             return "register-succes";
         }else {
             //user already exists

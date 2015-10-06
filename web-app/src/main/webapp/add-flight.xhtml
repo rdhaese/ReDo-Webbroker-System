@@ -4,10 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ct="http://java.sun.com/jsf/composite/custom-tags"
-      xmlns:p="http://primefaces.org/ui">
-
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
 <ui:composition template="template.xhtml">
@@ -15,29 +13,32 @@
     <ui:define name="header"><ct:header title="Add Flight"/> </ui:define>
     <ui:define name="pageContent">
         <h:form>
+            #{addFlightController.message}
+            <h:panelGrid columns="3">
 
+                <h:outputLabel value="Select departure airport: "/>
+                <h:selectOneMenu id="departure" value="#{addFlightController.departure_id}">
+                    <f:selectItems value="#{addFlightController.getAirports()}" var="a"
+                                   itemLabel="#{a.getName()}" itemValue="#{a.getId()}"/>
+                </h:selectOneMenu>
+                <h:message for="departure"/>
 
-        </h:form>
+                <h:outputLabel value="Select arrival airport: "/>
+                <h:selectOneMenu id="arrival" value="#{addFlightController.arrival_id}" >
+                    <f:selectItems value="#{addFlightController.getAirports()}" var="a"
+                                   itemLabel="#{a.getName()}" itemValue="#{a.getId()}"/>
+                </h:selectOneMenu>
+                <h:message for="arrival"/>
 
+                <h:outputLabel value="Give in price: "/>
+                <h:inputText id="price" value="#{addFlightController.price}"/>
+                <h:message for="price"/>
 
-
-
-        <h:form>
-            #{registerController.errorMessage}
-            <p:panelGrid columns="2">
-                <p:outputLabel value="Enter your name: "/>
-                <h:message for="lastName" />
-                <p:inputText id="lastName" value="#{registerController.lastName}"/>
-                <p:outputLabel value="Enter your first name: "/>
-                <p:inputText value="#{registerController.firstName}"/>
-                <p:outputLabel value="Enter your username: "/>
-                <p:inputText value="#{registerController.userName}"/>
-                <p:outputLabel value="Enter your password: "/>
-                <p:password id="password" value="#{registerController.password}" match="repeated_password" />
-                <h:inputHidden/>
-                <p:password id="repeated_password" value="#{registerController.password}"/>
-            </p:panelGrid>
-            <p:commandButton value="Add Ticket" action="#{registerController.registerUser()}" />
+                <h:outputLabel value="Give in amount of seats: "/>
+                <h:inputText id="seats" value="#{addFlightController.amountOfSeats}"/>
+                <h:message for="seats"/>
+            </h:panelGrid>
+            <h:commandButton value="Add Flight" action="#{addFlightController.addFlight()}"/>
         </h:form>
     </ui:define>
 </ui:composition>
