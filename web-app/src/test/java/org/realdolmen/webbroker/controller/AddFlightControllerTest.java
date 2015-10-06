@@ -6,20 +6,14 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.realdolmen.util.EntityFactory;
-import org.realdolmen.webbroker.model.AirlineCompany;
 import org.realdolmen.webbroker.model.Flight;
 import org.realdolmen.webbroker.model.user.AirlineCompanyEmployee;
-import org.realdolmen.webbroker.model.user.User;
 import org.realdolmen.webbroker.repository.AirportRepository;
 import org.realdolmen.webbroker.repository.FlightRepository;
 
-import javax.inject.Inject;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.times;
 
@@ -64,7 +58,7 @@ public class AddFlightControllerTest {
         flight.setCompany(getACEmp().getCompany());
 
         addFlightController.addFlight();
-        Mockito.verify(flightRepo, times(1)).add(flight);
+        Mockito.verify(flightRepo, times(1)).add(Mockito.any(Flight.class));
     }
 
     private AirlineCompanyEmployee getACEmp() {
