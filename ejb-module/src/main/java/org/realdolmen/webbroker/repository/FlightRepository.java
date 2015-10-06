@@ -18,6 +18,9 @@ public class FlightRepository {
     private EntityManager entityManager;
 
     public void add(Flight flight){
+        flight.setCompany(entityManager.merge(flight.getCompany()));
+        flight.setArrival(entityManager.merge(flight.getArrival()));
+        flight.setDeparture(entityManager.merge(flight.getDeparture()));
         entityManager.persist(flight);
     }
 

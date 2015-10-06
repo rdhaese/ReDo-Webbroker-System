@@ -10,13 +10,13 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Flight extends BaseEntity {
     @NotNull
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     private AirlineCompany company;
     @NotNull
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Airport departure;
     @NotNull
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Airport arrival;
     @NotNull
     @Min(value = 0)
