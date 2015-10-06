@@ -1,8 +1,9 @@
-package org.realdolmen.webbroker.model;
+package org.realdolmen.webbroker.model.user;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.realdolmen.webbroker.DataSetPersistenceTest;
+import org.realdolmen.webbroker.model.AirlineCompany;
 import org.realdolmen.webbroker.model.user.AirlineCompanyEmployee;
 import org.realdolmen.webbroker.model.user.User;
 
