@@ -38,4 +38,9 @@
     <trip id="7000" accommodationPrice="100" startDate="2000-10-10 12:10:10" endDate="2000-10-20 12:10:10" travelAgency_id="1" flight_id="1"/>
     <trip id="8000" accommodationPrice="100" startDate="2000-10-10 12:10:10" endDate="2000-10-20 12:10:10" travelAgency_id="1" flight_id="2"/>
 
+    <booking id="1" trip_id="7000" bookingUser_id="1" numberOfPassengers="2" overridePrice="150" />
+    <booking id="2" trip_id="8000" bookingUser_id="2" numberOfPassengers="1"  />
+
+    <booking_discount Booking_id="1" discounts_id="5000" />
+
 </dataset>

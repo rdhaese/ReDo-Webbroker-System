@@ -1,6 +1,7 @@
 package org.realdolmen.webbroker.util;
 
 import org.realdolmen.webbroker.model.*;
+import org.realdolmen.webbroker.model.user.User;
 
 import java.time.LocalDateTime;
 
@@ -68,5 +69,22 @@ public class EntityFactory {
         AirlineCompany ac = new AirlineCompany();
         ac.setName("AirlineCompanyTest");
         return ac;
+    }
+
+    public static User createUser(String lName, String fName, String uName, String password) {
+        User user = new User();
+        user.setFirstName(lName);
+        user.setLastName(fName);
+        user.setUserName(uName);
+        user.setPassword(password);
+        return user;
+    }
+
+    public static Discount getDiscount(String name, boolean ispercentage, double quantity) {
+        Discount discount = new Discount();
+        discount.setName(name);
+        discount.setIsPercentage(ispercentage);
+        discount.setQuantity(quantity);
+        return discount;
     }
 }

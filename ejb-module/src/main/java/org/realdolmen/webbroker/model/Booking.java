@@ -13,9 +13,10 @@ import java.util.List;
  */
 @Entity
 public class Booking extends BaseEntity{
-
+    @NotNull
     @OneToOne (cascade = CascadeType.PERSIST)
     private User bookingUser;
+    @NotNull
     @OneToOne (cascade = CascadeType.PERSIST)
     private Trip trip;
     @NotNull
@@ -56,5 +57,13 @@ public class Booking extends BaseEntity{
 
     public void setDiscounts(List<Discount> discounts) {
         this.discounts = discounts;
+    }
+
+    public Double getOverridePrice() {
+        return overridePrice;
+    }
+
+    public void setOverridePrice(Double overridePrice) {
+        this.overridePrice = overridePrice;
     }
 }
