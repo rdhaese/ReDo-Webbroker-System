@@ -1,4 +1,4 @@
-package org.realdolmen.webbroker.model;
+package org.realdolmen.webbroker.model.user;
 
 import org.junit.Before;
 import org.junit.Test;
