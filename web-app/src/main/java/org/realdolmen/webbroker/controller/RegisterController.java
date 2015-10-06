@@ -7,6 +7,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -25,7 +26,8 @@ public class RegisterController {
     private String firstName;
     @NotNull (message = "Username is required!")
     private String userName;
-    @NotNull (message = "Password name is required!")
+    @NotNull (message = "Password is required!")
+    @Size (min = 6, message = "Password should be at least 6 characters")
     private String password;
 
     private String errorMessage;

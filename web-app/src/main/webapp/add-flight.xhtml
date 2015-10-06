@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ct="http://java.sun.com/jsf/composite/custom-tags"
+      xmlns:p="http://primefaces.org/ui">
+
+
+
+<ui:composition template="template.xhtml">
+    <ui:define name="pageTitle">Add Flight</ui:define>
+    <ui:define name="header"><ct:header title="Add Flight"/> </ui:define>
+    <ui:define name="pageContent">
+        <h:form>
+
+
+        </h:form>
+
+
+
+
+        <h:form>
+            #{registerController.errorMessage}
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Enter your name: "/>
+                <h:message for="lastName" />
+                <p:inputText id="lastName" value="#{registerController.lastName}"/>
+                <p:outputLabel value="Enter your first name: "/>
+                <p:inputText value="#{registerController.firstName}"/>
+                <p:outputLabel value="Enter your username: "/>
+                <p:inputText value="#{registerController.userName}"/>
+                <p:outputLabel value="Enter your password: "/>
+                <p:password id="password" value="#{registerController.password}" match="repeated_password" />
+                <h:inputHidden/>
+                <p:password id="repeated_password" value="#{registerController.password}"/>
+            </p:panelGrid>
+            <p:commandButton value="Add Ticket" action="#{registerController.registerUser()}" />
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

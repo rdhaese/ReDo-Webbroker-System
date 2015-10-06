@@ -20,7 +20,7 @@
                 <h:message for="passwordInput" />
             </h:panelGrid>
 
-            <h:commandButton action="#{loginController.login}" value="Login" />
+            <h:commandButton action="#{loginController.login}" value="Login" /><h:commandButton action="register-user" value="Register" />
         </h:form>
 
         <c:if test="#{loginController.loginError}">
