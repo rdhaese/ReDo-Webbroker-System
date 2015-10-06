@@ -2,6 +2,7 @@ package org.realdolmen.webbroker.model;
 
 import org.realdolmen.webbroker.converter.LocalDateTimePersistenceConverter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -17,11 +18,11 @@ import java.time.LocalDateTime;
 @Entity
 public class Trip extends BaseEntity {
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @NotNull
     private Flight flight;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @NotNull
     private TravelAgency travelAgency;
 
