@@ -22,4 +22,7 @@
     <region id="1000" name="Europe" code="EU" />
     <region id="2000" name="North America" code="NA" />
     <region id="3000" name="South America" code="SA" />
+
+    <discount id="5000" name="free" isPercentage="1" quantity="100" />
+    <discount id="6000" name="no discount" isPercentage="0" quantity="0" />
 </dataset>

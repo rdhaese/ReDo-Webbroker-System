@@ -62,6 +62,7 @@
         <class>org.realdolmen.webbroker.model.user.TravelAgencyEmployee</class>
         <class>org.realdolmen.webbroker.model.Address</class>
         <class>org.realdolmen.webbroker.model.Region</class>
+        <class>org.realdolmen.webbroker.model.Discount</class>
 
         <properties>
 
