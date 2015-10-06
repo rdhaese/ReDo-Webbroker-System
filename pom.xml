@@ -98,6 +98,12 @@
             <!-- Version used by Wildfly 9.0.1.Final -->
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.sun.el</groupId>
+            <artifactId>el-ri</artifactId>
+            <version>1.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 
