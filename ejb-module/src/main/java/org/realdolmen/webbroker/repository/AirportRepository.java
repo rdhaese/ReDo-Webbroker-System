@@ -27,4 +27,8 @@ public class AirportRepository {
     public Airport find(long id) {
        return entityManager.find(Airport.class, id);
     }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 }

@@ -25,7 +25,6 @@ public class AddFlightController {
     private AirportRepository airportRepo;
     @Inject
     private FlightRepository flightRepo;
-
     @Inject
     private LoggedInUserController loggedInUserController;
 

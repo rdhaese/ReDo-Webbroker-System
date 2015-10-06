@@ -20,4 +20,8 @@ public class FlightRepository {
     public void add(Flight flight){
         entityManager.persist(flight);
     }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 }
