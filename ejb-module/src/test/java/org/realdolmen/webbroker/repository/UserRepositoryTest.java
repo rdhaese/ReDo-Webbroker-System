@@ -5,10 +5,6 @@ import org.junit.Test;
 import org.realdolmen.webbroker.DataSetPersistenceTest;
 import org.realdolmen.webbroker.model.user.User;
 
-import javax.persistence.EntityManager;
-
-import static org.junit.Assert.*;
-
 /**
  * Created by RDEAX37 on 5/10/2015.
  */
@@ -54,7 +50,7 @@ public class UserRepositoryTest extends DataSetPersistenceTest {
 
     @Test
     public void canAllUsersBeFound(){
-        assertEquals(8, userRepository.getAllUsers().size());
+        assertEquals(10, userRepository.getAllUsers().size());
     }
 
     @Test
