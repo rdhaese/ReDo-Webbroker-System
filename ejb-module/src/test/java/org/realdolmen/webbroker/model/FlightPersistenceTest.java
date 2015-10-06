@@ -1,9 +1,9 @@
 package org.realdolmen.webbroker.model;
 
-import javafx.scene.chart.PieChart;
 import org.junit.Before;
 import org.junit.Test;
 import org.realdolmen.webbroker.DataSetPersistenceTest;
+import org.realdolmen.webbroker.util.EntityFactory;
 
 import javax.validation.ConstraintViolationException;
 
@@ -17,47 +17,7 @@ public class FlightPersistenceTest extends DataSetPersistenceTest{
 
     @Before
     public void setUp(){
-        createFlight();
-    }
-
-    private void createFlight() {
-        flight = new Flight();
-        flight.setCompany(getAirlineCompany());
-        flight.setAvailableSeats(150);
-        flight.setPrice(100.50);
-        flight.setArrival(getAirport("Brussels Airport", getAddress("Belgium", "Schendelbeke", "9506", "Dagmoedstraat", "77"), getRegion()));
-        flight.setDeparture(getAirport("Amsterdam Airport", getAddress("Netherlands", "Amsterdam", "020", "LuchthavenStraat", "1"), getRegion()));
-    }
-
-    private Airport getAirport(String name, Address address, Region region) {
-        Airport airport = new Airport();
-        airport.setName(name);
-        airport.setAddress(address);
-        airport.setRegion(region);
-        return airport;
-    }
-
-    private Address getAddress(String country, String city, String postalCode, String street, String number) {
-        Address address = new Address();
-        address.setCountry(country);
-        address.setCity(city);
-        address.setPostalCode(postalCode);
-        address.setStreet(street);
-        address.setNumber(number);
-        return address;
-    }
-
-    private Region getRegion() {
-        Region region = new Region();
-        region.setName("Europe");
-        region.setCode("EU");
-        return region;
-    }
-
-    private AirlineCompany getAirlineCompany() {
-        AirlineCompany ac = new AirlineCompany();
-        ac.setName("AirlineCompanyTest");
-        return ac;
+        flight = EntityFactory.createFlight();
     }
 
     @Test
