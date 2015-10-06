@@ -22,4 +22,7 @@
     <region id="1000" name="Europe" code="EU" />
     <region id="2000" name="North America" code="NA" />
     <region id="3000" name="South America" code="SA" />
+
+    <airport id="1" name="Airport1" address_id="1" region_id="1000" />
+    <airport id="2" name="Airport2" address_id="2" region_id="2000" />
 </dataset>
