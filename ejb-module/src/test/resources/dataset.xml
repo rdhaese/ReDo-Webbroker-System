@@ -25,4 +25,7 @@
 
     <discount id="5000" name="free" isPercentage="1" quantity="100" />
     <discount id="6000" name="no discount" isPercentage="0" quantity="0" />
+
+    <airport id="1" name="Airport1" address_id="1" region_id="1000" />
+    <airport id="2" name="Airport2" address_id="2" region_id="2000" />
 </dataset>
