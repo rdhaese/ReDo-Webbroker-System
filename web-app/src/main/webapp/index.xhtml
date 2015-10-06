@@ -11,9 +11,8 @@
 
 <ui:composition template="template.xhtml" >
     <ui:define name="pageTitle">Home</ui:define>
-    <ui:define name="header"><ct:header title="Pick a link" /> </ui:define>
-    <ui:define name="pageContent">
-
+    <ui:define name="header">
+        <ct:header title="ReDo Air" />
         <c:if test="#{loggedInUserController.loggedIn}">
             <h1>Welcome back #{loggedInUserController.loggedInUser.userName}!</h1>
 
@@ -22,11 +21,15 @@
             </h:form>
         </c:if>
         <c:if test="#{!loggedInUserController.loggedIn}">
-            <a href="loginForm.xhtml">Login</a>
+            <h:link value="Login" outcome="loginForm"/>
         </c:if>
+    </ui:define>
+    <ui:define name="pageContent">
 
+        Welcome to ReDo Air!
 
-        <a href="register-user.xhtml">register-user.xhtml</a><br />
+        <h:link styleClass="btn btn-primary btn-lg btn-block" value="Search a trip" outcome="search-trip" />
+        <h:link styleClass="btn btn-primary btn-lg btn-block" value="Search a destination" outcome="search-destination" />
 
     </ui:define>
 </ui:composition>
