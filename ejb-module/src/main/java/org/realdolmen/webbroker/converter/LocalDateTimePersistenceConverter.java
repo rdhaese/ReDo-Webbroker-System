@@ -3,7 +3,6 @@ package org.realdolmen.webbroker.converter;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 /**
@@ -13,11 +12,6 @@ import java.time.LocalDateTime;
  */
 @Converter(autoApply = true)
 public class LocalDateTimePersistenceConverter implements AttributeConverter<LocalDateTime, java.sql.Timestamp> {
-
-    public static void main(String[] args) {
-        java.sql.Timestamp t = Timestamp.from(Instant.now());
-        System.out.println(t);
-    }
 
     @Override
     public java.sql.Timestamp convertToDatabaseColumn(LocalDateTime entityValue) {
