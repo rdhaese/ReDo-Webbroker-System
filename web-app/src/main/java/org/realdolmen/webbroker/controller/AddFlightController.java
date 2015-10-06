@@ -43,12 +43,15 @@ public class AddFlightController {
     private String message;
 
     public String addFlight() {
+        if (departure_id == arrival_id){
+            message = "Departure and arrival can't be the same";
+            return "add-flight";
+        }
         try {
             flightRepo.add(createFlight());
         } catch (Exception e) {
-            throw e;
-            /*message = "Something went wrong while adding the flight.";
-            return "add-flight";*/
+            message = "Something went wrong while adding the flight.";
+            return "add-flight";
         }
         message = "Flight added successfully.";
         clearFormState();
