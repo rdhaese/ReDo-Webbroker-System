@@ -32,7 +32,10 @@
     <airport id="1" name="Airport1" address_id="1" region_id="1000" />
     <airport id="2" name="Airport2" address_id="2" region_id="2000" />
 
-    <trip id="7000" accomodationPrice="100" startDate="2000-10-10 12:10:10" endDate="2000-10-20 12:10:10" travelAgency_id="1" flight_id="1"/>
-    <trip id="8000" accomodationPrice="100" startDate="2000-10-10 12:10:10" endDate="2000-10-20 12:10:10" travelAgency_id="1" flight_id="2"/>
+    <flight id="1" company_id="1" departure_id="1" arrival_id="2" price="150" availableSeats="200"/>
+    <flight id="2" company_id="1" departure_id="2" arrival_id="1" price="160.5" availableSeats="200"/>
+
+    <trip id="7000" accommodationPrice="100" startDate="2000-10-10 12:10:10" endDate="2000-10-20 12:10:10" travelAgency_id="1" flight_id="1"/>
+    <trip id="8000" accommodationPrice="100" startDate="2000-10-10 12:10:10" endDate="2000-10-20 12:10:10" travelAgency_id="1" flight_id="2"/>
 
 </dataset>

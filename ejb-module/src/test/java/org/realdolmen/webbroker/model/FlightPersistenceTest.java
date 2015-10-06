@@ -33,37 +33,37 @@ public class FlightPersistenceTest extends DataSetPersistenceTest{
         entityManager().persist(flight);
     }
 
-    @Test
+    @Test (expected = ConstraintViolationException.class)
     public void flightCantBePersistedWithoutNumberOfSeats(){
         flight.setAvailableSeats(null);
         entityManager().persist(flight);
     }
 
-    @Test
+    @Test (expected = ConstraintViolationException.class)
     public void flightCantBePersistedWithNumberOfSeatsSmallerThan0(){
         flight.setAvailableSeats(-10);
         entityManager().persist(flight);
     }
 
-    @Test
+    @Test (expected = ConstraintViolationException.class)
     public void flightCantBePersistedWithoutPrice(){
         flight.setPrice(null);
         entityManager().persist(flight);
     }
 
-    @Test
+    @Test (expected = ConstraintViolationException.class)
     public void flightCantBePersistedWithPriceSmallerThan0(){
         flight.setPrice(-1.5);
         entityManager().persist(flight);
     }
 
-    @Test
+    @Test (expected = ConstraintViolationException.class)
     public void flightCantBePersistedWithoutArrival(){
         flight.setArrival(null);
         entityManager().persist(flight);
     }
 
-    @Test
+    @Test (expected = ConstraintViolationException.class)
     public void flightCantBePersistedWithtoutDeparture(){
         flight.setDeparture(null);
         entityManager().persist(flight);
@@ -71,7 +71,7 @@ public class FlightPersistenceTest extends DataSetPersistenceTest{
 
     @Test
     public void canAllFlightsBeFound(){
-        assertEquals(2, entityManager().createQuery("Select f From Flight f"));
+        assertEquals(2, entityManager().createQuery("Select f From Flight f").getResultList().size());
     }
 
     @Test
