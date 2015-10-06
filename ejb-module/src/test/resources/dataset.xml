@@ -28,4 +28,7 @@
 
     <airport id="1" name="Airport1" address_id="1" region_id="1000" />
     <airport id="2" name="Airport2" address_id="2" region_id="2000" />
+
+    <trip id="7000" accomodationPrice="100" startDate="" endDate="" travelAgency_id="1" flight_id="1"/>
+
 </dataset>

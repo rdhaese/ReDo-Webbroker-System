@@ -1,15 +1,39 @@
 package org.realdolmen.webbroker.model;
 
-import java.time.Period;
+import org.realdolmen.webbroker.converter.LocalDateTimePersistenceConverter;
+
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 /**
- * Created by RDEAX37 on 2/10/2015.
+ * Entity which represents a trip.
+ *
+ * @author Youri Flement
  */
-public class Trip extends BaseEntity{
+@Entity
+public class Trip extends BaseEntity {
+
+    @OneToOne
+    @NotNull
     private Flight flight;
+
+    @OneToOne
+    @NotNull
     private TravelAgency travelAgency;
-    private Double accommodation;
-    private Period period;
+
+    @NotNull
+    private Double accommodationPrice;
+
+    @NotNull
+    @Convert(converter = LocalDateTimePersistenceConverter.class)
+    private LocalDateTime startDate;
+
+    @NotNull
+    @Convert(converter = LocalDateTimePersistenceConverter.class)
+    private LocalDateTime endDate;
 
     public Flight getFlight() {
         return flight;
@@ -27,19 +51,27 @@ public class Trip extends BaseEntity{
         this.travelAgency = travelAgency;
     }
 
-    public Double getAccommodation() {
-        return accommodation;
+    public Double getAccommodationPrice() {
+        return accommodationPrice;
     }
 
-    public void setAccommodation(Double accommodation) {
-        this.accommodation = accommodation;
+    public void setAccommodationPrice(Double accommodation) {
+        this.accommodationPrice = accommodation;
     }
 
-    public Period getPeriod() {
-        return period;
+    public LocalDateTime getStartDate() {
+        return startDate;
     }
 
-    public void setPeriod(Period period) {
-        this.period = period;
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
 }
