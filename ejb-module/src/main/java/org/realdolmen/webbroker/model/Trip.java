@@ -5,6 +5,7 @@ import org.realdolmen.webbroker.converter.LocalDateTimePersistenceConverter;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
@@ -25,6 +26,7 @@ public class Trip extends BaseEntity {
     private TravelAgency travelAgency;
 
     @NotNull
+    @Min(value = 0)
     private Double accommodationPrice;
 
     @NotNull
@@ -34,6 +36,17 @@ public class Trip extends BaseEntity {
     @NotNull
     @Convert(converter = LocalDateTimePersistenceConverter.class)
     private LocalDateTime endDate;
+
+    public Trip() {
+    }
+
+    public Trip(Flight flight, TravelAgency travelAgency, Double accommodationPrice, LocalDateTime startDate, LocalDateTime endDate) {
+        this.flight = flight;
+        this.travelAgency = travelAgency;
+        this.accommodationPrice = accommodationPrice;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 
     public Flight getFlight() {
         return flight;
@@ -56,6 +69,9 @@ public class Trip extends BaseEntity {
     }
 
     public void setAccommodationPrice(Double accommodation) {
+        if(accommodation != null && accommodation < 0) {
+            throw new IllegalArgumentException();
+        }
         this.accommodationPrice = accommodation;
     }
 
