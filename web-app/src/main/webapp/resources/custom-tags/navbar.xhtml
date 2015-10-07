@@ -9,63 +9,69 @@
 
 </cc:interface>
 <cc:implementation>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <div class="navbar-brand">
-                    <img src="resources/img/ReDoAir.png" alt="" class="redo-logo"/>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div class="navbar-brand">
+                        <img src="resources/img/ReDoAir.png" alt="" class="redo-logo"/>
+                    </div>
                 </div>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
+                <div id="navbar" class="navbar-collapse collapse">
 
-                <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav">
 
-                    <li><h:link outcome="index" value="Home"/></li>
+                        <li><h:link outcome="index" value="Home"/></li>
 
-                    <c:if test="#{loggedInUserController.loggedIn}">
-                    <c:if test="#{loggedInUserController.getRoll() eq 'AirlineCompanyEmployee'}">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Airline Company <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><h:link outcome="add-flight" value="Add Flight"/> </li>
-                        </ul>
-                    </li>
-                    </c:if>
+                        <c:if test="#{loggedInUserController.loggedIn}">
+                            <c:if test="#{loggedInUserController.getRoll() eq 'AirlineCompanyEmployee'}">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-haspopup="true"
+                                       aria-expanded="false">Airline Company <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><h:link outcome="add-flight" value="Add Flight"/></li>
+                                    </ul>
+                                </li>
+                            </c:if>
 
-                    <c:if test="#{loggedInUserController.getRoll() eq 'TravelAgencyEmployee'}">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Travel Agency<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><h:link outcome="import-trip" value="Import Trip"/></li>
-                            <li><h:link action="#" value="Export All Our Trips"/></li>
-                        </ul>
-                    </li>
-                    </c:if>
+                            <c:if test="#{loggedInUserController.getRoll() eq 'TravelAgencyEmployee'}">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-haspopup="true"
+                                       aria-expanded="false">Travel Agency<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><h:link outcome="import-trip" value="Import Trip"/></li>
+                                        <li><h:link action="#" value="Export All Our Trips"/></li>
+                                    </ul>
+                                </li>
+                            </c:if>
 
-                    <c:if test="#{loggedInUserController.getRoll() eq 'ReDoAirEmployee'}">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">ReDo Air<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><h:link outcome="#" value="TODO"/></li>
-                        </ul>
-                    </li>
-                    </c:if>
+                            <c:if test="#{loggedInUserController.getRoll() eq 'ReDoAirEmployee'}">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-haspopup="true"
+                                       aria-expanded="false">ReDo Air<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><h:link outcome="#" value="TODO"/></li>
+                                    </ul>
+                                </li>
+                            </c:if>
 
-                    <li role="separator" class="divider"></li>
+                            <li role="separator" class="divider"></li>
 
-                        <li><p class="navbar-text">Signed in as #{loggedInUserController.loggedInUser.userName}</p>
-                        </li>
-                        <li><h:form><h:commandLink action="#{loggedInUserController.logout()}" value="Log Out" styleClass="navbar-text"/></h:form></li>
-                    </c:if>
+                            <li><p class="navbar-text">Signed in as #{loggedInUserController.loggedInUser.userName}</p>
+                            </li>
+                            <li><h:form><h:commandLink action="#{loggedInUserController.logout()}" value="Log Out"
+                                                       styleClass="navbar-text"/></h:form></li>
+                        </c:if>
 
-                    <c:if test="#{!loggedInUserController.loggedIn}">
-                        <li><h:link outcome="loginForm" value="Log In"/></li>
-                    </c:if>
+                        <c:if test="#{!loggedInUserController.loggedIn}">
+                            <li><h:link outcome="loginForm" value="Log In"/></li>
+                        </c:if>
 
-                </ul>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
