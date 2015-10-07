@@ -12,14 +12,17 @@
 <ui:composition template="template.xhtml" >
     <ui:define name="pageTitle">Home</ui:define>
     <ui:define name="header">
-        <ct:header title="ReDo Air" />
+        <ct:header title="Home" />
     </ui:define>
     <ui:define name="pageContent">
 
-        Welcome to ReDo Air!
+        <div class="centered-content">
+        <h1>Welcome To ReDo Air!</h1>
+        <h2>What do you want to do?</h2>
 
         <h:link styleClass="btn btn-primary btn-lg btn-block" value="Search a trip" outcome="search-trip" />
         <h:link styleClass="btn btn-primary btn-lg btn-block" value="Search a destination" outcome="search-destination" />
+        </div>
 
     </ui:define>
 </ui:composition>

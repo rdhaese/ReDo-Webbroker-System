@@ -4,29 +4,48 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:ct="http://java.sun.com/jsf/composite/custom-tags"
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<ui:composition template="template.xhtml" >
-    <ui:define name="pageTitle">Login form</ui:define>
+
+<ui:composition template="template.xhtml">
+    <ui:define name="pageTitle">Log In</ui:define>
+    <ui:define name="header"><ct:header title="Log In"/> </ui:define>
     <ui:define name="pageContent">
         <h:form>
-            <h:panelGrid columns="3">
+            <h:panelGrid columns="2">
+                <c:if test="#{loginController.loginError}">
+                <f:facet name="header">
+                    <h:panelGroup style="display:block; text-align:center">
+                            <h:outputText value="The username or password is incorrect." styleClass="error-message"/>
+                    </h:panelGroup>
+                </f:facet>
+                </c:if>
+
                 <h:outputLabel for="usernameInput">Username:</h:outputLabel>
-                <h:inputText id="usernameInput" value="#{loginController.username}" />
-                <h:message for="usernameInput" />
+                <h:inputText id="usernameInput" value="#{loginController.username}" styleClass="form-control margin"/>
+                <h:inputHidden/>
+                <h:message for="usernameInput" styleClass="error-message"/>
 
                 <h:outputLabel for="passwordInput">Password:</h:outputLabel>
-                <h:inputSecret id="passwordInput" value="#{loginController.password}"/>
-                <h:message for="passwordInput" />
+                <h:inputSecret id="passwordInput" value="#{loginController.password}" styleClass="form-control margin"/>
+                <h:inputHidden/>
+                <h:message for="passwordInput" styleClass="error-message"/>
+
+                <f:facet name="footer">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <h:commandButton action="#{loginController.login}" value="Login" styleClass="form-control margin"/>
+                        <h:link outcome="register-user" value="Register" styleClass="form-control margin"/>
+                    </h:panelGroup>
+                </f:facet>
             </h:panelGrid>
-
-            <h:commandButton action="#{loginController.login}" value="Login" /><h:commandButton action="register-user" value="Register" />
         </h:form>
-
-        <c:if test="#{loginController.loginError}">
-            <h:outputText value="The username or password is incorrect." />
-        </c:if>
     </ui:define>
 </ui:composition>
-
 </html>
+
+
+
+
+

@@ -13,14 +13,14 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <div class="navbar-brand">
-                    <h:graphicImage value="resources/img/ReDoAir.png" styleClass="rounded-corners"/>
+                    <img src="resources/img/ReDoAir.png" alt="" class="redo-logo"/>
                 </div>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
 
                 <ul class="nav navbar-nav">
 
-                    <li><a href="index.xhtml">Home</a></li>
+                    <li><h:link outcome="index" value="Home"/></li>
 
                     <c:if test="#{loggedInUserController.loggedIn}">
                     <c:if test="#{loggedInUserController.getRoll() eq 'AirlineCompanyEmployee'}">
@@ -28,7 +28,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Airline Company <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="add-flight.xhtml">Add Flight</a></li>
+                            <li><h:link outcome="add-flight" value="Add Flight"/> </li>
                         </ul>
                     </li>
                     </c:if>
@@ -38,7 +38,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Travel Agency<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="import-trip.xhtml">Import Trip</a></li>
+                            <li><h:link outcome="import-trip" value="Import Trip"/></li>
                         </ul>
                     </li>
                     </c:if>
@@ -48,7 +48,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">ReDo Air<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">TODO</a></li>
+                            <li><h:link outcome="#" value="TODO"/></li>
                         </ul>
                     </li>
                     </c:if>
@@ -61,7 +61,7 @@
                     </c:if>
 
                     <c:if test="#{!loggedInUserController.loggedIn}">
-                        <li><a href="loginForm.xhtml">Log In</a></li>
+                        <li><h:link outcome="loginForm" value="Log In"/></li>
                     </c:if>
 
                 </ul>

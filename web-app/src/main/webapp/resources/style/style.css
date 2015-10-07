@@ -1,15 +1,29 @@
-.page-header .panel .panel-default .panel-body{
-    background-color: lightcyan;
-}
-
 .pageTitle {
-    color: gray;
+    color: darkgray;
 }
 
 .pageSubTitle {
-    color: lightgray;
+    color: gray;
 }
 
-.rounded-corners{
+.redo-logo{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
     border-radius: 5px;
+    width: 50px;
+    height: 25px;
+}
+
+.centered-content{
+    width: 50%;
+    text-align: center;
+    margin:0 auto;
+}
+
+.form-control {
+    margin: 5px;
+}
+
+.error-message{
+    color: red;
 }

@@ -10,7 +10,10 @@
 <h:head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+
+    <!--Some browsers want the one or the other, both import the same css file -->
     <h:outputStylesheet library="style" name="style.css"  />
+    <link rel="stylesheet" href="resources/style/style.css" />
 
     <title><ui:insert name="pageTitle" /></title>
 </h:head>

@@ -47,7 +47,7 @@ public class RegisterController {
                 errorMessage = "Something went wrong registering.";
                 return "register-user";
             }
-            return "register-succes";
+            return "register-success";
         }else {
             //user already exists
             errorMessage = "Username is already in use!";
