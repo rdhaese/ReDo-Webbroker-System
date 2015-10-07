@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<regions>
+    <region>
+        <name>North America</name>
+        <code>NA</code>
+    </region>
+    <region>
+        <name>South America</name>
+        <code>SA</code>
+    </region>
+    <region>
+        <name>Europe</name>
+        <code>EU</code>
+    </region>
+</regions>
