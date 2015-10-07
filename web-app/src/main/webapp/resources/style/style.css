@@ -1,12 +1,6 @@
-.page-header .panel .panel-default{
-    background-color: lightsteelblue;
+.page-header .panel .panel-default .panel-body{
+    background-color: lightcyan;
 }
-
-.panel-body {
-    background-color: lightsteelblue;
-}
-
-
 
 .pageTitle {
     color: gray;
@@ -14,4 +8,8 @@
 
 .pageSubTitle {
     color: lightgray;
+}
+
+.rounded-corners{
+    border-radius: 5px;
 }

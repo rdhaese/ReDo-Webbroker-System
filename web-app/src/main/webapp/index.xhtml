@@ -13,16 +13,6 @@
     <ui:define name="pageTitle">Home</ui:define>
     <ui:define name="header">
         <ct:header title="ReDo Air" />
-        <c:if test="#{loggedInUserController.loggedIn}">
-            <h1>Welcome back #{loggedInUserController.loggedInUser.userName}!</h1>
-
-            <h:form>
-                <h:commandButton value="Logout" action="#{loggedInUserController.logout}" />
-            </h:form>
-        </c:if>
-        <c:if test="#{!loggedInUserController.loggedIn}">
-            <h:link value="Login" outcome="loginForm"/>
-        </c:if>
     </ui:define>
     <ui:define name="pageContent">
 

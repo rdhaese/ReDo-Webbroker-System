@@ -64,4 +64,8 @@ public class LoggedInUserController implements Serializable {
         loggedInUser = null;
         return "index";
     }
+
+    public String getRoll(){
+        return loggedInUser.getClass().getSimpleName();
+    }
 }

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:cc="http://java.sun.com/jsf/composite" xmlns:c="http://java.sun.com/jsp/jstl/core"
+        >
+<cc:interface>
+
+</cc:interface>
+<cc:implementation>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="navbar-brand">
+                    <h:graphicImage value="resources/img/ReDoAir.png" styleClass="rounded-corners"/>
+                </div>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+
+                <ul class="nav navbar-nav">
+
+                    <li><a href="index.xhtml">Home</a></li>
+
+                    <c:if test="#{loggedInUserController.loggedIn}">
+                    <c:if test="#{loggedInUserController.getRoll() eq 'AirlineCompanyEmployee'}">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Airline Company <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="add-flight.xhtml">Add Flight</a></li>
+                        </ul>
+                    </li>
+                    </c:if>
+
+                    <c:if test="#{loggedInUserController.getRoll() eq 'TravelAgencyEmployee'}">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Travel Agency<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="import-trip.xhtml">Import Trip</a></li>
+                        </ul>
+                    </li>
+                    </c:if>
+
+                    <c:if test="#{loggedInUserController.getRoll() eq 'ReDoAirEmployee'}">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">ReDo Air<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">TODO</a></li>
+                        </ul>
+                    </li>
+                    </c:if>
+
+                    <li role="separator" class="divider"></li>
+
+                        <li><p class="navbar-text">Signed in as #{loggedInUserController.loggedInUser.userName}</p>
+                        </li>
+                        <li><h:form><h:commandLink action="#{loggedInUserController.logout()}" value="Log Out" styleClass="navbar-text"/></h:form></li>
+                    </c:if>
+
+                    <c:if test="#{!loggedInUserController.loggedIn}">
+                        <li><a href="loginForm.xhtml">Log In</a></li>
+                    </c:if>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</cc:implementation>
+</html>
+
