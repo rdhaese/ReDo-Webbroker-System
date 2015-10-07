@@ -14,10 +14,10 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="page-header">
-                <h1><h:outputText value="#{cc.attrs.title}"/>
+                <h1><h:outputText value="#{cc.attrs.title}" styleClass="pageTitle"/>
                     <c:if test="#{cc.attrs.subTitle ne null}">
                         <br/>
-                        <small><h:outputText value="#{cc.attrs.subTitle}"/></small>
+                        <small><h:outputText value="#{cc.attrs.subTitle}" styleClass="pageSubTitle"/></small>
                     </c:if>
                 </h1>
             </div>
