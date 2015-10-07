@@ -8,7 +8,7 @@
     <ui:define name="pageContent">
 
         <h:panelGrid columns="1" >
-            <h1>Trip manager</h1>
+            <h:outputText value="#{importTripController.message}" />
             <h:form enctype="multipart/form-data">
                 <h:inputFile value="#{importTripController.file}" />
                 <h:commandButton value="Import" action="#{importTripController.upload}" />
