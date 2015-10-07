@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users>
+    <user>
+        <firstname>root</firstname>
+        <lastname>root</lastname>
+        <username>root</username>
+        <password>password</password>
+        <role>redoair</role>
+    </user>
+    <user>
+        <firstname>re</firstname>
+        <lastname>do</lastname>
+        <username>redoair</username>
+        <password>redoair</password>
+        <role>redoair</role>
+    </user>
+    <user>
+        <firstname>robin</firstname>
+        <lastname>d'haese</lastname>
+        <username>robin</username>
+        <password>robindh</password>
+        <role>travelagency</role>
+        <travelagency>travel agency A</travelagency>
+    </user>
+    <user>
+        <firstname>youri</firstname>
+        <lastname>flement</lastname>
+        <username>youri</username>
+        <password>yourifl</password>
+        <role>travelagency</role>
+        <travelagency>travel agency B</travelagency>
+    </user>
+    <user>
+        <firstname>john</firstname>
+        <lastname>smith</lastname>
+        <username>john</username>
+        <password>johnsm</password>
+        <role>airlinecompany</role>
+        <airlinecompany>ryanair</airlinecompany>
+    </user>
+</users>

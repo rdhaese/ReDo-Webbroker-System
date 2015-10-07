@@ -12,6 +12,13 @@ public class TravelAgency extends BaseEntity{
     @NotNull
     private String name;
 
+    public TravelAgency() {
+    }
+
+    public TravelAgency(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
