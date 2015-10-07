@@ -27,4 +27,11 @@ public class FlightRepositoryTest extends DataSetPersistenceTest{
         flightRepository.add(flight);
         assertNotNull(flight.getId());
     }
+
+    @Test
+    public void canFindFlightBasedOnParameters() throws Exception {
+        assertEquals(1, flightRepository.findFlight("Virgin", "Airport1", "Airport2", 150d, 200).size());
+        assertEquals(2, flightRepository.findFlight("Virgin", "Airport1", "Airport2", 200d, 200).size());
+        assertEquals(0, flightRepository.findFlight("Virgin", "Airport2", "Airport2", 150d, 200).size());
+    }
 }

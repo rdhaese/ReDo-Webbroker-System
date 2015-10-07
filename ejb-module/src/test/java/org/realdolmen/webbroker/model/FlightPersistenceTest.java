@@ -71,7 +71,7 @@ public class FlightPersistenceTest extends DataSetPersistenceTest{
 
     @Test
     public void canAllFlightsBeFound(){
-        assertEquals(2, entityManager().createQuery("Select f From Flight f").getResultList().size());
+        assertEquals(4, entityManager().createQuery("Select f From Flight f").getResultList().size());
     }
 
     @Test

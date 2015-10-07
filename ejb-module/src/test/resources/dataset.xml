@@ -33,6 +33,8 @@
     <airport version="0" id="2" name="Airport2" address_id="2" region_id="2000" />
 
     <flight version="0" id="1" company_id="1" departure_id="1" arrival_id="2" price="150" availableSeats="200"/>
+    <flight version="0" id="3" company_id="1" departure_id="1" arrival_id="2" price="200" availableSeats="200"/>
+    <flight version="0" id="4" company_id="1" departure_id="1" arrival_id="2" price="200" availableSeats="200"/>
     <flight version="0" id="2" company_id="1" departure_id="2" arrival_id="1" price="160.5" availableSeats="200"/>
 
     <trip version="0" id="7000" accommodationPrice="100" startDate="2000-10-10 12:10:10" endDate="2000-10-20 12:10:10" travelAgency_id="1" flight_id="1"/>
