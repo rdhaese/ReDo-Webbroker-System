@@ -1,12 +1,7 @@
 package org.realdolmen.webbroker.listener;
 
-import org.realdolmen.webbroker.RegionXmlElement;
-import org.realdolmen.webbroker.RegionsXmlElement;
-import org.realdolmen.webbroker.UserXmlElement;
-import org.realdolmen.webbroker.UsersXmlElement;
-import org.realdolmen.webbroker.model.AirlineCompany;
-import org.realdolmen.webbroker.model.Region;
-import org.realdolmen.webbroker.model.TravelAgency;
+import org.realdolmen.webbroker.*;
+import org.realdolmen.webbroker.model.*;
 import org.realdolmen.webbroker.model.user.AirlineCompanyEmployee;
 import org.realdolmen.webbroker.model.user.ReDoAirEmployee;
 import org.realdolmen.webbroker.model.user.TravelAgencyEmployee;
@@ -22,6 +17,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Youri Flement
@@ -84,10 +81,37 @@ public class StartupListener implements ServletContextListener {
     }
 
     private void initializeAirports() {
+        try {
+            JAXBContext context = JAXBContext.newInstance(AirportsXmlElement.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            InputStream file = getClass().getClassLoader().getResourceAsStream("airports.xml");
+            AirportsXmlElement airports = (AirportsXmlElement) unmarshaller.unmarshal(file);
 
+            for (AirportXmlElement airportXmlElement : airports.getAirports()) {
+                Airport airport = new Airport();
+                airport.setName(airportXmlElement.getName());
+                Region region = regionMap.get(airportXmlElement.getRegionCode());
+                airport.setRegion(region);
+                Address address = new Address();
+                address.setCity(airportXmlElement.getCity());
+                address.setCountry(airportXmlElement.getCountry());
+                address.setNumber(airportXmlElement.getNumber());
+                address.setPostalCode(airportXmlElement.getPostalCode());
+                address.setStreet(airportXmlElement.getStreet());
+
+                entityManager.persist(address);
+                airport.setAddress(address);
+                entityManager.persist(airport);
+            }
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
     }
 
+    private Map<String, Region> regionMap;
+
     private void initializeRegions() {
+        regionMap = new HashMap<>();
         try {
             JAXBContext context = JAXBContext.newInstance(RegionsXmlElement.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -99,6 +123,7 @@ public class StartupListener implements ServletContextListener {
                 region.setCode(regionXmlElement.getCode());
                 region.setName(regionXmlElement.getName());
                 entityManager.persist(region);
+                regionMap.put(region.getCode(), region);
             }
         } catch (JAXBException e) {
             e.printStackTrace();
