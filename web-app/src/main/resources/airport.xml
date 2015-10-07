@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<airports>
+    <airport>
+        <regionCode>EU</regionCode>
+        <name>Zaventem</name>
+        <address>
+            <country>België</country>
+            <street>Zaventemstraat</street>
+            <number>1</number>
+            <postalcode>8000</postalcode>
+            <city>Zaventem</city>
+        </address>
+    </airport>
+    <airport>
+        <regionCode>EU</regionCode>
+        <name>Heathrow</name>
+        <address>
+            <country>United Kingdom</country>
+            <street>Heathrowstreet</street>
+            <number>1</number>
+            <postalcode>1000</postalcode>
+            <city>Heathrow</city>
+        </address>
+    </airport>
+    <airport>
+        <regionCode>NA</regionCode>
+        <name>New York Airport</name>
+        <address>
+            <country>USA</country>
+            <street>New York</street>
+            <number>1</number>
+            <postalcode>9000A</postalcode>
+            <city>New York</city>
+        </address>
+    </airport>
+</airports>

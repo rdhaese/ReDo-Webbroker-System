@@ -2,7 +2,15 @@ package org.realdolmen.webbroker.listener;
 
 import org.realdolmen.webbroker.RegionXmlElement;
 import org.realdolmen.webbroker.RegionsXmlElement;
+import org.realdolmen.webbroker.UserXmlElement;
+import org.realdolmen.webbroker.UsersXmlElement;
+import org.realdolmen.webbroker.model.AirlineCompany;
 import org.realdolmen.webbroker.model.Region;
+import org.realdolmen.webbroker.model.TravelAgency;
+import org.realdolmen.webbroker.model.user.AirlineCompanyEmployee;
+import org.realdolmen.webbroker.model.user.ReDoAirEmployee;
+import org.realdolmen.webbroker.model.user.TravelAgencyEmployee;
+import org.realdolmen.webbroker.model.user.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,8 +37,7 @@ public class StartupListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         initializeRegions();
         initializeAirports();
-        initializeAirportEmployees();
-        initializeTravelEmployees();
+        initializeUsers();
     }
 
     @Override
@@ -38,12 +45,42 @@ public class StartupListener implements ServletContextListener {
 
     }
 
-    private void initializeTravelEmployees() {
+    private void initializeUsers() {
+        try {
+            JAXBContext context = JAXBContext.newInstance(UsersXmlElement.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            InputStream file = getClass().getClassLoader().getResourceAsStream("users.xml");
+            UsersXmlElement users = (UsersXmlElement) unmarshaller.unmarshal(file);
 
-    }
+            for (UserXmlElement userXmlElement : users.getUsers()) {
+                User user;
+                if("redoair".equalsIgnoreCase(userXmlElement.getRole())) {
+                    user = new ReDoAirEmployee();
+                } else if("travelagency".equalsIgnoreCase(userXmlElement.getRole())) {
+                    user = new TravelAgencyEmployee();
+                    TravelAgency agency = new TravelAgency(userXmlElement.getTravelagency());
+                    entityManager.persist(agency);
+                    ((TravelAgencyEmployee)user).setTravelAgency(agency);
+                } else if("airlinecompany".equalsIgnoreCase(userXmlElement.getRole())) {
+                    user = new AirlineCompanyEmployee();
+                    AirlineCompany company = new AirlineCompany();
+                    company.setName(userXmlElement.getAirlinecompany());
+                    entityManager.persist(company);
+                    ((AirlineCompanyEmployee)user).setCompany(company);
+                } else {
+                    user = new User();
+                }
 
-    private void initializeAirportEmployees() {
-
+                user.setUserName(userXmlElement.getUsername());
+                user.setFirstName(userXmlElement.getFirstname());
+                user.setLastName(userXmlElement.getLastname());
+                user.setPassword(userXmlElement.getPassword());
+                user.setSalt("no salt yet");
+                entityManager.persist(user);
+            }
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initializeAirports() {
