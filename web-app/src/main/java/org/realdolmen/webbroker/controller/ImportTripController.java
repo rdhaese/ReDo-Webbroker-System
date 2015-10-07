@@ -7,6 +7,7 @@ import org.realdolmen.webbroker.model.Trip;
 import org.realdolmen.webbroker.repository.FlightRepository;
 import org.realdolmen.webbroker.repository.TravelAgencyRepository;
 import org.realdolmen.webbroker.repository.TripRepository;
+import org.realdolmen.webbroker.xml.XmlSerializer;
 import org.realdolmen.webbroker.xml.element.FlightXmlElement;
 import org.realdolmen.webbroker.xml.element.TripXmlElement;
 import org.realdolmen.webbroker.xml.element.TripsXmlElement;
@@ -17,14 +18,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.Source;
-import javax.xml.transform.stream.StreamSource;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 
 @ManagedBean
 @ViewScoped
@@ -43,13 +38,16 @@ public class ImportTripController {
     @Inject
     FlightRepository flightRepository;
 
+    @Inject
+    XmlSerializer serializer;
+
     private String message;
 
     private boolean isError;
 
     public void upload() {
         try {
-            TripsXmlElement tripsXmlElement = parseXml(TripsXmlElement.class, file.getInputStream());
+            TripsXmlElement tripsXmlElement = serializer.unmarhal(TripsXmlElement.class, file.getInputStream());
             tripsXmlElement.getTrips().forEach(this::processTripElement);
         } catch (JAXBException e) {
             message = "Unable to parse XML file.";
@@ -60,15 +58,15 @@ public class ImportTripController {
         }
     }
 
-    private boolean processTripElement(TripXmlElement tripElement) {
+    protected boolean processTripElement(TripXmlElement tripElement) {
         try {
-            TravelAgency agency = findTravelAgency(tripElement.getTravelAgency());
+            TravelAgency agency = travelAgencyRepository.findSingleTravelAgency(tripElement.getTravelAgency());
             if (agency == null) {
                 return errorMessage("Travel agency '" + tripElement.getTravelAgency() + "' was not found.");
             }
 
             FlightXmlElement flight1 = tripElement.getFlight();
-            Flight flight = findFlight(flight1.getAirlineCompany(), flight1.getDepartureAirport(), flight1.getArrivalAirport(), flight1.getPrice(), flight1.getAvailableSeats());
+            Flight flight = flightRepository.findSingleFlight(flight1.getAirlineCompany(), flight1.getDepartureAirport(), flight1.getArrivalAirport(), flight1.getPrice(), flight1.getAvailableSeats());
             if (flight == null) {
                 return errorMessage("Flight between " + flight1.getArrivalAirport() + " and " + flight1.getDepartureAirport() + " was not found.");
             }
@@ -95,39 +93,6 @@ public class ImportTripController {
         this.message = message;
         this.isError = true;
         return true;
-    }
-
-    // TODO: not here
-    private <T> T parseXml(Class<T> tClass, InputStream source) throws JAXBException {
-        return parseXml(tClass, new StreamSource(source));
-    }
-
-    private <T> T parseXml(Class<T> tClass, Source source) throws JAXBException {
-        JAXBContext context = JAXBContext.newInstance(tClass);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        return unmarshaller.unmarshal(source, tClass).getValue();
-    }
-
-    // TODO: dit hoort hier wss niet
-    private TravelAgency findTravelAgency(String name) throws AmbiguousEntityException {
-        List<TravelAgency> agencies = travelAgencyRepository.getTravelAgenciesByName(name);
-        if (agencies.isEmpty()) {
-            return null;
-        } else if (agencies.size() > 1) {
-            throw new AmbiguousEntityException(agencies.size() + " travel agencies with name '" + name + "' were found.");
-        } else {
-            return agencies.get(0);
-        }
-    }
-
-    private Flight findFlight(String company, String departure, String arrival, Double price, Integer availableSeats) {
-        List<Flight> flights = flightRepository.findFlight(company, departure, arrival, price, availableSeats);
-        if (flights.isEmpty()) {
-            return null;
-        } else if (flights.size() > 1) {
-            throw new AmbiguousEntityException(flights.size() + " flights found for parameters: " + company + "," + departure + "," + arrival + "," + price + "," + availableSeats);
-        }
-        return flights.get(0);
     }
 
     public String getMessage() {

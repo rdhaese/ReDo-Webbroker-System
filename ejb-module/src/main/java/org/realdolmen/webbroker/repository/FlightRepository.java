@@ -1,5 +1,6 @@
 package org.realdolmen.webbroker.repository;
 
+import org.realdolmen.webbroker.exception.AmbiguousEntityException;
 import org.realdolmen.webbroker.model.Flight;
 
 import javax.ejb.LocalBean;
@@ -50,6 +51,16 @@ public class FlightRepository {
                         .setParameter("arrival", arrivalAirport);
 
         return query.getResultList();
+    }
+
+    public Flight findSingleFlight(String company, String departure, String arrival, Double price, Integer availableSeats) {
+        List<Flight> flights = findFlight(company, departure, arrival, price, availableSeats);
+        if (flights.isEmpty()) {
+            return null;
+        } else if (flights.size() > 1) {
+            throw new AmbiguousEntityException(flights.size() + " flights found for parameters: " + company + "," + departure + "," + arrival + "," + price + "," + availableSeats);
+        }
+        return flights.get(0);
     }
 
     public void setEntityManager(EntityManager entityManager) {

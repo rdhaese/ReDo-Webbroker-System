@@ -1,5 +1,6 @@
 package org.realdolmen.webbroker.repository;
 
+import org.realdolmen.webbroker.exception.AmbiguousEntityException;
 import org.realdolmen.webbroker.model.TravelAgency;
 
 import javax.ejb.LocalBean;
@@ -35,5 +36,15 @@ public class TravelAgencyRepository {
         return query.getResultList();
     }
 
+    public TravelAgency findSingleTravelAgency(String name) throws AmbiguousEntityException {
+        List<TravelAgency> agencies = getTravelAgenciesByName(name);
+        if (agencies.isEmpty()) {
+            return null;
+        } else if (agencies.size() > 1) {
+            throw new AmbiguousEntityException(agencies.size() + " travel agencies with name '" + name + "' were found.");
+        } else {
+            return agencies.get(0);
+        }
+    }
 
 }
