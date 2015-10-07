@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
+ * Controller for the register functionality.
  *
  * @author Robin D'Haese
  */
@@ -22,37 +23,54 @@ public class RegisterController {
 
     @NotNull(message = "Last name is required!")
     private String lastName;
-    @NotNull (message = "First name is required!")
+    @NotNull(message = "First name is required!")
     private String firstName;
-    @NotNull (message = "Username is required!")
+    @NotNull(message = "Username is required!")
     private String userName;
-    @NotNull (message = "Password is required!")
-    @Size (min = 6, message = "Password should be at least 6 characters")
+    @NotNull(message = "Password is required!")
+    @Size(min = 6, message = "Password should be at least 6 characters")
     private String password;
 
     private String errorMessage;
 
-    public String registerUser(){
+    /**
+     * Registers a user with the information from the properties,
+     * except when the given username is already taken or when something
+     * goes wrong with adding the user to the persistence context.
+     *
+     * Corresponding messages are set, so it is possible to inform the user.
+     *
+     * @return the next page to navigate to
+     */
+    public String registerUser() {
         errorMessage = null;
-        if (userRepo.getUserByUsername(userName) == null){
+        if (userRepo.getUserByUsername(userName) == null) {
             //Register user
-            User user = new User();
-            user.setLastName(lastName);
-            user.setFirstName(firstName);
-            user.setUserName(userName);
-            user.setPassword(password);
             try {
-                userRepo.add(user);
-            } catch (Exception e){
+                userRepo.add(createUser());
+            } catch (Exception e) {
                 errorMessage = "Something went wrong registering.";
                 return "register-user";
             }
             return "register-success";
-        }else {
+        } else {
             //user already exists
             errorMessage = "Username is already in use!";
             return "register-user";
         }
+    }
+
+    /**
+     * Creates a user with the information from the properties
+     * @return the created user.
+     */
+    private User createUser() {
+        User user = new User();
+        user.setLastName(lastName);
+        user.setFirstName(firstName);
+        user.setUserName(userName);
+        user.setPassword(password);
+        return user;
     }
 
     public String getLastName() {

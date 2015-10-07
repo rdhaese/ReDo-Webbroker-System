@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * Created by RDEAX37 on 2/10/2015.
+ * Entity represeting a booking
+ * @Author Robin D'Haese
  */
 @Entity
 public class Booking extends BaseEntity{

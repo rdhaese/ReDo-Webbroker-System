@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
  * Factory to create entity objects to be used for testing purposes.
  *
  * @author Youri Flement
- * @author Robin D'Haese
  */
 public class EntityFactory {
 

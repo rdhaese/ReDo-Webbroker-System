@@ -7,6 +7,9 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Created by RDEAX37 on 2/10/2015.
+ *
+ * Entity representing a User that works for an AirlineCompany
+ * @author Robin D'Haese
  */
 @Entity
 public class AirlineCompanyEmployee extends User {

@@ -7,6 +7,8 @@ import org.realdolmen.webbroker.model.user.User;
 
 /**
  * Created by RDEAX37 on 5/10/2015.
+ * Tests for {@link UserRepository}
+ * @author Robin D'Haese
  */
 public class UserRepositoryTest extends DataSetPersistenceTest {
 

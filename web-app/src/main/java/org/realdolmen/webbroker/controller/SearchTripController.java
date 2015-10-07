@@ -15,6 +15,8 @@ import java.util.List;
 
 /**
  * Created by RDEAX37 on 7/10/2015.
+ *
+ * Controller for the search trip functionality.
  */
 @Named
 @RequestScoped
@@ -33,19 +35,18 @@ public class SearchTripController {
     @DecimalMin( value = "1", message = "Please provide a number larger than 0.")
     private Integer numberOfPersons;
 
+    /**
+     * Collects all trips fitting the given constraints.
+     * @return the next page to navigate to -> found-trips
+     */
     public String searchTrip(){
-
+        //TODO
         return "found-trips";
     }
 
-
-    public void click() {
-        RequestContext requestContext = RequestContext.getCurrentInstance();
-
-        requestContext.update("form:display");
-        requestContext.execute("PF('dlg').show()");
-    }
-
+    /**
+     * @return All airports from the persistence context.
+     */
     public List<Airport> getAirports(){
         return airportRepo.getAllAirports();
     }
