@@ -1,11 +1,11 @@
 package org.realdolmen.webbroker.listener;
 
-import org.realdolmen.webbroker.*;
 import org.realdolmen.webbroker.model.*;
 import org.realdolmen.webbroker.model.user.AirlineCompanyEmployee;
 import org.realdolmen.webbroker.model.user.ReDoAirEmployee;
 import org.realdolmen.webbroker.model.user.TravelAgencyEmployee;
 import org.realdolmen.webbroker.model.user.User;
+import org.realdolmen.webbroker.xml.element.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -38,6 +38,7 @@ public class StartupListener implements ServletContextListener {
         initializeFlights();
     }
 
+    // TODO: move these
     private void initializeFlights() {
         try {
             JAXBContext context = JAXBContext.newInstance(FlightsXmlElement.class);

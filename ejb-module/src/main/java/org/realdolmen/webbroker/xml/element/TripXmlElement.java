@@ -1,6 +1,6 @@
-package org.realdolmen.webbroker;
+package org.realdolmen.webbroker.xml.element;
 
-import org.realdolmen.webbroker.converter.LocalDateTimeConverter;
+import org.realdolmen.webbroker.xml.adapter.LocalDateTimeXmlAdapter;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -23,11 +23,11 @@ public class TripXmlElement {
     private Double accommodationPrice;
 
     @XmlElement(name = "startDate")
-    @XmlJavaTypeAdapter(type = LocalDateTime.class, value = LocalDateTimeConverter.class)
+    @XmlJavaTypeAdapter(type = LocalDateTime.class, value = LocalDateTimeXmlAdapter.class)
     private LocalDateTime startDate;
 
     @XmlElement(name = "endDate")
-    @XmlJavaTypeAdapter(type = LocalDateTime.class, value = LocalDateTimeConverter.class)
+    @XmlJavaTypeAdapter(type = LocalDateTime.class, value = LocalDateTimeXmlAdapter.class)
     private LocalDateTime endDate;
 
     public FlightXmlElement getFlight() {
