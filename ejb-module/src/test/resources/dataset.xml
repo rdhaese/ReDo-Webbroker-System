@@ -10,11 +10,11 @@
     <users id="3" DTYPE="users" lastName="Detest" firstName="Jan" userName="jdetest" password="123456" />
     <users id="4" DTYPE="users" lastName="Detest" firstName="Anne" userName="adetest" password="987654" />
 
-    <users id="5" DTYPE="AirlineCompanyEmployee" lastName="De Vlieger" firstName="Geert" userName="gdevlieger" password="wxcvbn" />
-    <users id="6" DTYPE="AirlineCompanyEmployee" lastName="De Vlieger" firstName="Els" userName="edevlieger" password="qsdfgh" />
+    <users id="5" DTYPE="AirlineCompanyEmployee" lastName="De Vlieger" firstName="Geert" userName="gdevlieger" password="wxcvbn" company_id="1" />
+    <users id="6" DTYPE="AirlineCompanyEmployee" lastName="De Vlieger" firstName="Els" userName="edevlieger" password="qsdfgh" company_id="2"/>
 
-    <users id="7" DTYPE="TravelAgencyEmployee" lastName="Van Ver" firstName="Jos" userName="jvanver" password="poiuyt" />
-    <users id="8" DTYPE="TravelAgencyEmployee" lastName="Van Ver" firstName="Gertrude" userName="gvanver" password="mlkjhg" />
+    <users id="7" DTYPE="TravelAgencyEmployee" lastName="Van Ver" firstName="Jos" userName="jvanver" password="poiuyt" travelAgency_id="1" />
+    <users id="8" DTYPE="TravelAgencyEmployee" lastName="Van Ver" firstName="Gertrude" userName="gvanver" password="mlkjhg" travelAgency_id="2"/>
 
     <users id="9" DTYPE="ReDoAirEmployee" lastName="Van Dicht" firstName="Jean" userName="jvandicht" password="nbvcxw" />
     <users id="10" DTYPE="ReDoAirEmployee" lastName="Van Dicht" firstName="Frieda" userName="fvandicht" password="rtyfgh" />

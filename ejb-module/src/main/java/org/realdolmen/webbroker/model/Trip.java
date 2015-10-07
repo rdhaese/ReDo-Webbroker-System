@@ -91,4 +91,32 @@ public class Trip extends BaseEntity {
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Trip trip = (Trip) o;
+
+        if (getFlight() != null ? !getFlight().equals(trip.getFlight()) : trip.getFlight() != null) return false;
+        if (getTravelAgency() != null ? !getTravelAgency().equals(trip.getTravelAgency()) : trip.getTravelAgency() != null)
+            return false;
+        if (getAccommodationPrice() != null ? !getAccommodationPrice().equals(trip.getAccommodationPrice()) : trip.getAccommodationPrice() != null)
+            return false;
+        if (getStartDate() != null ? !getStartDate().equals(trip.getStartDate()) : trip.getStartDate() != null)
+            return false;
+        return !(getEndDate() != null ? !getEndDate().equals(trip.getEndDate()) : trip.getEndDate() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getFlight() != null ? getFlight().hashCode() : 0;
+        result = 31 * result + (getTravelAgency() != null ? getTravelAgency().hashCode() : 0);
+        result = 31 * result + (getAccommodationPrice() != null ? getAccommodationPrice().hashCode() : 0);
+        result = 31 * result + (getStartDate() != null ? getStartDate().hashCode() : 0);
+        result = 31 * result + (getEndDate() != null ? getEndDate().hashCode() : 0);
+        return result;
+    }
 }

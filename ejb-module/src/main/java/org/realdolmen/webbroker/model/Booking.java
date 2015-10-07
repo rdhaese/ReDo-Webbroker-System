@@ -66,4 +66,32 @@ public class Booking extends BaseEntity{
     public void setOverridePrice(Double overridePrice) {
         this.overridePrice = overridePrice;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Booking booking = (Booking) o;
+
+        if (getBookingUser() != null ? !getBookingUser().equals(booking.getBookingUser()) : booking.getBookingUser() != null)
+            return false;
+        if (getTrip() != null ? !getTrip().equals(booking.getTrip()) : booking.getTrip() != null) return false;
+        if (getNumberOfPassengers() != null ? !getNumberOfPassengers().equals(booking.getNumberOfPassengers()) : booking.getNumberOfPassengers() != null)
+            return false;
+        if (getOverridePrice() != null ? !getOverridePrice().equals(booking.getOverridePrice()) : booking.getOverridePrice() != null)
+            return false;
+        return !(getDiscounts() != null ? !getDiscounts().equals(booking.getDiscounts()) : booking.getDiscounts() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getBookingUser() != null ? getBookingUser().hashCode() : 0;
+        result = 31 * result + (getTrip() != null ? getTrip().hashCode() : 0);
+        result = 31 * result + (getNumberOfPassengers() != null ? getNumberOfPassengers().hashCode() : 0);
+        result = 31 * result + (getOverridePrice() != null ? getOverridePrice().hashCode() : 0);
+        result = 31 * result + (getDiscounts() != null ? getDiscounts().hashCode() : 0);
+        return result;
+    }
 }

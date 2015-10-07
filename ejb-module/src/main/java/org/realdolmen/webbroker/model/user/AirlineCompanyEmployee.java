@@ -22,4 +22,20 @@ public class AirlineCompanyEmployee extends User {
     public void setCompany(AirlineCompany company) {
         this.company = company;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AirlineCompanyEmployee that = (AirlineCompanyEmployee) o;
+
+        return !(getCompany() != null ? !getCompany().equals(that.getCompany()) : that.getCompany() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return getCompany() != null ? getCompany().hashCode() : 0;
+    }
 }

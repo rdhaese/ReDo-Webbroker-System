@@ -11,10 +11,10 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Airport extends BaseEntity {
     @NotNull
-    @OneToOne (cascade = CascadeType.PERSIST)
+    @OneToOne (cascade = CascadeType.ALL)
     private Region region;
     @NotNull
-    @OneToOne (cascade = CascadeType.PERSIST)
+    @OneToOne (cascade = CascadeType.ALL)
     private Address address;
     @NotNull
     private String name;

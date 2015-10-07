@@ -64,4 +64,32 @@ public class Flight extends BaseEntity {
     public void setAvailableSeats(Integer availableSeats) {
         this.availableSeats = availableSeats;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Flight flight = (Flight) o;
+
+        if (getCompany() != null ? !getCompany().equals(flight.getCompany()) : flight.getCompany() != null)
+            return false;
+        if (getDeparture() != null ? !getDeparture().equals(flight.getDeparture()) : flight.getDeparture() != null)
+            return false;
+        if (getArrival() != null ? !getArrival().equals(flight.getArrival()) : flight.getArrival() != null)
+            return false;
+        if (getPrice() != null ? !getPrice().equals(flight.getPrice()) : flight.getPrice() != null) return false;
+        return !(getAvailableSeats() != null ? !getAvailableSeats().equals(flight.getAvailableSeats()) : flight.getAvailableSeats() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getCompany() != null ? getCompany().hashCode() : 0;
+        result = 31 * result + (getDeparture() != null ? getDeparture().hashCode() : 0);
+        result = 31 * result + (getArrival() != null ? getArrival().hashCode() : 0);
+        result = 31 * result + (getPrice() != null ? getPrice().hashCode() : 0);
+        result = 31 * result + (getAvailableSeats() != null ? getAvailableSeats().hashCode() : 0);
+        return result;
+    }
 }

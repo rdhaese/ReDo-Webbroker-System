@@ -4,6 +4,7 @@ import org.realdolmen.webbroker.model.AirlineCompany;
 import org.realdolmen.webbroker.model.Airport;
 import org.realdolmen.webbroker.model.Flight;
 import org.realdolmen.webbroker.model.user.AirlineCompanyEmployee;
+import org.realdolmen.webbroker.model.user.User;
 import org.realdolmen.webbroker.repository.AirportRepository;
 import org.realdolmen.webbroker.repository.FlightRepository;
 
@@ -67,17 +68,13 @@ public class AddFlightController {
     private Flight createFlight() {
         Flight flight = new Flight();
         flight.setDeparture(airportRepo.find(departure_id));
-        flight.setArrival(airportRepo.find(departure_id));
+        flight.setArrival(airportRepo.find(arrival_id));
         flight.setPrice(price);
         flight.setAvailableSeats(amountOfSeats);
 
-        //hardcoded ->DELETE!
-        AirlineCompany ac = new AirlineCompany();
-        ac.setId(1000L);
-        ac.setName("HardCodedAC");
-        flight.setCompany(ac);
-        //TODO fix next line
-        //flight.setCompany(((AirlineCompanyEmployee) loggedInUserController.getLoggedInUser()).getCompany());
+        User loggedInUser = loggedInUserController.getLoggedInUser();
+        AirlineCompanyEmployee ace = (AirlineCompanyEmployee) loggedInUser;
+        flight.setCompany(ace.getCompany());
         return flight;
     }
 

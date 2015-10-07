@@ -40,4 +40,23 @@ public class Region extends BaseEntity {
     public void setCode(String code) {
         this.code = code;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Region region = (Region) o;
+
+        if (getName() != null ? !getName().equals(region.getName()) : region.getName() != null) return false;
+        return !(getCode() != null ? !getCode().equals(region.getCode()) : region.getCode() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getName() != null ? getName().hashCode() : 0;
+        result = 31 * result + (getCode() != null ? getCode().hashCode() : 0);
+        return result;
+    }
 }
