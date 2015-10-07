@@ -31,7 +31,7 @@ public class FlightRepository {
     }
 
     /**
-     * Find a flight based on the name of its company, the name of its arrival and departure airport, price and the number of
+     * Find {@link Flight}s based on the name of the company, the name of the arrival and departure airport, price and the number of
      * available seats.
      *
      * @param company   The name of the company of the flight.
@@ -53,7 +53,19 @@ public class FlightRepository {
         return query.getResultList();
     }
 
-    public Flight findSingleFlight(String company, String departure, String arrival, Double price, Integer availableSeats) {
+    /**
+     * Find a single {@link Flight} based in the name of its company, the name of the arrival and departure airports,
+     * the price and the number of available seats.
+     *
+     * @param company   The name of the company.
+     * @param departure The name of departure airport.
+     * @param arrival   The name of the arrival airport.
+     * @param price The price.
+     * @param availableSeats    The number of available flights.
+     * @return  The flight corresponding to the given parameters or <code>null</code> if no corresponding flight was found.
+     * @throws AmbiguousEntityException if multiple flights with the given parameters were found.
+     */
+    public Flight findSingleFlight(String company, String departure, String arrival, Double price, Integer availableSeats) throws AmbiguousEntityException {
         List<Flight> flights = findFlight(company, departure, arrival, price, availableSeats);
         if (flights.isEmpty()) {
             return null;

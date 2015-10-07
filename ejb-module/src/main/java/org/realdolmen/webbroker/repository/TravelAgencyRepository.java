@@ -36,6 +36,14 @@ public class TravelAgencyRepository {
         return query.getResultList();
     }
 
+    /**
+     * Find a single {@link TravelAgency} based on its {@link TravelAgency#name}. Returns <code>null</code> if no
+     * travel agency was found with the given name.
+     *
+     * @param name  The name of the travel agency.
+     * @return  The entity corresponding to the travel agency.
+     * @throws AmbiguousEntityException if multiple travel agencies with the given name were found.
+     */
     public TravelAgency findSingleTravelAgency(String name) throws AmbiguousEntityException {
         List<TravelAgency> agencies = getTravelAgenciesByName(name);
         if (agencies.isEmpty()) {
