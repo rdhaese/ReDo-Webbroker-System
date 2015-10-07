@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ct="http://java.sun.com/jsf/composite/custom-tags"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
 
 
 <ui:composition template="template.xhtml">
@@ -19,40 +19,36 @@
         <h:form>
             <h:panelGrid columns="2">
                 <h:outputLabel for="destination">Destination:</h:outputLabel>
-                <h:inputText id="destination" value="#{}" styleClass="form-control margin"/>
+                <h:selectOneMenu id="destination" value="#{}" styleClass="form-control" >
+                    <f:selectItems value="#{}" var=""
+                                   itemLabel="#{}" itemValue="#{}"/>
+                </h:selectOneMenu>
                 <h:inputHidden/>
                 <h:message for="destination" styleClass="error-message"/>
+
+                <h:outputLabel for="departureDate">Departure date (dd/mm/yyyy):</h:outputLabel>
+                <h:inputText id="departureDate" value="#{}" styleClass="form-control"/>
+                <h:inputHidden/>
+                <h:message for="departureDate" styleClass="error-message"/>
+
+                <h:outputLabel for="returnDate">Return date (dd/mm/yyyy):</h:outputLabel>
+                <h:inputText id="returnDate" value="#{}" styleClass="form-control"/>
+                <h:inputHidden/>
+                <h:message for="returnDate" styleClass="error-message"/>
+
+                <h:outputLabel for="numberOfPersons">Number of persons:</h:outputLabel>
+                <h:inputText id="numberOfPersons" value="#{}" styleClass="form-control"/>
+                <h:inputHidden/>
+                <h:message for="numberOfPersons" styleClass="error-message"/>
+
+                <f:facet name="footer">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <h:commandButton value="Search Trip" action="#{}" styleClass="form-control"/>
+                    </h:panelGroup>
+                </f:facet>
             </h:panelGrid>
         </h:form>
 
-
-        <h:panelGrid columns="2">
-            <c:if test="#{loginController.loginError}">
-                <f:facet name="header">
-                    <h:panelGroup style="display:block; text-align:center">
-                        <h:outputText value="The username or password is incorrect." styleClass="error-message"/>
-                    </h:panelGroup>
-                </f:facet>
-            </c:if>
-
-            <h:outputLabel for="usernameInput">Username:</h:outputLabel>
-            <h:inputText id="usernameInput" value="#{loginController.username}" styleClass="form-control margin"/>
-            <h:inputHidden/>
-            <h:message for="usernameInput" styleClass="error-message"/>
-
-            <h:outputLabel for="passwordInput">Password:</h:outputLabel>
-            <h:inputSecret id="passwordInput" value="#{loginController.password}" styleClass="form-control margin"/>
-            <h:inputHidden/>
-            <h:message for="passwordInput" styleClass="error-message"/>
-
-            <f:facet name="footer">
-                <h:panelGroup style="display:block; text-align:center">
-                    <h:commandButton action="#{loginController.login}" value="Login" styleClass="form-control margin"/>
-                    <h:link outcome="register-user" value="Register" styleClass="form-control margin"/>
-                </h:panelGroup>
-            </f:facet>
-        </h:panelGrid>
-    </h:form>
 
 </ui:define>
 </ui:composition>
