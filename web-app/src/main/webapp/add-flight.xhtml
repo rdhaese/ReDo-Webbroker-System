@@ -37,12 +37,12 @@
                 <h:message for="arrival" styleClass="error-message"/>
 
                 <h:outputLabel for="price" value="Give in price: "/>
-                <h:inputText id="price" value="#{addFlightController.price}" styleClass="form-control"/>
+                <h:inputText id="price" value="#{addFlightController.price}" styleClass="form-control" converterMessage="Please fill in a number."/>
                 <h:inputHidden/>
                 <h:message for="price" styleClass="error-message"/>
 
                 <h:outputLabel for="seats" value="Give in amount of seats: "/>
-                <h:inputText id="seats" value="#{addFlightController.amountOfSeats}" styleClass="form-control"/>
+                <h:inputText id="seats" value="#{addFlightController.amountOfSeats}" styleClass="form-control" converterMessage="Please fill in a number."/>
                 <h:inputHidden/>
                 <h:message for="seats" styleClass="error-message"/>
 

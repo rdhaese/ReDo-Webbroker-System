@@ -12,7 +12,7 @@
     <ui:define name="pageContent">
 
         <h:panelGrid columns="1" >
-            <h:outputText value="#{importTripController.message}" />
+            <h:outputText value="#{importTripController.message}" styleClass="error-message"/>
             <h:form enctype="multipart/form-data">
                 <h:inputFile value="#{importTripController.file}" class="form-control"/>
                 <h:commandButton value="Import" action="#{importTripController.upload}" class="form-control"/>
