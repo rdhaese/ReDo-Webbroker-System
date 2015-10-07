@@ -23,7 +23,7 @@ public class TripRepositoryTest extends DataSetPersistenceTest {
     }
 
     @Test
-    public void canFlightBeAdded(){
+    public void canTripBeAdded(){
         assertNull(trip.getId());
         tripRepository.add(trip);
         assertNotNull(trip.getId());

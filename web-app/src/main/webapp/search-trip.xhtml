@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ct="http://java.sun.com/jsf/composite/custom-tags"
-      xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+      xmlns:p="http://primefaces.org/ui">
 
 
 <ui:composition template="template.xhtml">
@@ -16,40 +16,53 @@
     </ui:define>
     <ui:define name="pageContent">
 
+        <f:metadata>
+            <f:viewParam name="selectedDestination" value="#{searchTripController.destination_id}"/>
+        </f:metadata>
+
         <h:form>
             <h:panelGrid columns="2">
                 <h:outputLabel for="destination">Destination:</h:outputLabel>
-                <h:selectOneMenu id="destination" value="#{}" styleClass="form-control" >
-                    <f:selectItems value="#{}" var=""
-                                   itemLabel="#{}" itemValue="#{}"/>
+                <h:selectOneMenu id="destination" value="#{searchTripController.destination_id}"
+                                 styleClass="form-control">
+                    <f:selectItems value="#{searchTripController.getAirports()}" var="a"
+                                   itemLabel="#{a.name}" itemValue="#{a.id}"/>
                 </h:selectOneMenu>
                 <h:inputHidden/>
                 <h:message for="destination" styleClass="error-message"/>
 
                 <h:outputLabel for="departureDate">Departure date (dd/mm/yyyy):</h:outputLabel>
-                <h:inputText id="departureDate" value="#{}" styleClass="form-control"/>
+                <h:inputText id="departureDate" value="#{searchTripController.departureDate}" styleClass="form-control"
+                             converterMessage="Please provide a date in the dd/mm/yyyy format.">
+                    <f:convertDateTime pattern="d/M/yyyy" for="departureDate"/>
+                </h:inputText>
                 <h:inputHidden/>
                 <h:message for="departureDate" styleClass="error-message"/>
 
                 <h:outputLabel for="returnDate">Return date (dd/mm/yyyy):</h:outputLabel>
-                <h:inputText id="returnDate" value="#{}" styleClass="form-control"/>
+                <h:inputText id="returnDate" value="#{searchTripController.arrivalDate}" styleClass="form-control"
+                             converterMessage="Please provide a date in the dd/mm/yyyy format.">
+                    <f:convertDateTime pattern="d/M/yyyy" for="returnDate"/>
+                </h:inputText>
                 <h:inputHidden/>
                 <h:message for="returnDate" styleClass="error-message"/>
 
                 <h:outputLabel for="numberOfPersons">Number of persons:</h:outputLabel>
-                <h:inputText id="numberOfPersons" value="#{}" styleClass="form-control"/>
+                <h:inputText id="numberOfPersons" value="#{searchTripController.numberOfPersons}"
+                             styleClass="form-control" converterMessage="Make sure your input is a number."/>
                 <h:inputHidden/>
                 <h:message for="numberOfPersons" styleClass="error-message"/>
 
                 <f:facet name="footer">
                     <h:panelGroup style="display:block; text-align:center">
-                        <h:commandButton value="Search Trip" action="#{}" styleClass="form-control"/>
+                        <h:commandButton value="Search Trip" action="#{searchTripController.searchTrip()}"
+                                         styleClass="form-control"/>
                     </h:panelGroup>
                 </f:facet>
             </h:panelGrid>
         </h:form>
 
 
-</ui:define>
+    </ui:define>
 </ui:composition>
-        </html>
+</html>
