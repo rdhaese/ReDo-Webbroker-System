@@ -1,28 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ct="http://java.sun.com/jsf/composite/custom-tags"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
-
-
-<ui:composition template="template.xhtml" >
-    <ui:define name="pageTitle">Import Trip</ui:define>
-    <ui:define name="header">
-        <ct:header title="Import Trip" />
-    </ui:define>
-    <ui:define name="pageContent">
-        <h:form id="importForm" enctype="multipart/form-data">
-            <h:panelGrid bodyrows="3">
-                <h:outputLabel for="xmlInput">Select XML file:</h:outputLabel>
-                <h:inputFile id="xmlInput" value="#{importTripController.file}" validator="#{importTripController.validate}"/>
-                <h:message for="xmlInput" />
-            </h:panelGrid>
-            <h:commandButton action="#{importTripController.importFile}" value="Import" />
-        </h:form>
-    </ui:define>
-</ui:composition>
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head />
+<h:body>
+    <h:form enctype="multipart/form-data">
+        <h:inputFile value="#{importTripController.file}" />
+        <h:commandButton value="Post Upload" action="#{importTripController.upload}" />
+    </h:form>
+</h:body>
 </html>

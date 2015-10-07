@@ -36,6 +36,14 @@
         <username>john</username>
         <password>johnsm</password>
         <role>airlinecompany</role>
-        <airlinecompany>ryanair</airlinecompany>
+        <airlinecompany>RyanAir</airlinecompany>
+    </user>
+    <user>
+        <firstname>test</firstname>
+        <lastname>user</lastname>
+        <username>testuser</username>
+        <password>password</password>
+        <role>airlinecompany</role>
+        <airlinecompany>Sabena</airlinecompany>
     </user>
 </users>

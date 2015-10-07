@@ -1,53 +1,70 @@
 package org.realdolmen.webbroker.controller;
 
+import org.realdolmen.webbroker.FlightXmlElement;
+import org.realdolmen.webbroker.TripXmlElement;
+import org.realdolmen.webbroker.TripsXmlElement;
+import org.realdolmen.webbroker.model.Flight;
+import org.realdolmen.webbroker.model.TravelAgency;
+import org.realdolmen.webbroker.model.Trip;
 import org.realdolmen.webbroker.repository.TripRepository;
 
-import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.servlet.http.Part;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
+import java.io.InputStream;
 
-/**
- * Created by RDEAX37 on 7/10/2015.
- */
-
-@Named
-@RequestScoped
+@ManagedBean
+@ViewScoped
 public class ImportTripController {
 
-    @NotNull
     private Part file;
 
     @Inject
-    private TripRepository tripRepo;
+    TripRepository repository;
 
+    @PersistenceContext
+    EntityManager entityManager;
 
-    public void importFile(){
+    public void upload() {
+        try {
+            InputStream inputStream = file.getInputStream();
+            JAXBContext context = JAXBContext.newInstance(TripsXmlElement.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            TripsXmlElement tripsXmlElement = (TripsXmlElement) unmarshaller.unmarshal(inputStream);
 
-
+            for (TripXmlElement tripXmlElement : tripsXmlElement.getTrips()) {
+                TravelAgency travelAgency = findTravelAgency(tripXmlElement);
+                Flight flight = findFlight(tripXmlElement.getFlight());
+                Trip trip = new Trip(flight, travelAgency, tripXmlElement.getAccommodationPrice(), tripXmlElement.getStartDate(), tripXmlElement.getEndDate());
+                repository.add(trip);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void validate(FacesContext ctx,
-                             UIComponent comp,
-                             Object value) {
-        List<FacesMessage> msgs = new ArrayList<FacesMessage>();
-        Part file = (Part)value;
-        if (file.getSize() > 1024) {
-            msgs.add(new FacesMessage("File is too big"));
-        }
-        if (!"text/xml".equals(file.getContentType())) {
-            msgs.add(new FacesMessage("Not a XML file"));
-        }
-        if (!msgs.isEmpty()) {
-            throw new ValidatorException(msgs);
-        }
+    private TravelAgency findTravelAgency(TripXmlElement tripXmlElement) {
+        TypedQuery<TravelAgency> query =
+                entityManager.createQuery("select t from TravelAgency t where t.name = :name", TravelAgency.class)
+                              .setParameter("name", tripXmlElement.getTravelAgency());
+        return query.getResultList().get(0);
+    }
+
+    private Flight findFlight(FlightXmlElement flight) {
+        TypedQuery<Flight> query =
+                entityManager.createQuery("select f from Flight f where f.company.name = :company and f.arrival.name = :arrival and f.departure.name = :departure and f.price = :price and f.availableSeats = :seats", Flight.class)
+                                .setParameter("company", flight.getAirlineCompany())
+                                .setParameter("departure", flight.getDepartureAirport())
+                                .setParameter("seats", flight.getAvailableSeats())
+                                .setParameter("price", flight.getPrice())
+                                .setParameter("arrival", flight.getArrivalAirport());
+        return query.getResultList().get(0);
     }
 
     public Part getFile() {

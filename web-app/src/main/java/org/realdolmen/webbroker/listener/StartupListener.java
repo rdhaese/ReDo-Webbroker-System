@@ -35,6 +35,29 @@ public class StartupListener implements ServletContextListener {
         initializeRegions();
         initializeAirports();
         initializeUsers();
+        initializeFlights();
+    }
+
+    private void initializeFlights() {
+        try {
+            JAXBContext context = JAXBContext.newInstance(FlightsXmlElement.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            InputStream file = getClass().getClassLoader().getResourceAsStream("flights.xml");
+            FlightsXmlElement flights = (FlightsXmlElement) unmarshaller.unmarshal(file);
+            for (FlightXmlElement flightXmlElement : flights.getFlights()) {
+                Flight flight = new Flight();
+                flight.setArrival(airportMap.get(flightXmlElement.getArrivalAirport()));
+                flight.setDeparture(airportMap.get(flightXmlElement.getDepartureAirport()));
+                flight.setCompany(airlineCompanyMap.get(flightXmlElement.getAirlineCompany()));
+                flight.setAvailableSeats(flightXmlElement.getAvailableSeats());
+                flight.setPrice(flightXmlElement.getPrice());
+
+                entityManager.persist(flight);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -43,6 +66,7 @@ public class StartupListener implements ServletContextListener {
     }
 
     private void initializeUsers() {
+        airlineCompanyMap = new HashMap<>();
         try {
             JAXBContext context = JAXBContext.newInstance(UsersXmlElement.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -63,6 +87,7 @@ public class StartupListener implements ServletContextListener {
                     AirlineCompany company = new AirlineCompany();
                     company.setName(userXmlElement.getAirlinecompany());
                     entityManager.persist(company);
+                    airlineCompanyMap.put(company.getName(), company);
                     ((AirlineCompanyEmployee)user).setCompany(company);
                 } else {
                     user = new User();
@@ -81,6 +106,7 @@ public class StartupListener implements ServletContextListener {
     }
 
     private void initializeAirports() {
+        airportMap = new HashMap<>();
         try {
             JAXBContext context = JAXBContext.newInstance(AirportsXmlElement.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -102,12 +128,15 @@ public class StartupListener implements ServletContextListener {
                 entityManager.persist(address);
                 airport.setAddress(address);
                 entityManager.persist(airport);
+                airportMap.put(airport.getName(), airport);
             }
         } catch (JAXBException e) {
             e.printStackTrace();
         }
     }
 
+    private Map<String, Airport> airportMap;
+    private Map<String, AirlineCompany> airlineCompanyMap;
     private Map<String, Region> regionMap;
 
     private void initializeRegions() {

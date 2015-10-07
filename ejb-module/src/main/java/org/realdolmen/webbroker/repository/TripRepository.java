@@ -1,6 +1,5 @@
 package org.realdolmen.webbroker.repository;
 
-import org.realdolmen.webbroker.model.Flight;
 import org.realdolmen.webbroker.model.Trip;
 
 import javax.ejb.LocalBean;
@@ -19,6 +18,8 @@ public class TripRepository {
     private EntityManager entityManager;
 
     public void add(Trip trip){
+        trip.setFlight(entityManager.merge(trip.getFlight()));
+        trip.setTravelAgency(entityManager.merge(trip.getTravelAgency()));
         entityManager.persist(trip);
     }
 
