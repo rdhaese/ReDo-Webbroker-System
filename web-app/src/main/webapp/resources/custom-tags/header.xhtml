@@ -7,22 +7,20 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 <cc:interface>
     <cc:attribute name="title" required="true"/>
-    <cc:attribute name="subTitle" required="false"/>
 </cc:interface>
 
 <cc:implementation>
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="page-header">
-                <h1><h:outputText value="#{cc.attrs.title}" styleClass="pageTitle"/>
-                    <c:if test="#{cc.attrs.subTitle ne null}">
+                <h1><h:outputText value="ReDo Air" styleClass="pageTitle"/>
+                    <c:if test="#{cc.attrs.title ne null}">
                         <br/>
-                        <small><h:outputText value="#{cc.attrs.subTitle}" styleClass="pageSubTitle"/></small>
+                        <small><h:outputText value="#{cc.attrs.title}" styleClass="pageSubTitle"/></small>
                     </c:if>
                 </h1>
             </div>
         </div>
     </div>
-
 </cc:implementation>
 </html>
