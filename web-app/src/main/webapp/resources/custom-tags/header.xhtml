@@ -3,25 +3,26 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-        xmlns:cc="http://java.sun.com/jsf/composite"
-        xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 <cc:interface>
-    <cc:attribute name="title" required="true" />
-    <cc:attribute name="subTitle" required="false" />
+    <cc:attribute name="title" required="true"/>
+    <cc:attribute name="subTitle" required="false"/>
 </cc:interface>
 
 <cc:implementation>
     <div class="panel panel-default">
-    <div class="panel-body">
-    <div class="page-header">
-        <h1><h:outputText value="#{cc.attrs.title}" />
-        <c:if test="#{cc.attrs.subTitle ne null}">
-            <br/><small><h:outputText value="#{cc.attrs.subTitle}" /></small>
-        </c:if>
-        </h1>
-    </div></div></div>
+        <div class="panel-body">
+            <div class="page-header">
+                <h1><h:outputText value="#{cc.attrs.title}" styleClass="pageTitle"/>
+                    <c:if test="#{cc.attrs.subTitle ne null}">
+                        <br/>
+                        <small><h:outputText value="#{cc.attrs.subTitle}" styleClass="pageSubTitle"/></small>
+                    </c:if>
+                </h1>
+            </div>
+        </div>
+    </div>
 
 </cc:implementation>
 </html>

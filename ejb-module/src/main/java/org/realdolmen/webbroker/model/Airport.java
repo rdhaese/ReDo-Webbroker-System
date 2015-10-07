@@ -2,7 +2,6 @@ package org.realdolmen.webbroker.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
@@ -12,10 +11,10 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Airport extends BaseEntity {
     @NotNull
-    @OneToOne (cascade = CascadeType.PERSIST)
+    @OneToOne (cascade = CascadeType.ALL)
     private Region region;
     @NotNull
-    @OneToOne (cascade = CascadeType.PERSIST)
+    @OneToOne (cascade = CascadeType.ALL)
     private Address address;
     @NotNull
     private String name;
@@ -42,5 +41,27 @@ public class Airport extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Airport)) return false;
+
+        Airport airport = (Airport) o;
+
+        if (getRegion() != null ? !getRegion().equals(airport.getRegion()) : airport.getRegion() != null) return false;
+        if (getAddress() != null ? !getAddress().equals(airport.getAddress()) : airport.getAddress() != null)
+            return false;
+        return !(getName() != null ? !getName().equals(airport.getName()) : airport.getName() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getRegion() != null ? getRegion().hashCode() : 0;
+        result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        return result;
     }
 }

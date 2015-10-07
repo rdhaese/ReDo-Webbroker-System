@@ -20,4 +20,20 @@ public class AirlineCompany extends BaseEntity{
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AirlineCompany that = (AirlineCompany) o;
+
+        return !(getName() != null ? !getName().equals(that.getName()) : that.getName() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return getName() != null ? getName().hashCode() : 0;
+    }
 }

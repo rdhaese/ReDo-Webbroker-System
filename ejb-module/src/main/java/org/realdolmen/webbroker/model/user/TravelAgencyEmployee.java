@@ -24,4 +24,20 @@ public class TravelAgencyEmployee extends User {
     public void setTravelAgency(TravelAgency travelAgency) {
         this.travelAgency = travelAgency;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TravelAgencyEmployee that = (TravelAgencyEmployee) o;
+
+        return !(getTravelAgency() != null ? !getTravelAgency().equals(that.getTravelAgency()) : that.getTravelAgency() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return getTravelAgency() != null ? getTravelAgency().hashCode() : 0;
+    }
 }

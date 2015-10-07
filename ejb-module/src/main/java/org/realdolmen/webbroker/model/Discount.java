@@ -63,4 +63,26 @@ public class Discount extends BaseEntity {
     public void setIsPercentage(Boolean isPercentage) {
         this.isPercentage = isPercentage;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Discount discount = (Discount) o;
+
+        if (getName() != null ? !getName().equals(discount.getName()) : discount.getName() != null) return false;
+        if (getQuantity() != null ? !getQuantity().equals(discount.getQuantity()) : discount.getQuantity() != null)
+            return false;
+        return !(isPercentage != null ? !isPercentage.equals(discount.isPercentage) : discount.isPercentage != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getName() != null ? getName().hashCode() : 0;
+        result = 31 * result + (getQuantity() != null ? getQuantity().hashCode() : 0);
+        result = 31 * result + (isPercentage != null ? isPercentage.hashCode() : 0);
+        return result;
+    }
 }
