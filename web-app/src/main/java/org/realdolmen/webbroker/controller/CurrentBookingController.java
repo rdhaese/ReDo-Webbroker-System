@@ -11,8 +11,13 @@ import java.io.Serializable;
 @SessionScoped
 public class CurrentBookingController implements Serializable{
 
-    public void setCurrentBooking(Booking booking) {
+    private Booking booking;
 
+    public Booking getBooking() {
+        return booking;
     }
 
+    public void setBooking(Booking booking) {
+        this.booking = booking;
+    }
 }

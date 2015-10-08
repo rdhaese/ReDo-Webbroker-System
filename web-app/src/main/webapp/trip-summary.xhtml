@@ -15,35 +15,37 @@
     </ui:define>
     <ui:define name="pageContent">
         <h:panelGrid columns="2">
-            <h:outputLabel value="Departure from:" for="departure"/><h:outputText id="departure"
-                                                                                  value=" #{bookTripController.booking.trip.flight.departure.name}"/>
-            <h:outputLabel value="Arrival to:" for="arrival"/> <h:outputText id="arrival"
-                                                                             value=" #{bookTripController.booking.trip.flight.arrival.name}"/>
-            <h:outputLabel value="Travel agency:" for="travelAgency"/> <h:outputText id="travelAgency"
-                                                                                     value=" #{bookTripController.booking.trip.travelAgency.name}"/>
-            <h:outputLabel value="Departure date:" for="depDate"/> <h:outputText id="depDate"
-                                                                                 value=" #{bookTripController.booking.trip.getStartDateInOldApi()}"><f:convertDateTime
-                pattern="dd/MM/yyyy"/>
-        </h:outputText>
-            <h:outputLabel value="Return date:" for="retDate"/> <h:outputText id="retDate"
-                                                                              value=" #{bookTripController.booking.trip.getEndDateInOldApi()}"><f:convertDateTime
-                pattern="dd/MM/yyyy"/>
-        </h:outputText>
-            <!--<h:outputLabel value="Amount of persons:" for="amountOfPersons"/> <h:outputText id="amountOfPersons" value=" #{bookTripController.booking.numberOfPassengers}" />-->
-            <!-- <h:outputLabel value="Flight price (total based on persons):" for="flightPrice"/> <h:outputText id="flightPrice" value=" #{bookTripController.booking.getFlightPrice()}" />
-             <h:outputLabel value="Accommodation price (for period):" for="accPrice"/> <h:outputText id="accPrice" value=" #{bookTripController.booking.trip.getTotalAccommodationPrice()}" />
-             <h:outputLabel value="Total price:" for="totalPrice"/> <h:outputText id="totalPrice" value=" #{bookTripController.booking.getTotalPrice()}" />-->
+            <h:outputLabel value="Departure from:" for="departure"/>
+            <h:outputText id="departure"
+                          value=" #{currentBookingController.booking.trip.flight.departure.name}"/>
+            <h:outputLabel value="Arrival to:" for="arrival"/>
+            <h:outputText id="arrival"
+                          value=" #{currentBookingController.booking.trip.flight.arrival.name}"/>
+            <h:outputLabel value="Travel agency:" for="travelAgency"/>
+            <h:outputText id="travelAgency"
+                          value=" #{currentBookingController.booking.trip.travelAgency.name}"/>
+            <h:outputLabel value="Departure date:" for="depDate"/>
+            <h:outputText id="depDate"
+                          value="#{currentBookingController.booking.trip.getStartDateInOldApi()}">
+                <f:convertDateTime for="depDate" pattern="dd/MM/yyyy"/>
+            </h:outputText>
+            <h:outputLabel value="Return date:" for="retDate"/>
+            <h:outputText id="retDate"
+                          value="#{currentBookingController.booking.trip.getEndDateInOldApi()}">
+                <f:convertDateTime for="retDate" pattern="dd/MM/yyyy"/>
+            </h:outputText>
             <f:facet name="footer">
                 <h:panelGroup style="display:block; text-align:center">
                     <h:form>
-                    <c:if test="#{loggedInUserController.loggedIn}">
-                        <h:commandButton value="Go on" action="confirm-booking" styleClass="form-control"/>
-                    </c:if>
-                    <c:if test="#{not loggedInUserController.loggedIn}">
-                        <h:commandButton value="You need to log in to book" action="#{loginController.loginFromPreviousPage()}"
-                                         styleClass="form-control"><f:param name="prevPage" value="trip-summary"/></h:commandButton>
-                    </c:if>
-                    <h:commandButton value="Cancel" action="found-trips" styleClass="form-control"/>
+                        <c:if test="#{loggedInUserController.loggedIn}">
+                            <h:commandButton value="Go on" action="confirm-booking" styleClass="form-control"/>
+                        </c:if>
+                        <c:if test="#{not loggedInUserController.loggedIn}">
+                            <h:commandButton value="You need to log in to book"
+                                             action="#{loginController.loginFromPreviousPage('trip-summary')}"
+                                             styleClass="form-control"/>
+                        </c:if>
+                        <h:commandButton value="Cancel" action="found-trips" styleClass="form-control"/>
                     </h:form>
                 </h:panelGroup>
             </f:facet>

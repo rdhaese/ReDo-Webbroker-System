@@ -66,11 +66,8 @@ public class LoginController implements Serializable {
     }
 
 
-    public String loginFromPreviousPage() {
-        Object prevPageObj = FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("prevPage");
-        if (prevPageObj != null) {
-            prevPage = prevPageObj.toString();
-        }
+    public String loginFromPreviousPage(String prevPage) {
+        this.prevPage = prevPage;
         return "loginForm";
     }
 
