@@ -67,6 +67,10 @@
             </p:fieldset>
 
             <h:commandButton value="Purchase" action="#{confirmBookingController.purchase()}"/>
+
+            <ui:fragment rendered="#{not empty confirmBookingController.errorMessage}">
+                <h:outputText value="#{confirmBookingController.errorMessage}" styleClass="alert alert-danger" role="alert"/>
+            </ui:fragment>
         </h:form>
 
     </ui:define>

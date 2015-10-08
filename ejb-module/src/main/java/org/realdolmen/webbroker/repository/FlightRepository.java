@@ -89,4 +89,7 @@ public class FlightRepository implements Serializable {
         this.entityManager = entityManager;
     }
 
+    public void updateFlight(Flight flight) {
+        entityManager.merge(flight);
+    }
 }
