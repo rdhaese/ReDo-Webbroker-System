@@ -21,6 +21,8 @@ public class BookTripController {
     private TripRepository tripRepo;
     @Inject
     private LoggedInUserController loggedInUserController;
+    @Inject
+    private CurrentBookingController currentBookingController;
 
     private Booking booking;
 
@@ -33,7 +35,7 @@ public class BookTripController {
     }
 
     public String bookTrip(){
-        //TODO
+        currentBookingController.setCurrentBooking(booking);
         return "booking-placed";
     }
 

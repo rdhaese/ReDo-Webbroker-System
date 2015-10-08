@@ -4,9 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ct="http://java.sun.com/jsf/composite/custom-tags"
-      xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:p="http://primefaces.org/ui">
+      xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
 <ui:composition template="template.xhtml">
@@ -16,21 +15,39 @@
     </ui:define>
     <ui:define name="pageContent">
         <h:panelGrid columns="2">
-            Departure from: <h:outputText value=" #{bookTripController.booking.trip.flight.departure}" />
-            Arrival to: <h:outputText value=" #{bookTripController.booking.trip.flight.arrival}" />
-            Travel agency: <h:outputText value=" #{bookTripController.booking.trip.travelAgency.name}" />
-            Departure date: <h:outputText value=" #{bookTripController.booking.trip.startDate}" />
-            Return date: <h:outputText value=" #{bookTripController.booking.trip.endDate}" />
-            Amount of persons: <h:outputText value=" #{bookTripController.booking.numberOfPassengers}" />
-            Flight price (total based on persons): <h:outputText value=" #{bookTripController.booking.getFlightPrice()}" />
-            Accommodation price (for period): <h:outputText value=" #{bookTripController.booking.trip.getTotalAccommodationPrice()}" />
-            Total price: <h:outputText value=" #{bookTripController.booking.getTotalPrice()}" />
+            <h:outputLabel value="Departure from:" for="departure"/><h:outputText id="departure"
+                                                                                  value=" #{bookTripController.booking.trip.flight.departure.name}"/>
+            <h:outputLabel value="Arrival to:" for="arrival"/> <h:outputText id="arrival"
+                                                                             value=" #{bookTripController.booking.trip.flight.arrival.name}"/>
+            <h:outputLabel value="Travel agency:" for="travelAgency"/> <h:outputText id="travelAgency"
+                                                                                     value=" #{bookTripController.booking.trip.travelAgency.name}"/>
+            <h:outputLabel value="Departure date:" for="depDate"/> <h:outputText id="depDate"
+                                                                                 value=" #{bookTripController.booking.trip.getStartDateInOldApi()}"><f:convertDateTime
+                pattern="dd/MM/yyyy"/>
+        </h:outputText>
+            <h:outputLabel value="Return date:" for="retDate"/> <h:outputText id="retDate"
+                                                                              value=" #{bookTripController.booking.trip.getEndDateInOldApi()}"><f:convertDateTime
+                pattern="dd/MM/yyyy"/>
+        </h:outputText>
+            <!--<h:outputLabel value="Amount of persons:" for="amountOfPersons"/> <h:outputText id="amountOfPersons" value=" #{bookTripController.booking.numberOfPassengers}" />-->
+            <!-- <h:outputLabel value="Flight price (total based on persons):" for="flightPrice"/> <h:outputText id="flightPrice" value=" #{bookTripController.booking.getFlightPrice()}" />
+             <h:outputLabel value="Accommodation price (for period):" for="accPrice"/> <h:outputText id="accPrice" value=" #{bookTripController.booking.trip.getTotalAccommodationPrice()}" />
+             <h:outputLabel value="Total price:" for="totalPrice"/> <h:outputText id="totalPrice" value=" #{bookTripController.booking.getTotalPrice()}" />-->
+            <f:facet name="footer">
+                <h:panelGroup style="display:block; text-align:center">
+                    <h:form>
+                    <c:if test="#{loggedInUserController.loggedIn}">
+                        <h:commandButton value="Go on" action="confirm-booking" styleClass="form-control"/>
+                    </c:if>
+                    <c:if test="#{not loggedInUserController.loggedIn}">
+                        <h:commandButton value="You need to log in to book" action="#{loginController.loginFromPreviousPage()}"
+                                         styleClass="form-control"><f:param name="prevPage" value="trip-summary"/></h:commandButton>
+                    </c:if>
+                    <h:commandButton value="Cancel" action="found-trips" styleClass="form-control"/>
+                    </h:form>
+                </h:panelGroup>
+            </f:facet>
         </h:panelGrid>
-
-
-
-            #{t.getFlight().getDeparture().getName()}
-        <h:commandButton value="Confirm Booking" action="#{bookTripController.bookTrip()}" />
 
     </ui:define>
 </ui:composition>

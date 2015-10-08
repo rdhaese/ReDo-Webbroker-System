@@ -8,8 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
 
 /**
  * Entity which represents a trip.
@@ -81,12 +84,20 @@ public class Trip extends BaseEntity {
         return startDate;
     }
 
+    public Date getStartDateInOldApi(){
+        return Date.from(startDate.toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
     public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
     public LocalDateTime getEndDate() {
         return endDate;
+    }
+
+    public Date getEndDateInOldApi(){
+       return Date.from(endDate.toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
     public void setEndDate(LocalDateTime endDate) {

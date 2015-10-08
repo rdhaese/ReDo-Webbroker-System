@@ -39,7 +39,7 @@
                 <h:outputLabel for="departureDate">Departure date (dd/mm/yyyy):</h:outputLabel>
                 <h:inputText id="departureDate" value="#{searchTripController.departureDate}" styleClass="form-control"
                              converterMessage="Please provide a date in the dd/mm/yyyy format.">
-                    <f:convertDateTime pattern="d/M/yyyy" for="departureDate"/>
+                    <f:convertDateTime pattern="dd/MM/yyyy" for="departureDate"/>
                 </h:inputText>
                 <h:inputHidden/>
                 <h:message for="departureDate" styleClass="error-message"/>
@@ -47,7 +47,7 @@
                 <h:outputLabel for="returnDate">Return date (dd/mm/yyyy):</h:outputLabel>
                 <h:inputText id="returnDate" value="#{searchTripController.arrivalDate}" styleClass="form-control"
                              converterMessage="Please provide a date in the dd/mm/yyyy format.">
-                    <f:convertDateTime pattern="d/M/yyyy" for="returnDate"/>
+                    <f:convertDateTime pattern="dd/MM/yyyy" for="returnDate"/>
                 </h:inputText>
                 <h:inputHidden/>
                 <h:message for="returnDate" styleClass="error-message"/>

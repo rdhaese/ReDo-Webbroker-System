@@ -13,6 +13,7 @@
     <ui:define name="pageTitle">Log In</ui:define>
     <ui:define name="header"><ct:header title="Log In"/> </ui:define>
     <ui:define name="pageContent">
+        #{prevPage}
         <h:form>
             <h:panelGrid columns="2">
                 <c:if test="#{loginController.loginError}">
