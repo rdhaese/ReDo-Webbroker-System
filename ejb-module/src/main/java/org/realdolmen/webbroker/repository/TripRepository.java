@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.function.Consumer;
 
 @Stateless
 @LocalBean
-public class TripRepository {
+public class TripRepository implements Serializable {
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -64,16 +65,22 @@ public class TripRepository {
      */
     private List<Trip> filterOnDates(final LocalDate depDate, final LocalDate arrDate, List<Trip> tripsToFilter) {
         List<Trip> filteredTrips = new ArrayList<Trip>();
-        tripsToFilter.forEach(new Consumer<Trip>() {
-            @Override
-            public void accept(Trip trip) {
-                if ((trip.getStartDate().isEqual(depDate.atStartOfDay())) || (trip.getStartDate().isAfter(depDate.atStartOfDay()))) {
-                    if ((trip.getEndDate().isEqual(arrDate.atStartOfDay())) || (trip.getEndDate().isBefore(arrDate.atStartOfDay()))) {
-                        filteredTrips.add(trip);
-                    }
-                }
+        for (Trip trip : tripsToFilter){
+            LocalDate start = trip.getStartDate().toLocalDate();
+            LocalDate end = trip.getEndDate().toLocalDate();
+
+            boolean startIsEqual = depDate.isEqual(start);
+            boolean startIsAfter = depDate.isAfter(start);
+            boolean endIsEqual = arrDate.isEqual(end);
+            boolean endIsBefore = arrDate.isBefore(end);
+
+            boolean validStartDate = startIsEqual || startIsAfter;
+            boolean validEndDate = endIsEqual || endIsBefore;
+
+            if (validStartDate && validEndDate) {
+                    filteredTrips.add(trip);
             }
-        });
+        }
         return filteredTrips;
     }
 
@@ -85,7 +92,7 @@ public class TripRepository {
      * @return all found trips
      */
     private List<Trip> performQuery(Airport destination, Integer numberOfPersons) {
-        Query qry = entityManager.createQuery("Select t From Trip t WHERE t.flight.arrival = :destination AND t.flight.availableSeats > :numberOfPersons").setParameter("destination", destination).setParameter("numberOfPersons", numberOfPersons);
+       Query qry = entityManager.createQuery("Select t From Trip t WHERE t.flight.arrival.name = :destination AND t.flight.availableSeats >= :numberOfPersons").setParameter("destination", destination.getName()).setParameter("numberOfPersons", numberOfPersons);
         return qry.getResultList();
     }
 
@@ -93,5 +100,12 @@ public class TripRepository {
         this.entityManager = entityManager;
     }
 
-
+    /**
+     * Find a trip on his id
+     * @param id to search trip for
+     * @return the found trip, or null
+     */
+    public Trip find(Long id) {
+        return entityManager.find(Trip.class, id);
+    }
 }

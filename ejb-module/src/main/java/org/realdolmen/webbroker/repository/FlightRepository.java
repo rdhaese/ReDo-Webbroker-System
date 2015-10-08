@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
  */
 @Stateless
 @LocalBean
-public class FlightRepository {
+public class FlightRepository implements Serializable {
 
     @PersistenceContext
     EntityManager entityManager;

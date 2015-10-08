@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ import java.util.List;
  */
 @Named
 @RequestScoped
-public class AddFlightController {
+public class AddFlightController implements Serializable {
 
     @Inject
     private AirportRepository airportRepo;

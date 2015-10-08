@@ -36,4 +36,9 @@ public class TripRepositoryTest extends DataSetPersistenceTest {
         //TODO
         fail();
     }
+
+    @Test
+    public void canTripBeFoundOnId(){
+        assertNotNull(tripRepository.find(1L));
+    }
 }

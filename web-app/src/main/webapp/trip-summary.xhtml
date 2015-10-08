@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ct="http://java.sun.com/jsf/composite/custom-tags"
+      xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="template.xhtml">
+    <ui:define name="pageTitle">Trip Summary</ui:define>
+    <ui:define name="header">
+        <ct:header title="Trip Summary"/>
+    </ui:define>
+    <ui:define name="pageContent">
+        <h:panelGrid columns="2">
+            Departure from: <h:outputText value=" #{bookTripController.booking.trip.flight.departure}" />
+            Arrival to: <h:outputText value=" #{bookTripController.booking.trip.flight.arrival}" />
+            Travel agency: <h:outputText value=" #{bookTripController.booking.trip.travelAgency.name}" />
+            Departure date: <h:outputText value=" #{bookTripController.booking.trip.startDate}" />
+            Return date: <h:outputText value=" #{bookTripController.booking.trip.endDate}" />
+            Amount of persons: <h:outputText value=" #{bookTripController.booking.numberOfPassengers}" />
+            Flight price (total based on persons): <h:outputText value=" #{bookTripController.booking.getFlightPrice()}" />
+            Accommodation price (for period): <h:outputText value=" #{bookTripController.booking.trip.getTotalAccommodationPrice()}" />
+            Total price: <h:outputText value=" #{bookTripController.booking.getTotalPrice()}" />
+        </h:panelGrid>
+
+
+
+            #{t.getFlight().getDeparture().getName()}
+        <h:commandButton value="Confirm Booking" action="#{bookTripController.bookTrip()}" />
+
+    </ui:define>
+</ui:composition>
+</html>

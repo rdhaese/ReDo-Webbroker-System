@@ -17,9 +17,9 @@
     <ui:define name="pageContent">
 
         <h:dataTable value="#{searchTripController.foundTrips}" var="t"
-                     styleClass="order-table"
-                     headerClass="order-table-header"
-                     rowClasses="order-table-odd-row,order-table-even-row"
+                     styleClass="table"
+                     headerClass="table-header"
+                     rowClasses="table-odd-row,table-even-row"
                 >
 
             <h:column>
@@ -33,31 +33,26 @@
             </h:column>
 
             <h:column>
-                <f:facet name="header">Travel Agency</f:facet>
-                #{t.getTravelAgency().getName()}
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">Price</f:facet>
-                #{t.getFlight.getPrice() + t.getAccomodationPrice()}
-            </h:column>
-
-            <h:column>
                 <f:facet name="header">Departure Date</f:facet>
-                #{t.getStartDate()}
+                <h:outputText value="#{t.getStartDate()}">
+                    <f:convertDateTime pattern="dd.MM.yyyy" />
+                </h:outputText>
             </h:column>
 
             <h:column>
                 <f:facet name="header">Return Date</f:facet>
-                #{t.getEndDate()}
+                <h:outputText value="#{t.getEndDate()}">
+                    <f:convertDateTime pattern="dd.MM.yyyy" />
+                </h:outputText>
             </h:column>
 
             <h:column>
-                <f:facet name="header">Available Seats</f:facet>
-                #{t.getFlight.getAvailableSeats()}
+                <h:form>
+                <h:commandButton value="Book" action="#{bookTripController.showSummary(t.id, searchTripController.numberOfPersons)}" styleClass="form-control"/>
+                </h:form>
             </h:column>
         </h:dataTable>
-        
+
     </ui:define>
 </ui:composition>
 </html>

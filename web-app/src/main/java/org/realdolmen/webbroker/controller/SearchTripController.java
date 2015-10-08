@@ -6,10 +6,12 @@ import org.realdolmen.webbroker.repository.AirportRepository;
 import org.realdolmen.webbroker.repository.TripRepository;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,8 +23,8 @@ import java.util.List;
  * Controller for the search trip functionality.
  */
 @Named
-@RequestScoped
-public class SearchTripController {
+@SessionScoped
+public class SearchTripController implements Serializable {
 
     @Inject
     private AirportRepository airportRepo;
@@ -49,7 +51,7 @@ public class SearchTripController {
      * @return the next page to navigate to -> found-trips; if no trips are found -> a message is set and the form is shown again.
      */
     public String searchTrip() {
-        getFoundTrips();
+        fillFoundTrips();
         if (foundTrips.size() == 0) {
             errorMessage = "No trips found";
             return "search-trips";
@@ -60,10 +62,10 @@ public class SearchTripController {
     /**
      * Gets all trips from the repo with the given arguments.
      */
-    private void getFoundTrips() {
+    private void fillFoundTrips() {
         Airport destination = airportRepo.find(destination_id);
-        LocalDate depDate = LocalDate.from(departureDate.toInstant());
-        LocalDate arrDate = LocalDate.from(arrivalDate.toInstant());
+        LocalDate depDate = new java.sql.Date(departureDate.getTime()).toLocalDate();
+        LocalDate arrDate = new java.sql.Date(arrivalDate.getTime()).toLocalDate();
         foundTrips = tripRepo.searchTrips(destination, depDate, arrDate, numberOfPersons);
     }
 
@@ -114,7 +116,12 @@ public class SearchTripController {
         this.errorMessage = errorMessage;
     }
 
+    public List<Trip> getFoundTrips() {
+        return foundTrips;
+    }
+
     public void setFoundTrips(List<Trip> foundTrips) {
         this.foundTrips = foundTrips;
     }
+
 }

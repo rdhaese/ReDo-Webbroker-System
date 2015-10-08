@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * Controller for the register functionality.
@@ -16,7 +17,7 @@ import javax.validation.constraints.Size;
  */
 @Named
 @RequestScoped
-public class RegisterController {
+public class RegisterController implements Serializable {
 
     @Inject
     private UserRepository userRepo;

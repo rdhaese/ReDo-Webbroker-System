@@ -9,6 +9,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.time.Period;
 
 /**
  * Entity which represents a trip.
@@ -92,6 +93,15 @@ public class Trip extends BaseEntity {
         this.endDate = endDate;
     }
 
+
+    public Double getTotalAccommodationPrice(){
+        return accommodationPrice * getAmountOfDays();
+    }
+
+    public int getAmountOfDays(){
+        return Period.between(startDate.toLocalDate(),endDate.toLocalDate()).getDays();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -119,4 +129,6 @@ public class Trip extends BaseEntity {
         result = 31 * result + (getEndDate() != null ? getEndDate().hashCode() : 0);
         return result;
     }
+
+
 }

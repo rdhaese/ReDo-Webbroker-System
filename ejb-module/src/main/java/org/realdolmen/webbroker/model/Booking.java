@@ -69,6 +69,14 @@ public class Booking extends BaseEntity{
         this.overridePrice = overridePrice;
     }
 
+    public Double getFlightPrice(){
+        return trip.getFlight().getPrice() * numberOfPassengers;
+    }
+
+    public Double getTotalPrice(){
+        return getFlightPrice() * trip.getTotalAccommodationPrice();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

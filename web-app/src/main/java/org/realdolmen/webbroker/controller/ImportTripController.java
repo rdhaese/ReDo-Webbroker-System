@@ -20,10 +20,11 @@ import javax.inject.Inject;
 import javax.servlet.http.Part;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
+import java.io.Serializable;
 
 @ManagedBean
 @ViewScoped
-public class ImportTripController {
+public class ImportTripController implements Serializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ImportTripController.class);
 
