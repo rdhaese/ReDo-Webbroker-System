@@ -21,6 +21,15 @@ public class Airport extends BaseEntity {
     @NotNull
     private String name;
 
+    public Airport() {
+    }
+
+    public Airport(String name, Region region, Address address) {
+        this.name = name;
+        this.region = region;
+        this.address = address;
+    }
+
     public Region getRegion() {
         return region;
     }

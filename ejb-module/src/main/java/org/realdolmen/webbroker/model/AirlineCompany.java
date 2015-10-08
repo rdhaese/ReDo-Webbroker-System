@@ -14,6 +14,13 @@ public class AirlineCompany extends BaseEntity{
     @NotNull
     private String name;
 
+    public AirlineCompany() {
+    }
+
+    public AirlineCompany(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

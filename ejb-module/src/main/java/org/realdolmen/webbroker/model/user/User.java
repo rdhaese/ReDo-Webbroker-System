@@ -23,6 +23,17 @@ public class User extends BaseEntity {
     private String password;
     private String salt;
 
+    public User() {
+    }
+
+    public User(String first, String last, String username, String password, String salt) {
+        this.firstName = first;
+        this.lastName = last;
+        this.userName = username;
+        this.password = password;
+        this.salt = salt;
+    }
+
     public String getUserName() {
         return userName;
     }
