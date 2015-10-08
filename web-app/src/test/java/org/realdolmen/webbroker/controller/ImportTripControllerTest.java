@@ -55,9 +55,9 @@ public class ImportTripControllerTest {
     public void canUploadValidXmlFile() throws Exception {
         InputStream inputStream = getClass().getResource("/trips.xml").openStream();
         XmlSerializer realSerializer = new XmlSerializer();
-        TripsXmlElement elements = realSerializer.unmarhal(TripsXmlElement.class, inputStream);
+        TripsXmlElement elements = realSerializer.unmarshalStream(TripsXmlElement.class, inputStream);
 
-        when(serializer.unmarhal(any(), any())).thenReturn(elements);
+        when(serializer.unmarshalStream(any(), any())).thenReturn(elements);
         when(travelAgencyRepository.getSingleTravelAgency(anyString())).thenReturn(new TravelAgency("Jetair"));
         when(flightRepository.getSingleFlight(anyString(),anyString(), anyString(),anyDouble(),anyInt()))
                 .thenReturn(EntityFactory.createFlight());
@@ -72,9 +72,9 @@ public class ImportTripControllerTest {
     public void cannotUploadWithNoTravelAgenciesFound() throws Exception {
         InputStream inputStream = getClass().getResource("/trips.xml").openStream();
         XmlSerializer realSerializer = new XmlSerializer();
-        TripsXmlElement elements = realSerializer.unmarhal(TripsXmlElement.class, inputStream);
+        TripsXmlElement elements = realSerializer.unmarshalStream(TripsXmlElement.class, inputStream);
 
-        when(serializer.unmarhal(any(), any())).thenReturn(elements);
+        when(serializer.unmarshalStream(any(), any())).thenReturn(elements);
         when(travelAgencyRepository.getSingleTravelAgency(anyString())).thenReturn(null);
 
         controller.upload();
@@ -87,9 +87,9 @@ public class ImportTripControllerTest {
     public void cannotUploadWithNoFlightsFound() throws Exception {
         InputStream inputStream = getClass().getResource("/trips.xml").openStream();
         XmlSerializer realSerializer = new XmlSerializer();
-        TripsXmlElement elements = realSerializer.unmarhal(TripsXmlElement.class, inputStream);
+        TripsXmlElement elements = realSerializer.unmarshalStream(TripsXmlElement.class, inputStream);
 
-        when(serializer.unmarhal(any(), any())).thenReturn(elements);
+        when(serializer.unmarshalStream(any(), any())).thenReturn(elements);
         when(travelAgencyRepository.getSingleTravelAgency(anyString())).thenReturn(new TravelAgency("Jetair"));
         when(flightRepository.getSingleFlight(anyString(), anyString(), anyString(), anyDouble(), anyInt()))
                 .thenReturn(null);
@@ -102,7 +102,7 @@ public class ImportTripControllerTest {
 
     @Test
     public void cannotUploadInvalidXmlFile() throws Exception {
-        when(serializer.unmarhal(any(), any())).thenThrow(new JAXBException(""));
+        when(serializer.unmarshalStream(any(), any())).thenThrow(new JAXBException(""));
         controller.upload();
         assertTrue(!controller.getErrorMessage().isEmpty());
         assertTrue(controller.getSuccessMessage().isEmpty());

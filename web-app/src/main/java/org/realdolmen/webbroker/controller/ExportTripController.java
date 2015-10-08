@@ -19,9 +19,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Controller to export all {@link Trip}s to XML.
+ *
+ * @author Youri Flement
+ */
 @Named
 @RequestScoped
 public class ExportTripController implements Serializable {
+
+    private static final String DEFAULT_FILE_NAME = "allTrips.xml";
 
     @Inject
     TripRepository tripRepository;
@@ -31,13 +38,18 @@ public class ExportTripController implements Serializable {
 
     private String message = "";
 
+    /**
+     * Export all trips from the database to an XML file.
+     *
+     * @param context The faces context to export from.
+     */
     public void export(FacesContext context) {
         ExternalContext ec = context.getExternalContext();
 
         ec.responseReset();
         ec.setResponseContentType("application/xml");
         ec.setResponseCharacterEncoding("UTF-8");
-        ec.setResponseHeader("Content-Disposition", "attachment; filename=\"" + "allTrips.xml" + "\"");
+        ec.setResponseHeader("Content-Disposition", "attachment; filename=\"" + DEFAULT_FILE_NAME + "\"");
         try {
             OutputStream output = ec.getResponseOutputStream();
             Collection<Trip> allTrips = tripRepository.getAllTrips();
@@ -50,10 +62,19 @@ public class ExportTripController implements Serializable {
         context.responseComplete();
     }
 
+    /**
+     * Export all trips with the current {@link FacesContext}.
+     */
     public void export() {
         export(FacesContext.getCurrentInstance());
     }
 
+    /**
+     * Convert a the collection of trips to their counterpart XML elements.
+     *
+     * @param trips The trips to convert.
+     * @return The trips in their XML representation.
+     */
     private TripsXmlElement tripsToXmlElement(Collection<Trip> trips) {
         TripsXmlElement elements = new TripsXmlElement();
         List<TripXmlElement> tripElementList = new ArrayList<>();
@@ -66,6 +87,12 @@ public class ExportTripController implements Serializable {
         return elements;
     }
 
+    /**
+     * Convert a {@link Trip} to its counterpart {@link TripXmlElement}.
+     *
+     * @param trip the trip to convert.
+     * @return The converted trip.
+     */
     private TripXmlElement tripToXmlElement(Trip trip) {
         TripXmlElement element = new TripXmlElement();
         element.setAccommodationPrice(trip.getAccommodationPrice());
@@ -76,6 +103,12 @@ public class ExportTripController implements Serializable {
         return element;
     }
 
+    /**
+     * Convert a {@link Flight} to its counterpart {@link FlightXmlElement}.
+     *
+     * @param flight The flight to convert.
+     * @return The converted flight.
+     */
     private FlightXmlElement flightToXmlElement(Flight flight) {
         FlightXmlElement element = new FlightXmlElement();
         element.setPrice(flight.getPrice());

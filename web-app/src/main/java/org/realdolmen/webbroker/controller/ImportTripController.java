@@ -49,7 +49,7 @@ public class ImportTripController {
         errorMessage = "";
         successMessage = "";
         try {
-            TripsXmlElement tripsXmlElement = serializer.unmarhal(TripsXmlElement.class, file.getInputStream());
+            TripsXmlElement tripsXmlElement = serializer.unmarshalStream(TripsXmlElement.class, file.getInputStream());
             tripsXmlElement.getTrips().forEach(this::processTripElement);
         } catch (JAXBException e) {
             errorMessage = "Unable to parse XML file.";

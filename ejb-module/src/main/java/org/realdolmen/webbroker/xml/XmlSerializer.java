@@ -11,12 +11,17 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ * Helper class to marshal and unmarshal XML files.
+ *
+ * @author Youri Flement
+ */
 @Stateless
 @LocalBean
 public class XmlSerializer {
 
-    public <T> T unmarhal(Class<T> tClass, InputStream source) throws JAXBException {
-        return unmarshal(tClass, new StreamSource(source));
+    public <T> T unmarshalStream(Class<T> tClass, InputStream stream) throws JAXBException {
+        return unmarshal(tClass, new StreamSource(stream));
     }
 
     public <T> T unmarshal(Class<T> tClass, Source source) throws JAXBException {
