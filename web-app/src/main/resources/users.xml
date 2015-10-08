@@ -46,4 +46,11 @@
         <role>airlinecompany</role>
         <airlinecompany>Sabena</airlinecompany>
     </user>
+    <user>
+        <firstname>normal</firstname>
+        <lastname>user</lastname>
+        <username>normalUser</username>
+        <password>password</password>
+        <role>user</role>
+    </user>
 </users>
