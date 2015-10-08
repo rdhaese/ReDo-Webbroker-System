@@ -24,7 +24,7 @@
                         <li><h:link outcome="index" value="Home"/></li>
 
                         <c:if test="#{loggedInUserController.loggedIn}">
-                            <c:if test="#{loggedInUserController.getRoll() eq 'AirlineCompanyEmployee'}">
+                            <c:if test="#{loggedInUserController.getRoll() eq 'AirlineCompanyEmployee' or loggedInUserController.getRoll() eq 'ReDoAirEmployee'}">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                        aria-haspopup="true"
@@ -35,7 +35,7 @@
                                 </li>
                             </c:if>
 
-                            <c:if test="#{loggedInUserController.getRoll() eq 'TravelAgencyEmployee'}">
+                            <c:if test="#{loggedInUserController.getRoll() eq 'TravelAgencyEmployee' or loggedInUserController.getRoll() eq 'ReDoAirEmployee'}">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                        aria-haspopup="true"
