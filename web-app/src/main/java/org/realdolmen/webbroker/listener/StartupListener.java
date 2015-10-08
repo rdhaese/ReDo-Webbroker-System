@@ -1,12 +1,18 @@
 package org.realdolmen.webbroker.listener;
 
+import org.realdolmen.webbroker.exception.AmbiguousEntityException;
 import org.realdolmen.webbroker.model.*;
 import org.realdolmen.webbroker.model.user.AirlineCompanyEmployee;
 import org.realdolmen.webbroker.model.user.ReDoAirEmployee;
 import org.realdolmen.webbroker.model.user.TravelAgencyEmployee;
 import org.realdolmen.webbroker.model.user.User;
+import org.realdolmen.webbroker.repository.FlightRepository;
+import org.realdolmen.webbroker.repository.TravelAgencyRepository;
+import org.realdolmen.webbroker.repository.TripRepository;
+import org.realdolmen.webbroker.xml.XmlSerializer;
 import org.realdolmen.webbroker.xml.element.*;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.ServletContextEvent;
@@ -31,6 +37,18 @@ public class StartupListener implements ServletContextListener {
     @PersistenceContext
     EntityManager entityManager;
 
+    @Inject
+    XmlSerializer serializer;
+
+    @Inject
+    TravelAgencyRepository travelAgencyRepository;
+
+    @Inject
+    private FlightRepository flightRepository;
+
+    @Inject
+    private TripRepository tripRepository;
+
     @Override
     @Transactional
     public void contextInitialized(ServletContextEvent sce) {
@@ -38,6 +56,37 @@ public class StartupListener implements ServletContextListener {
         initializeAirports();
         initializeUsers();
         initializeFlights();
+        initializeTrips();
+    }
+
+    private void initializeTrips() {
+        try {
+            InputStream file = getClass().getClassLoader().getResourceAsStream("trips.xml");
+            TripsXmlElement xmlElement = serializer.unmarshalStream(TripsXmlElement.class, file);
+            for (TripXmlElement element : xmlElement.getTrips()) {
+                processTripElement(element);
+            }
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void processTripElement(TripXmlElement tripElement) {
+        try {
+            TravelAgency agency = travelAgencyRepository.getSingleTravelAgency(tripElement.getTravelAgency());
+            if (agency == null) {
+            } else {
+                FlightXmlElement flight1 = tripElement.getFlight();
+                Flight flight = flightRepository.getSingleFlight(flight1.getAirlineCompany(), flight1.getDepartureAirport(), flight1.getArrivalAirport(), flight1.getPrice(), flight1.getAvailableSeats());
+                if (flight == null) {
+                } else {
+                    Trip trip = new Trip(flight, agency, tripElement.getAccommodationPrice(), tripElement.getStartDate(), tripElement.getEndDate());
+                    tripRepository.add(trip);
+                }
+            }
+        } catch (AmbiguousEntityException e) {
+            e.printStackTrace();
+        }
     }
 
     // TODO: move these
