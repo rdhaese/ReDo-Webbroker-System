@@ -1,6 +1,7 @@
 package org.realdolmen.webbroker.xml;
 
-import javax.inject.Named;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -8,7 +9,8 @@ import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import java.io.InputStream;
 
-@Named
+@Stateless
+@LocalBean
 public class XmlSerializer {
 
     public <T> T unmarhal(Class<T> tClass, InputStream source) throws JAXBException {
