@@ -22,7 +22,16 @@ public class FlightRepository {
     @PersistenceContext
     EntityManager entityManager;
 
-    public void add(Flight flight){
+    /**
+     * Add a {@link Flight} to the repository. The flight must have a company, arrival airport and departure airport.
+     *
+     * @param flight The flight to add.
+     * @throws IllegalArgumentException if the flight is missing either a company or airport.
+     */
+    public void add(Flight flight) throws IllegalArgumentException {
+        if(flight.getArrival() == null || flight.getDeparture() == null || flight.getCompany() == null) {
+            throw new IllegalArgumentException("A flight must have a company, departure airport and arrival airport");
+        }
         flight.setCompany(entityManager.merge(flight.getCompany()));
         flight.setArrival(entityManager.merge(flight.getArrival()));
         flight.setDeparture(entityManager.merge(flight.getDeparture()));
@@ -41,7 +50,7 @@ public class FlightRepository {
      * @param availableSeats    The available seats on the flight.
      * @return  A list of all flights which math the given parameters.
      */
-    public List<Flight> findFlight(String company, String departureAirport, String arrivalAirport, Double price, Integer availableSeats) {
+    public List<Flight> getFlight(String company, String departureAirport, String arrivalAirport, Double price, Integer availableSeats) {
         TypedQuery<Flight> query =
                 entityManager.createQuery("select f from Flight f where f.company.name = :company and f.arrival.name = :arrival and f.departure.name = :departure and f.price = :price and f.availableSeats = :seats", Flight.class)
                         .setParameter("company", company)
@@ -65,8 +74,8 @@ public class FlightRepository {
      * @return  The flight corresponding to the given parameters or <code>null</code> if no corresponding flight was found.
      * @throws AmbiguousEntityException if multiple flights with the given parameters were found.
      */
-    public Flight findSingleFlight(String company, String departure, String arrival, Double price, Integer availableSeats) throws AmbiguousEntityException {
-        List<Flight> flights = findFlight(company, departure, arrival, price, availableSeats);
+    public Flight getSingleFlight(String company, String departure, String arrival, Double price, Integer availableSeats) throws AmbiguousEntityException {
+        List<Flight> flights = getFlight(company, departure, arrival, price, availableSeats);
         if (flights.isEmpty()) {
             return null;
         } else if (flights.size() > 1) {

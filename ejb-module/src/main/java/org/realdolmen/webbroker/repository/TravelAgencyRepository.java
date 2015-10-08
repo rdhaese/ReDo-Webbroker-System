@@ -44,7 +44,7 @@ public class TravelAgencyRepository {
      * @return  The entity corresponding to the travel agency.
      * @throws AmbiguousEntityException if multiple travel agencies with the given name were found.
      */
-    public TravelAgency findSingleTravelAgency(String name) throws AmbiguousEntityException {
+    public TravelAgency getSingleTravelAgency(String name) throws AmbiguousEntityException {
         List<TravelAgency> agencies = getTravelAgenciesByName(name);
         if (agencies.isEmpty()) {
             return null;

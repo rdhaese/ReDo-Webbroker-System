@@ -60,13 +60,13 @@ public class ImportTripController {
 
     protected boolean processTripElement(TripXmlElement tripElement) {
         try {
-            TravelAgency agency = travelAgencyRepository.findSingleTravelAgency(tripElement.getTravelAgency());
+            TravelAgency agency = travelAgencyRepository.getSingleTravelAgency(tripElement.getTravelAgency());
             if (agency == null) {
                 return errorMessage("Travel agency '" + tripElement.getTravelAgency() + "' was not found.");
             }
 
             FlightXmlElement flight1 = tripElement.getFlight();
-            Flight flight = flightRepository.findSingleFlight(flight1.getAirlineCompany(), flight1.getDepartureAirport(), flight1.getArrivalAirport(), flight1.getPrice(), flight1.getAvailableSeats());
+            Flight flight = flightRepository.getSingleFlight(flight1.getAirlineCompany(), flight1.getDepartureAirport(), flight1.getArrivalAirport(), flight1.getPrice(), flight1.getAvailableSeats());
             if (flight == null) {
                 return errorMessage("Flight between " + flight1.getArrivalAirport() + " and " + flight1.getDepartureAirport() + " was not found.");
             }
