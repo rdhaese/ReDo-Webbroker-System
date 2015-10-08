@@ -41,10 +41,7 @@ public class AddFlightControllerTest {
     public void setUp(){
         flight = EntityFactory.createFlight();
     }
-    @Test
-    public void canAirportsBeGotten(){
 
-    }
 
     @Test
     public void isFlightAdded(){
@@ -76,15 +73,17 @@ public class AddFlightControllerTest {
     @Test
     public void departureAndArrivalCannotBeTheSame(){
         setFlightControllerState();
+        addFlightController.setDeparture_id(1L);
 
         addFlightController.addFlight();
         
         String expectedMessage = "Departure and arrival can't be the same";
-        assertEquals(expectedMessage,addFlightController.getMessage());
+        assertEquals(expectedMessage, addFlightController.getMessage());
     }
 
     @Test
     public void isFormDataCleared(){
+        Mockito.when(loggedInUserController.getLoggedInUser()).thenReturn(getACEmp());
         setFlightControllerState();
 
         addFlightController.addFlight();
