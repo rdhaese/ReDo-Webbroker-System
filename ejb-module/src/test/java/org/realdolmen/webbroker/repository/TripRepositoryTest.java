@@ -3,7 +3,6 @@ package org.realdolmen.webbroker.repository;
 import org.junit.Before;
 import org.junit.Test;
 import org.realdolmen.webbroker.DataSetPersistenceTest;
-import org.realdolmen.webbroker.model.Flight;
 import org.realdolmen.webbroker.model.Trip;
 import org.realdolmen.webbroker.util.EntityFactory;
 
@@ -39,6 +38,6 @@ public class TripRepositoryTest extends DataSetPersistenceTest {
 
     @Test
     public void canTripBeFoundOnId(){
-        assertNotNull(tripRepository.find(1L));
+        assertNotNull(tripRepository.find(7000L));
     }
 }
