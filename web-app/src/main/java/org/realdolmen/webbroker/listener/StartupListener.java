@@ -21,6 +21,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Servlet context listener which loads some initial data into the database.
+ *
  * @author Youri Flement
  */
 @WebListener

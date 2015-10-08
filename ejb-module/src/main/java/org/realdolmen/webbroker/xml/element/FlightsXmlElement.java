@@ -6,9 +6,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
-/**
- * Created by YFMAX32 on 7/10/2015.
- */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "flights")
 public class FlightsXmlElement {
