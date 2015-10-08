@@ -16,9 +16,48 @@
     </ui:define>
     <ui:define name="pageContent">
 
-       Found Trips
+        <h:dataTable value="#{searchTripController.foundTrips}" var="t"
+                     styleClass="order-table"
+                     headerClass="order-table-header"
+                     rowClasses="order-table-odd-row,order-table-even-row"
+                >
 
+            <h:column>
+                <f:facet name="header">Departure</f:facet>
+                #{t.getFlight().getDeparture().getName()}
+            </h:column>
 
+            <h:column>
+                <f:facet name="header">Arrival</f:facet>
+                #{t.getFlight().getArrival().getName()}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Travel Agency</f:facet>
+                #{t.getTravelAgency().getName()}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Price</f:facet>
+                #{t.getFlight.getPrice() + t.getAccomodationPrice()}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Departure Date</f:facet>
+                #{t.getStartDate()}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Return Date</f:facet>
+                #{t.getEndDate()}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Available Seats</f:facet>
+                #{t.getFlight.getAvailableSeats()}
+            </h:column>
+        </h:dataTable>
+        
     </ui:define>
 </ui:composition>
 </html>

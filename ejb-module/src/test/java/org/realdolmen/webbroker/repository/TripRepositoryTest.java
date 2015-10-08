@@ -30,4 +30,10 @@ public class TripRepositoryTest extends DataSetPersistenceTest {
         tripRepository.add(trip);
         assertNotNull(trip.getId());
     }
+
+    @Test
+    public void canTripsBeFoundOnDestinationDatesAndAvailableSeats(){
+        //TODO
+        fail();
+    }
 }

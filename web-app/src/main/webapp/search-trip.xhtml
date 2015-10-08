@@ -22,6 +22,11 @@
 
         <h:form>
             <h:panelGrid columns="2">
+                <f:facet name="header">
+                    <h:panelGroup style="display:block; text-align:center">
+                       <h:outputText styleClass="error-message" value="#{searchTripController.errorMessage}" />
+                    </h:panelGroup>
+                </f:facet>
                 <h:outputLabel for="destination">Destination:</h:outputLabel>
                 <h:selectOneMenu id="destination" value="#{searchTripController.destination_id}"
                                  styleClass="form-control">

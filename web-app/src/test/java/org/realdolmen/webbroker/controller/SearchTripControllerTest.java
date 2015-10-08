@@ -12,7 +12,13 @@ import static org.junit.Assert.fail;
 public class SearchTripControllerTest {
 
     @Test
-    public void todoTest(){
+    public void canTripsBeSearched(){
+        //TODO
+        fail();
+    }
+
+    @Test
+    public void canAllAirportsBeGotten(){
         //TODO
         fail();
     }
