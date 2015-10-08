@@ -17,6 +17,8 @@ import java.util.List;
 
 /**
  * Created by RDEAX37 on 6/10/2015.
+ * Controller to add flights.
+ * @author Robin D'Haese
  */
 @Named
 @RequestScoped
@@ -42,6 +44,12 @@ public class AddFlightController {
 
     private String message;
 
+    /**
+     * Adds a flight if possible.
+     * If departure and arrival are the same or if adding to the persistence context fails, a message is set and no flight is added, form data is kept.
+     * If a flight is added successfully, a corresponding message is set and the form state is cleared.
+     * @return the next page to navigate to
+     */
     public String addFlight() {
         if (departure_id == arrival_id){
             message = "Departure and arrival can't be the same";
@@ -58,6 +66,9 @@ public class AddFlightController {
         return "add-flight";
     }
 
+    /**
+     * Clears the form state by setting all properties to null
+     */
     private void clearFormState() {
         departure_id = null;
         arrival_id = null;
@@ -65,6 +76,10 @@ public class AddFlightController {
         amountOfSeats = null;
     }
 
+    /**
+     * Creates a flight with the data from the properties and the logged in user.
+     * @return the created flight
+     */
     private Flight createFlight() {
         Flight flight = new Flight();
         flight.setDeparture(airportRepo.find(departure_id));

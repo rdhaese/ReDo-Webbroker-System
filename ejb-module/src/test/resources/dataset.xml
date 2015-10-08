@@ -1,3 +1,4 @@
+<!-- Used by DBUnit to fill database before a test -->
 <dataset>
     <airlinecompany version="0" id="1" name="Virgin"/>
     <airlinecompany version="0" id="2" name="Airbus"/>
@@ -44,5 +45,4 @@
     <booking version="0" id="2" trip_id="8000" bookingUser_id="2" numberOfPassengers="1"  />
 
     <booking_discount Booking_id="1" discounts_id="5000" />
-
 </dataset>

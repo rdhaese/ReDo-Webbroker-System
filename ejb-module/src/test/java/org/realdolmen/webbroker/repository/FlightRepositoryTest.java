@@ -9,6 +9,8 @@ import org.realdolmen.webbroker.util.EntityFactory;
 
 /**
  * Created by RDEAX37 on 6/10/2015.
+ * Tests for {@link FlightRepository}
+ * @author Robin D'Haese
  */
 public class FlightRepositoryTest extends DataSetPersistenceTest{
 

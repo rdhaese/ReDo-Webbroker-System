@@ -19,6 +19,8 @@ import static org.mockito.Mockito.times;
 
 /**
  * Created by RDEAX37 on 6/10/2015.
+ * Test for {@link AddFlightController}
+ * @Author Robin D'Haese
  */
 @RunWith(MockitoJUnitRunner.class)
 public class AddFlightControllerTest {

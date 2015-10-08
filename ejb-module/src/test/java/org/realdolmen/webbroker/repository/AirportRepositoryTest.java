@@ -6,6 +6,8 @@ import org.realdolmen.webbroker.DataSetPersistenceTest;
 
 /**
  * Created by RDEAX37 on 6/10/2015.
+ * Tests for {@link AirportRepository}
+ * @author Robin D'Haese
  */
 public class AirportRepositoryTest extends DataSetPersistenceTest {
 

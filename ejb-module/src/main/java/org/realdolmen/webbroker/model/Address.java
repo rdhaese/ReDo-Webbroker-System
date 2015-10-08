@@ -5,6 +5,8 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Created by RDEAX37 on 2/10/2015.
+ * Entity representing an address
+ * @author Robin D'Haese
  */
 @Entity
 public class Address extends BaseEntity{

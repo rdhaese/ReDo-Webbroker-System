@@ -8,6 +8,8 @@ import javax.validation.ConstraintViolationException;
 
 /**
  * Created by RDEAX37 on 6/10/2015.
+ * Persistence tests for {@link Airport}
+ * @author Robin D'Haese
  */
 public class AirportPersistenceTest extends DataSetPersistenceTest{
 

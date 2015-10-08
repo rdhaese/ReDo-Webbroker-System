@@ -6,6 +6,10 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Entity representing a flight
+ * @Author Robin D'Haese
+ */
 @Entity
 public class Flight extends BaseEntity {
     @NotNull

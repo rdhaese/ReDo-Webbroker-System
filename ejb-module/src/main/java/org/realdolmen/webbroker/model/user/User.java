@@ -7,6 +7,8 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Created by RDEAX37 on 2/10/2015.
+ * Entity representing a User
+ * @Author Robin D'Haese
  */
 @Entity(name = "users")
 @Inheritance

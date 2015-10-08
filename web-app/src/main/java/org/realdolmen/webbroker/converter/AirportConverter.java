@@ -15,10 +15,13 @@ import javax.persistence.PersistenceContext;
 
 /**
  * Created by RDEAX37 on 6/10/2015.
+ *
+ * JSF Converter to convert airports from objects to id's and id's to objects.
+ * @Author Robin D'Haese
  */
 @ManagedBean(name = "flightConverterBean")
 @FacesConverter(value = "flightConverter")
-public class FlightConverter implements Converter {
+public class AirportConverter implements Converter {
 
     @Inject
     private AirportRepository airportRepo;
