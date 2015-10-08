@@ -45,11 +45,5 @@ public class BookTripController {
         this.booking = booking;
     }
 
-    public int getAmountOfPersons() {
-        return amountOfPersons;
-    }
 
-    public void setAmountOfPersons(int amountOfPersons) {
-        this.amountOfPersons = amountOfPersons;
-    }
 }

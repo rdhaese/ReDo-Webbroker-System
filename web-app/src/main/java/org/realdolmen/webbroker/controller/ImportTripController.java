@@ -42,68 +42,46 @@ public class ImportTripController implements Serializable {
     @Inject
     XmlSerializer serializer;
 
-    private String message;
+    private String errorMessage;
 
-    private boolean isError;
+    private String successMessage;
 
     public void upload() {
+        errorMessage = "";
+        successMessage = "";
         try {
-            TripsXmlElement tripsXmlElement = serializer.unmarhal(TripsXmlElement.class, file.getInputStream());
+            TripsXmlElement tripsXmlElement = serializer.unmarshalStream(TripsXmlElement.class, file.getInputStream());
             tripsXmlElement.getTrips().forEach(this::processTripElement);
         } catch (JAXBException e) {
-            message = "Unable to parse XML file.";
-            LOGGER.warn(message + ": " + file.getName());
+            errorMessage = "Unable to parse XML file.";
+            LOGGER.warn(errorMessage + ": " + file.getName());
         } catch (IOException e) {
-            message = "Unable to open XML file.";
-            LOGGER.warn(message + ": " + file.getName());
+            errorMessage = "Unable to open XML file.";
+            LOGGER.warn(errorMessage + ": " + file.getName());
         } catch (NullPointerException e) {
-            message = "Please select a file.";
+            errorMessage = "Please select a file.";
         }
     }
 
-    protected boolean processTripElement(TripXmlElement tripElement) {
+    protected void processTripElement(TripXmlElement tripElement) {
         try {
             TravelAgency agency = travelAgencyRepository.getSingleTravelAgency(tripElement.getTravelAgency());
             if (agency == null) {
-                return errorMessage("Travel agency '" + tripElement.getTravelAgency() + "' was not found.");
+                errorMessage = "Travel agency '" + tripElement.getTravelAgency() + "' was not found.";
+            } else {
+                FlightXmlElement flight1 = tripElement.getFlight();
+                Flight flight = flightRepository.getSingleFlight(flight1.getAirlineCompany(), flight1.getDepartureAirport(), flight1.getArrivalAirport(), flight1.getPrice(), flight1.getAvailableSeats());
+                if (flight == null) {
+                    errorMessage = "Flight between " + flight1.getArrivalAirport() + " and " + flight1.getDepartureAirport() + " was not found.";
+                } else {
+                    Trip trip = new Trip(flight, agency, tripElement.getAccommodationPrice(), tripElement.getStartDate(), tripElement.getEndDate());
+                    tripRepository.add(trip);
+                    successMessage = "Trips were successfully added.";
+                }
             }
-
-            FlightXmlElement flight1 = tripElement.getFlight();
-            Flight flight = flightRepository.getSingleFlight(flight1.getAirlineCompany(), flight1.getDepartureAirport(), flight1.getArrivalAirport(), flight1.getPrice(), flight1.getAvailableSeats());
-            if (flight == null) {
-                return errorMessage("Flight between " + flight1.getArrivalAirport() + " and " + flight1.getDepartureAirport() + " was not found.");
-            }
-
-            Trip trip = new Trip(flight, agency, tripElement.getAccommodationPrice(), tripElement.getStartDate(), tripElement.getEndDate());
-            tripRepository.add(trip);
-            return successMessage("Trips were successfully added.");
         } catch (AmbiguousEntityException e) {
-            return errorMessage("Multiple flights or travel agencies were found for the input flights/travel agencies.");
+            errorMessage = "Multiple flights or travel agencies were found for the input flights/travel agencies.";
         }
-    }
-
-    private boolean successMessage(String message) {
-        this.message = message;
-        this.isError = false;
-        return false;
-    }
-
-    private boolean uploadSuccessful() {
-        return !isError;
-    }
-
-    public boolean errorMessage(String message) {
-        this.message = message;
-        this.isError = true;
-        return true;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public Part getFile() {
@@ -112,5 +90,21 @@ public class ImportTripController implements Serializable {
 
     public void setFile(Part file) {
         this.file = file;
+    }
+
+    public String getSuccessMessage() {
+        return successMessage;
+    }
+
+    public void setSuccessMessage(String successMessage) {
+        this.successMessage = successMessage;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

@@ -7,12 +7,13 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import javax.persistence.Query;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
+
 
 /**
  * Created by RDEAX37 on 7/10/2015.
@@ -107,5 +108,13 @@ public class TripRepository implements Serializable {
      */
     public Trip find(Long id) {
         return entityManager.find(Trip.class, id);
+    }
+/**
+     * Get all trips.
+     *
+     * @return All the trips in the repository.
+     */
+    public List<Trip> getAllTrips() {
+        return entityManager.createQuery("select t from Trip t", Trip.class).getResultList();
     }
 }
