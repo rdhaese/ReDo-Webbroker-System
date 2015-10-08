@@ -15,9 +15,11 @@
         <h:form>
             <h:panelGrid columns="2">
                 <f:facet name="header">
+                <ui:fragment rendered="#{not empty addFlightController.message}">
                     <h:panelGroup style="display:block; text-align:center">
-                        <h:outputText value="#{addFlightController.message}" styleClass="error-message"/>
+                        <ct:alert text="#{addFlightController.message}" kind="danger" />
                     </h:panelGroup>
+                </ui:fragment>
                 </f:facet>
 
                 <h:outputLabel for="departure" value="Select departure airport: "/>

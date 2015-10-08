@@ -23,11 +23,13 @@
         <h:form>
             <h:panelGrid columns="2">
                 <f:facet name="header">
+                <ui:fragment rendered="#{not empty searchTripController.errorMessage}">
                     <h:panelGroup style="display:block; text-align:center">
-                       <h:outputText styleClass="error-message" value="#{searchTripController.errorMessage}" />
+                        <ct:alert text="#{searchTripController.errorMessage}" kind="danger" />
                     </h:panelGroup>
-                </f:facet>
-                <h:outputLabel for="destination">Destination:</h:outputLabel>
+                </ui:fragment>
+            </f:facet>
+            <h:outputLabel for="destination">Destination:</h:outputLabel>
                 <h:selectOneMenu id="destination" value="#{searchTripController.destination_id}"
                                  styleClass="form-control">
                     <f:selectItems value="#{searchTripController.getAirports()}" var="a"

@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:ct="http://java.sun.com/jsf/composite/custom-tags" xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:ct="http://java.sun.com/jsf/composite/custom-tags" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition template="template.xhtml">
     <ui:define name="pageTitle">Import Trip</ui:define>
@@ -9,27 +10,31 @@
         <ct:header title="Trip manager"/>
     </ui:define>
     <ui:define name="pageContent">
-
         <h:panelGrid columns="1" >
+            <f:facet name="header">
             <ui:fragment rendered="#{not empty importTripController.successMessage}">
-                <h:outputText value="#{importTripController.successMessage}" styleClass="alert alert-success" role="alert"/>
+                <h:panelGroup style="display:block; text-align:center">
+                <ct:alert kind="success" text="#{importTripController.successMessage}"/>
+                </h:panelGroup>
             </ui:fragment>
             <ui:fragment rendered="#{not empty importTripController.errorMessage}">
-                <h:outputText value="#{importTripController.errorMessage}" styleClass="alert alert-danger" role="alert"/>
+                <ct:alert kind="danger" text="#{importTripController.errorMessage}" />
             </ui:fragment>
-            <hr />
+            </f:facet>
             <h:form enctype="multipart/form-data">
                 <h:inputFile value="#{importTripController.file}" class="form-control"/>
-                <h:commandButton value="Import" action="#{importTripController.upload}" class="form-control"/>
+                <h:commandButton value="Import Trips From XML" action="#{importTripController.upload}" class="form-control"/>
             </h:form>
+
+            <hr />
+
+            <ui:fragment rendered="#{not empty exportTripController.message}">
+                <ct:alert kind="danger" text="#{exportTripController.message}"/>
+            </ui:fragment>
             <h:form>
                 <h:commandButton ajax="false" value="Export All Our Trips" action="#{exportTripController.export}" class="form-control"/>
             </h:form>
-            <ui:fragment rendered="#{not empty exportTripController.message}">
-                <h:outputText value="#{exportTripController.message}" styleClass="alert alert-danger" role="alert"/>
-            </ui:fragment>
         </h:panelGrid>
-
     </ui:define>
 </ui:composition>
 
