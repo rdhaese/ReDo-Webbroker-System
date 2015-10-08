@@ -9,7 +9,7 @@
         <jta-data-source>java:/MyDataSource</jta-data-source>
         <class>org.realdolmen.webbroker.converter.LocalDateTimePersistenceConverter</class>
         <properties>
-            <property name="hibernate.default_schema" value="webbroker"/>
+            <property name="hibernate.default_schema" value="webbrokerproduction"/>
             <property name="hibernate.hbm2ddl.auto" value="create" />
         </properties>
 
