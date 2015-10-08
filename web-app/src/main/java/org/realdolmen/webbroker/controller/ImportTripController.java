@@ -55,6 +55,8 @@ public class ImportTripController {
         } catch (IOException e) {
             message = "Unable to open XML file.";
             LOGGER.warn(message + ": " + file.getName());
+        } catch (NullPointerException e) {
+            message = "Please select a file.";
         }
     }
 
