@@ -29,11 +29,10 @@ public class ExportTripController implements Serializable {
     @Inject
     XmlSerializer serializer;
 
-    private String message;
+    private String message = "";
 
-    public void export() {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        ExternalContext ec = fc.getExternalContext();
+    public void export(FacesContext context) {
+        ExternalContext ec = context.getExternalContext();
 
         ec.responseReset();
         ec.setResponseContentType("application/xml");
@@ -48,7 +47,11 @@ public class ExportTripController implements Serializable {
             message = "Unable to export the trips as this time.";
         }
 
-        fc.responseComplete();
+        context.responseComplete();
+    }
+
+    public void export() {
+        export(FacesContext.getCurrentInstance());
     }
 
     private TripsXmlElement tripsToXmlElement(Collection<Trip> trips) {
@@ -87,7 +90,4 @@ public class ExportTripController implements Serializable {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }
