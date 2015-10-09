@@ -10,18 +10,18 @@
 
 
 <ui:composition template="template.xhtml" >
-    <ui:define name="pageTitle">Home</ui:define>
+    <ui:define name="pageTitle">#{text['page.title.homepage']}</ui:define>
     <ui:define name="header">
-        <ct:header title="Home" />
+        <ct:header title="#{text['page.title.homepage']}" />
     </ui:define>
     <ui:define name="pageContent">
 
         <div class="centered-content">
-        <h1>Welcome To ReDo Air!</h1>
-        <h2>What do you want to do?</h2>
+        <h1>#{text['homepage.title']}</h1>
+        <h2>#{text['homepage.subtitle']}</h2>
 
-        <h:link styleClass="btn btn-primary btn-lg btn-block" value="Search a trip" outcome="search-trip" />
-        <h:link styleClass="btn btn-primary btn-lg btn-block" value="Search a destination" outcome="search-destination" />
+        <h:link styleClass="btn btn-primary btn-lg btn-block" value="#{text['button.search.trip']}" outcome="search-trip" />
+        <h:link styleClass="btn btn-primary btn-lg btn-block" value="#{text['button.search.destination']}" outcome="search-destination" />
         </div>
 
     </ui:define>

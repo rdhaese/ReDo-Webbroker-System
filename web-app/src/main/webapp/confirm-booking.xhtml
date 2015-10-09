@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ct="http://java.sun.com/jsf/composite/custom-tags"
+      xmlns:p="http://primefaces.org/ui"
+        >
+
+
+<ui:composition template="template.xhtml">
+    <ui:define name="pageTitle">Book trip</ui:define>
+    <ui:define name="header">
+        <ct:header title="Book Trip"/>
+    </ui:define>
+    <ui:define name="pageContent">
+
+        <h:form>
+            <h:panelGrid columns="4">
+                <h:outputLabel for="airportArrival" value="Arrival:"/>
+                <h:inputText disabled="true" id="airportArrival"
+                             value="#{currentBookingController.currentBooking.trip.flight.arrival.name}"/>
+
+                <h:outputLabel for="airportDeparture" value="Departure:"/>
+                <h:inputText disabled="true" id="airportDeparture"
+                             value="#{currentBookingController.currentBooking.trip.flight.departure.name}"/>
+
+                <h:outputLabel for="startDate" value="From:"/>
+                <h:inputText disabled="true" id="startDate"
+                             value="#{currentBookingController.currentBooking.trip.startDate.toString()}"/>
+
+                <h:outputLabel for="endDate" value="To:"/>
+                <h:inputText disabled="true" id="endDate"
+                             value="#{currentBookingController.currentBooking.trip.endDate.toString()}"/>
+
+                <h:outputText value="Total price: #{currentBookingController.currentBooking.totalPrice}"/>
+                <h:outputText value="Discounted credit card price: #{currentBookingController.currentBooking.totalPrice}"/>
+            </h:panelGrid>
+        </h:form>
+
+        <hr/>
+
+        <h2>Payment info</h2>
+        <h:form>
+            <h:outputLabel for="creditcardPayment">Credit card:</h:outputLabel>
+            <p:fieldset id="creditcardPayment">
+                <h:panelGrid columns="3">
+                    <h:outputLabel for="creditcardField">Credit card number:</h:outputLabel>
+                    <h:inputText id="creditcardField" value="#{confirmBookingController.creditcardNumber}">
+                        <f:validator validatorId="org.realdolmen.CreditCardNumberValidator"/>
+                    </h:inputText>
+                    <h:message for="creditcardField"/>
+
+                    <h:outputLabel for="creditcardExpiryDateField">Expiry date:</h:outputLabel>
+                    <h:inputText id="creditcardExpiryDateField" value="#{confirmBookingController.creditcardExpiryDate}">
+                        <f:validator validatorId="org.realdolmen.CreditCardExpiryDateValidator" />
+                    </h:inputText>
+                    <h:message for="creditcardExpiryDateField"/>
+                </h:panelGrid>
+            </p:fieldset>
+
+            <h:outputLabel for="endorsement">Endorsement:</h:outputLabel>
+            <p:fieldset id="endorsement">
+                TODO
+            </p:fieldset>
+
+            <h:commandButton value="Purchase" action="#{confirmBookingController.purchase()}"/>
+
+            <ui:fragment rendered="#{not empty confirmBookingController.errorMessage}">
+                <h:outputText value="#{confirmBookingController.errorMessage}" styleClass="alert alert-danger" role="alert"/>
+            </ui:fragment>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+</html>
