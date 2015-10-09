@@ -1,20 +1,74 @@
 package org.realdolmen.webbroker.controller;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.realdolmen.util.EntityFactory;
+import org.realdolmen.webbroker.model.Booking;
+import org.realdolmen.webbroker.model.Trip;
+import org.realdolmen.webbroker.repository.BookingRepository;
+import org.realdolmen.webbroker.repository.FlightRepository;
 
-import static org.junit.Assert.fail;
+import java.util.ArrayList;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.*;
 
 /**
+ * Mock test for the {@link ConfirmBookingController}.
  *
- *
+ * @author Youri Flement
  */
+@RunWith(MockitoJUnitRunner.class)
 public class ConfirmBookingControllerTest {
 
+    @Mock
+    CurrentBookingController currentBookingController;
 
+    @Mock
+    BookingRepository bookingRepository;
+
+    @Mock
+    FlightRepository flightRepository;
+
+    @InjectMocks
+    ConfirmBookingController controller;
+
+    Booking booking;
+
+    @Before
+    public void setup() {
+        Trip trip = EntityFactory.createTrip();
+        booking = new Booking();
+        booking.setOverridePrice(100d);
+        booking.setTrip(trip);
+        booking.setNumberOfPassengers(20);
+        booking.setDiscounts(new ArrayList<>());
+
+        when(currentBookingController.getCurrentBooking()).thenReturn(booking);
+    }
 
     @Test
-    public void test() {
-        fail();
+    public void canBookIfValidPurchase() throws Exception {
+        assertEquals("thank-you", controller.purchase());
+        assertTrue(controller.getErrorMessage().isEmpty());
+        verify(bookingRepository, times(1)).addBooking(booking);
+        verify(flightRepository, times(1)).updateFlight(booking.getTrip().getFlight());
+    }
+
+    @Test
+    public void cannotOverbookFlight() throws Exception {
+        booking.getTrip().getFlight().setAvailableSeats(0);
+
+        assertEquals("confirm-booking", controller.purchase());
+        assertFalse(controller.getErrorMessage().isEmpty());
+        verifyNoMoreInteractions(bookingRepository);
+        verifyNoMoreInteractions(flightRepository);
     }
 
 }

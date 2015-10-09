@@ -13,24 +13,29 @@ import javax.inject.Named;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 
+/**
+ * Controller to purchase a trip (confirmation of a booking).
+ *
+ * @author Youri Flement
+ */
 @Named
 @RequestScoped
-public class ConfirmBookingController implements Serializable {
+public class  ConfirmBookingController implements Serializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ConfirmBookingController.class);
 
     @Inject
     CurrentBookingController currentBookingController;
 
-    private String creditcardNumber = "67034200303993013";
-
-    private String creditcardExpiryDate = "01/16";
-
     @Inject
     BookingRepository bookingRepository;
 
     @Inject
     FlightRepository flightRepository;
+
+    private String creditcardNumber = "67034200303993013";
+
+    private String creditcardExpiryDate = "01/16";
 
     private String errorMessage = "";
 
