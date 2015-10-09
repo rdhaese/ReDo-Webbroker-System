@@ -33,20 +33,21 @@ public class  ConfirmBookingController implements Serializable {
     @Inject
     FlightRepository flightRepository;
 
+
+    //TODO REMOVE STATE BEFORE PRODUCTION (keep fields!//
     private String creditcardNumber = "67034200303993013";
-
     private String creditcardExpiryDate = "01/16";
+    /////////////////////////////////////////////////////
 
-    private String errorMessage = "";
+    private boolean noMoreSeats = false;
 
-    //TODO: what about concurrency ?
     @Transactional
     public String purchase() {
-        Booking booking = currentBookingController.getBooking();
+        Booking booking = currentBookingController.getCurrentBooking();
         Trip trip = booking.getTrip();
         Integer availableSeats = trip.getFlight().getAvailableSeats();
         if(availableSeats < booking.getNumberOfPassengers()) {
-            errorMessage = "There are currently no more seats available. Sorry about that.";
+            noMoreSeats = true;
             return "confirm-booking";
         } else {
             bookingRepository.addBooking(booking);
@@ -57,14 +58,6 @@ public class  ConfirmBookingController implements Serializable {
 
             return "thank-you";
         }
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
     }
 
     public String getCreditcardNumber() {
@@ -81,5 +74,13 @@ public class  ConfirmBookingController implements Serializable {
 
     public void setCreditcardExpiryDate(String creditcardExpiryDate) {
         this.creditcardExpiryDate = creditcardExpiryDate;
+    }
+
+    public boolean isNoMoreSeats() {
+        return noMoreSeats;
+    }
+
+    public void setNoMoreSeats(boolean noMoreSeats) {
+        this.noMoreSeats = noMoreSeats;
     }
 }

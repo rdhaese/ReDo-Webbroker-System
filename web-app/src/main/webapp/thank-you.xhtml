@@ -15,7 +15,8 @@
         <ct:header title="#{text['page.title.thankYou']}"/>
     </ui:define>
     <ui:define name="pageContent">
-        Thanks
+        <ct:alert kind="success" text="#{text['thankYou.message']}" />
+        #{text['thankYou.goBack']} <h:link value="#{text['thankYou.link.home']}" outcome="index" />.
     </ui:define>
 </ui:composition>
 </html>

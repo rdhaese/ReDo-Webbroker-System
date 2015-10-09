@@ -19,25 +19,25 @@
                 <f:facet name="header">
                 <ui:fragment rendered="#{loginController.loginError}">
                     <h:panelGroup style="display:block; text-align:center">
-                        <ct:alert text="The username or password is incorrect." kind="danger"/>
+                        <ct:alert text="#{text['logInForm.message.incorrect']}" kind="danger"/>
                     </h:panelGroup>
                 </ui:fragment>
                 </f:facet>
 
-                <h:outputLabel for="usernameInput">Username:</h:outputLabel>
-                <h:inputText id="usernameInput" value="#{loginController.username}" styleClass="form-control margin"/>
+                <h:outputLabel for="usernameInput" value="#{text['logInForm.username']}"/>
+                <h:inputText id="usernameInput" value="#{loginController.username}" styleClass="form-control margin" validatorMessage="#{text['logInForm.valMessage.username']}"/>
                 <h:inputHidden/>
                 <h:message for="usernameInput" styleClass="error-message"/>
 
-                <h:outputLabel for="passwordInput">Password:</h:outputLabel>
-                <h:inputSecret id="passwordInput" value="#{loginController.password}" styleClass="form-control margin"/>
+                <h:outputLabel for="passwordInput" value="#{text['logInForm.password']}"/>
+                <h:inputSecret id="passwordInput" value="#{loginController.password}" styleClass="form-control margin" validatorMessage="#{text['logInForm.valMessage.password']}"/>
                 <h:inputHidden/>
                 <h:message for="passwordInput" styleClass="error-message"/>
 
                 <f:facet name="footer">
                     <h:panelGroup style="display:block; text-align:center">
-                        <h:commandButton action="#{loginController.login}" value="Login" styleClass="form-control margin"/>
-                        <h:link outcome="register-user" value="Register" styleClass="form-control margin"/>
+                        <h:commandButton action="#{loginController.login}" value="#{text['logInForm.button.logIn']}" styleClass="form-control margin"/>
+                        <h:link outcome="register-user" value="#{text['loginForm.link.register']}" styleClass="form-control margin"/>
                     </h:panelGroup>
                 </f:facet>
             </h:panelGrid>

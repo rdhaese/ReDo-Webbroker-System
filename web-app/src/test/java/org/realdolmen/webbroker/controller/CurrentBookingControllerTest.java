@@ -26,9 +26,9 @@ public class CurrentBookingControllerTest {
 
     @Test
     public void canKeepTrackOfCurrentBooking() throws Exception {
-        controller.setBooking(booking);
+        controller.setCurrentBooking(booking);
 
-        assertEquals(booking, controller.getBooking());
+        assertEquals(booking, controller.getCurrentBooking());
     }
 
 }

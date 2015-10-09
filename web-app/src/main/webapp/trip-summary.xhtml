@@ -6,32 +6,35 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:ct="http://java.sun.com/jsf/composite/custom-tags"
       xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core">
-
-
 <ui:composition template="template.xhtml">
     <ui:define name="pageTitle">#{text['page.title.tripSummary']}</ui:define>
     <ui:define name="header">
         <ct:header title="#{text['page.title.tripSummary']}"/>
     </ui:define>
     <ui:define name="pageContent">
+        <ui:fragment rendered="#{currentBookingController.currentBooking eq null}">
+            <ct:alert kind="warning" text="#{text['tripSummary.noBooking']}" />
+            <h:link outcome="index" value="#{text['tripSummary.link.goHome']}"/>
+        </ui:fragment>
+        <ui:fragment rendered="#{currentBookingController.currentBooking ne null}">
         <h:panelGrid columns="2">
             <h:outputLabel value="#{text['tripSummary.departureFrom']}" for="departure"/>
             <h:outputText id="departure"
-                          value=" #{currentBookingController.booking.trip.flight.departure.name}"/>
+                          value=" #{currentBookingController.currentBooking.trip.flight.departure.name}"/>
             <h:outputLabel value="#{text['tripSummary.arrivalTo']}" for="arrival"/>
             <h:outputText id="arrival"
-                          value=" #{currentBookingController.booking.trip.flight.arrival.name}"/>
+                          value=" #{currentBookingController.currentBooking.trip.flight.arrival.name}"/>
             <h:outputLabel value="#{text['tripSummary.travelAgency']}" for="travelAgency"/>
             <h:outputText id="travelAgency"
-                          value=" #{currentBookingController.booking.trip.travelAgency.name}"/>
+                          value=" #{currentBookingController.currentBooking.trip.travelAgency.name}"/>
             <h:outputLabel value="#{text['tripSummary.departureDate']}" for="depDate"/>
             <h:outputText id="depDate"
-                          value="#{currentBookingController.booking.trip.getStartDateInOldApi()}">
+                          value="#{currentBookingController.currentBooking.trip.getStartDateInOldApi()}">
                 <f:convertDateTime for="depDate" pattern="dd/MM/yyyy"/>
             </h:outputText>
             <h:outputLabel value="#{text['tripSummary.returnDate']}" for="retDate"/>
             <h:outputText id="retDate"
-                          value="#{currentBookingController.booking.trip.getEndDateInOldApi()}">
+                          value="#{currentBookingController.currentBooking.trip.getEndDateInOldApi()}">
                 <f:convertDateTime for="retDate" pattern="dd/MM/yyyy"/>
             </h:outputText>
             <f:facet name="footer">
@@ -50,7 +53,7 @@
                 </h:panelGroup>
             </f:facet>
         </h:panelGrid>
-
+        </ui:fragment>
     </ui:define>
 </ui:composition>
 </html>

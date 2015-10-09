@@ -31,19 +31,18 @@ public class SearchTripController implements Serializable {
     @Inject
     private TripRepository tripRepo;
 
-    @NotNull(message = "Please select a destination.")
+    @NotNull
     private Long destination_id;
-    @NotNull(message = "Please enter a departure date.")
+    @NotNull
     private Date departureDate;
-    @NotNull(message = "Please enter an arrival date.")
+    @NotNull
     private Date arrivalDate;
-    @NotNull(message = "Please enter the number of persons.")
-    @DecimalMin(value = "1", message = "Please provide a number larger than 0.")
+    @NotNull
+    @DecimalMin(value = "1")
     private Integer numberOfPersons;
 
-    private String errorMessage;
     private List<Trip> foundTrips = new ArrayList<Trip>();
-
+    private boolean noTripsFound = false;
 
     /**
      * Collects all trips fitting the given constraints.
@@ -53,7 +52,7 @@ public class SearchTripController implements Serializable {
     public String searchTrip() {
         fillFoundTrips();
         if (foundTrips.size() == 0) {
-            errorMessage = "No trips found";
+            noTripsFound = true;
             return "search-trips";
         }
         return "found-trips";
@@ -108,14 +107,6 @@ public class SearchTripController implements Serializable {
         this.numberOfPersons = numberOfPersons;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
     public List<Trip> getFoundTrips() {
         return foundTrips;
     }
@@ -124,4 +115,11 @@ public class SearchTripController implements Serializable {
         this.foundTrips = foundTrips;
     }
 
+    public boolean isNoTripsFound() {
+        return noTripsFound;
+    }
+
+    public void setNoTripsFound(boolean noTripsFound) {
+        this.noTripsFound = noTripsFound;
+    }
 }

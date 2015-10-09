@@ -39,13 +39,13 @@ public class ConfirmBookingControllerTest {
     @Before
     public void setup() {
         booking = EntityFactory.createBooking();
-        when(currentBookingController.getBooking()).thenReturn(booking);
+        when(currentBookingController.getCurrentBooking()).thenReturn(booking);
     }
 
     @Test
     public void canBookIfValidPurchase() throws Exception {
         assertEquals("thank-you", controller.purchase());
-        assertTrue(controller.getErrorMessage().isEmpty());
+        assertFalse(controller.isNoMoreSeats());
         verify(bookingRepository, times(1)).addBooking(booking);
         verify(flightRepository, times(1)).updateFlight(booking.getTrip().getFlight());
     }
@@ -55,7 +55,7 @@ public class ConfirmBookingControllerTest {
         booking.getTrip().getFlight().setAvailableSeats(0);
 
         assertEquals("confirm-booking", controller.purchase());
-        assertFalse(controller.getErrorMessage().isEmpty());
+        assertTrue(controller.isNoMoreSeats());
         verifyNoMoreInteractions(bookingRepository);
         verifyNoMoreInteractions(flightRepository);
     }

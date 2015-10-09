@@ -42,7 +42,8 @@ public class RegisterControllerTest {
         controller.setPassword("password");
 
         assertEquals("register-success", controller.registerUser());
-        assertNull(controller.getErrorMessage());
+        assertFalse(controller.isErrorRegistering());
+        assertFalse(controller.isUserNameAlreadyInUse());
     }
 
     @Test
@@ -51,7 +52,7 @@ public class RegisterControllerTest {
         controller.setUserName("root");
 
         assertEquals("register-user", controller.registerUser());
-        assertNotNull(controller.getErrorMessage());
+        assertTrue(controller.isUserNameAlreadyInUse());
     }
 
 }

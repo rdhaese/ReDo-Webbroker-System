@@ -34,10 +34,10 @@ public class LoginController implements Serializable {
     @Inject
     PasswordService passwordService;
 
-    @NotNull(message = "Please enter a username")
+    @NotNull
     private String username;
 
-    @NotNull(message = "Please enter a password")
+    @NotNull
     private String password;
 
     // Flag to determine whether the current attempt to login was successful or not.

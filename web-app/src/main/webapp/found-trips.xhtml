@@ -23,24 +23,24 @@
                 >
 
             <h:column>
-                <f:facet name="header">Departure</f:facet>
+                <f:facet name="header">#{text['foundTrips.column.departure']}</f:facet>
                 #{t.getFlight().getDeparture().getName()}
             </h:column>
 
             <h:column>
-                <f:facet name="header">Arrival</f:facet>
+                <f:facet name="header">#{text['foundTrips.column.arrival']}</f:facet>
                 #{t.getFlight().getArrival().getName()}
             </h:column>
 
             <h:column>
-                <f:facet name="header">Departure Date</f:facet>
+                <f:facet name="header">#{text['foundTrips.column.departureDate']}</f:facet>
                 <h:outputText value="#{t.getStartDateInOldApi()}">
                     <f:convertDateTime pattern="dd/MM/yyyy" />
                 </h:outputText>
             </h:column>
 
             <h:column>
-                <f:facet name="header">Return Date</f:facet>
+                <f:facet name="header">#{text['foundTrips.column.returnDate']}</f:facet>
                 <h:outputText value="#{t.getEndDateInOldApi()}">
                     <f:convertDateTime pattern="dd/MM/yyyy" />
                 </h:outputText>
@@ -48,7 +48,7 @@
 
             <h:column>
                 <h:form>
-                <h:commandButton value="Book" action="#{bookTripController.showSummary(t.id, searchTripController.numberOfPersons)}" styleClass="form-control"/>
+                <h:commandButton value="#{text['foundTrips.button.book']}" action="#{bookTripController.showSummary(t.id, searchTripController.numberOfPersons)}" styleClass="form-control"/>
                 </h:form>
             </h:column>
         </h:dataTable>

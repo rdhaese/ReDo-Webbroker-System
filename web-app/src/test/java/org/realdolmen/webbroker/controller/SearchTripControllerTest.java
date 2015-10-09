@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static org.jgroups.util.Util.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
@@ -69,7 +70,7 @@ public class SearchTripControllerTest {
         when(tripRepo.searchTrips(any(), any(), any(), any())).thenReturn(new ArrayList<Trip>());
         String resultPage = controller.searchTrip();
         assertEquals("search-trips", resultPage);
-        assertEquals("No trips found", controller.getErrorMessage());
+        assertTrue(controller.isNoTripsFound());
     }
 
     @Test

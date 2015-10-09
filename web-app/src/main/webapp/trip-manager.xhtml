@@ -5,9 +5,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition template="template.xhtml">
-    <ui:define name="pageTitle">#{text['page.title.importTrip']}</ui:define>
+    <ui:define name="pageTitle">#{text['page.title.tripManager']}</ui:define>
     <ui:define name="header">
-        <ct:header title="#{text['page.title.importTrip']}"/>
+        <ct:header title="#{text['page.title.tripManager']}"/>
     </ui:define>
     <ui:define name="pageContent">
         <h:panelGrid columns="1" >
@@ -27,20 +27,40 @@
                         <ct:alert kind="danger" text="#{text['tripManager.message.unableToOpen']}" />
                     </h:panelGroup>
                 </ui:fragment>
+            <ui:fragment rendered="#{importTripController.noneSelected}">
+                <h:panelGroup style="display:block; text-align:center">
+                    <ct:alert kind="danger" text="#{text['tripManager.message.noneSelected']}" />
+                </h:panelGroup>
+            </ui:fragment>
+                <ui:fragment rendered="#{importTripController.agencyIsNull}">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <ct:alert kind="danger" text="#{text['tripManager.message.agencyIsNull']}" />
+                    </h:panelGroup>
+                </ui:fragment>
+                <ui:fragment rendered="#{importTripController.flightNotFound}">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <ct:alert kind="danger" text="#{text['tripManager.message.flightNotFound']}" />
+                    </h:panelGroup>
+                </ui:fragment>
+                <ui:fragment rendered="#{importTripController.multipleFound}">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <ct:alert kind="danger" text="#{text['tripManager.message.multipleFound']}" />
+                    </h:panelGroup>
+                </ui:fragment>
             </f:facet>
 
             <h:form enctype="multipart/form-data">
                 <h:inputFile value="#{importTripController.file}" class="form-control"/>
-                <h:commandButton value="Import Trips From XML" action="#{importTripController.upload}" class="form-control"/>
+                <h:commandButton value="#{text['tripManager.button.import']}" action="#{importTripController.upload}" class="form-control"/>
             </h:form>
 
             <hr />
 
-            <ui:fragment rendered="#{not empty exportTripController.message}">
-                <ct:alert kind="danger" text="#{exportTripController.message}"/>
+            <ui:fragment rendered="#{exportTripController.unableToExport}">
+                <ct:alert kind="danger" text="#{text['tripManager.message.unableToExport']}"/>
             </ui:fragment>
             <h:form>
-                <h:commandButton ajax="false" value="Export All Our Trips" action="#{exportTripController.export}" class="form-control"/>
+                <h:commandButton ajax="false" value="#{text['tripManager.button.export']}" action="#{exportTripController.export}" class="form-control"/>
             </h:form>
         </h:panelGrid>
     </ui:define>

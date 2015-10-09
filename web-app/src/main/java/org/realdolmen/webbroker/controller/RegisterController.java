@@ -28,17 +28,18 @@ public class RegisterController implements Serializable {
     @Inject
     PasswordService passwordService;
 
-    @NotNull(message = "Last name is required!")
+    @NotNull
     private String lastName;
-    @NotNull(message = "First name is required!")
+    @NotNull
     private String firstName;
-    @NotNull(message = "Username is required!")
+    @NotNull
     private String userName;
-    @NotNull(message = "Password is required!")
-    @Size(min = 6, message = "Password should be at least 6 characters")
+    @NotNull
+    @Size(min = 6)
     private String password;
 
-    private String errorMessage;
+    private boolean errorRegistering = false;
+    private boolean userNameAlreadyInUse = false;
 
     /**
      * Registers a user with the information from the properties,
@@ -50,19 +51,18 @@ public class RegisterController implements Serializable {
      * @return the next page to navigate to
      */
     public String registerUser() {
-        errorMessage = null;
         if (userRepo.getUserByUsername(userName) == null) {
             //Register user
             try {
                 userRepo.add(createUser());
             } catch (Exception e) {
-                errorMessage = "Something went wrong registering.";
+                errorRegistering = true;
                 return "register-user";
             }
             return "register-success";
         } else {
             //user already exists
-            errorMessage = "Username is already in use!";
+            userNameAlreadyInUse = true;
             return "register-user";
         }
     }
@@ -116,11 +116,19 @@ public class RegisterController implements Serializable {
         this.password = password;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public boolean isErrorRegistering() {
+        return errorRegistering;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setErrorRegistering(boolean errorRegistering) {
+        this.errorRegistering = errorRegistering;
+    }
+
+    public boolean isUserNameAlreadyInUse() {
+        return userNameAlreadyInUse;
+    }
+
+    public void setUserNameAlreadyInUse(boolean userNameAlreadyInUse) {
+        this.userNameAlreadyInUse = userNameAlreadyInUse;
     }
 }
