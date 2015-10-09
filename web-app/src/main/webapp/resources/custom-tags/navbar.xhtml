@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:cc="http://java.sun.com/jsf/composite" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
         >
 <cc:interface>
 
@@ -69,6 +70,14 @@
                             <li><h:link outcome="loginForm" value="Log In"/></li>
                         </c:if>
 
+                        <li>
+                            <h:form>
+                                <h:selectOneMenu value="#{localeBean.language}" onchange="submit()">
+                                    <f:selectItem itemValue="en" itemLabel="English" />
+                                    <f:selectItem itemValue="nl" itemLabel="Nederlands" />
+                                </h:selectOneMenu>
+                            </h:form>
+                        </li>
                     </ul>
                 </div>
             </div>
