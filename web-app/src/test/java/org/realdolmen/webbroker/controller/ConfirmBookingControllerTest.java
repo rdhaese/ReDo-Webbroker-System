@@ -50,7 +50,7 @@ public class ConfirmBookingControllerTest {
         booking.setNumberOfPassengers(20);
         booking.setDiscounts(new ArrayList<>());
 
-        when(currentBookingController.getCurrentBooking()).thenReturn(booking);
+        when(currentBookingController.getBooking()).thenReturn(booking);
     }
 
     @Test
