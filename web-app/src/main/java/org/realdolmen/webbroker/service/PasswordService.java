@@ -65,6 +65,9 @@ public class PasswordService {
      * @return <code>true</code> if the password is correct, <code>false</code> otherwise.
      */
     public boolean isCorrectPassword(User user, String unhashedPassword) {
+        if(user == null || unhashedPassword == null || unhashedPassword.isEmpty()) {
+            return false;
+        }
         Pair<String, String> securePassword = createSecurePassword(stringToByteArray(user.getSalt()), unhashedPassword);
         if (securePassword != null) {
             return securePassword.getSecond().equals(user.getPassword());
