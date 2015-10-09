@@ -8,13 +8,17 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+/**
+ * Validator for a credit card number. Uses Luhn's algorithm to determine if the credit card number is valid.
+ *
+ * @author Youri Flement
+ */
 @FacesValidator("org.realdolmen.CreditCardNumberValidator")
 public class CreditCardNumberValidator implements Validator {
 
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        String creditCardNumber = (String)value;
-        if(!isValid(creditCardNumber)) {
+        if(value == null || !isValid((String) value)) {
             FacesMessage message = new FacesMessage("cc validation");
             throw new ValidatorException(message);
         }

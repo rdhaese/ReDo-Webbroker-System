@@ -10,6 +10,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Validator for a credit card expiry date.
+ *
+ * @author Youri Flement
+ */
 @FacesValidator("org.realdolmen.CreditCardExpiryDateValidator")
 public class CreditCardExpiryDateValidator implements Validator {
 
@@ -31,6 +36,5 @@ public class CreditCardExpiryDateValidator implements Validator {
             throw new ValidatorException(new FacesMessage("Credit card expiry date must follow the pattern: dd/MM. For example: 05/20"));
         }
     }
-
 
 }
