@@ -10,6 +10,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
 
 /**
  * Entity which represents a trip.
@@ -50,6 +52,34 @@ public class Trip extends BaseEntity {
         this.endDate = endDate;
     }
 
+    /**
+     * @return the accommodationPrice multiplied with the amountOfDays
+     */
+    public Double getTotalAccommodationPrice() {
+        return accommodationPrice * getAmountOfDays();
+    }
+
+    /**
+     * @return The difference in days between startDate and endDate
+     */
+    public int getAmountOfDays() {
+        return Period.between(startDate.toLocalDate(), endDate.toLocalDate()).getDays();
+    }
+
+    /**
+     * @return the startDate, but converted to java.util.Date
+     */
+    public Date getStartDateInOldApi() {
+        return Date.from(startDate.toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
+    /**
+     * @return the endDate, but converted to java.util.Date
+     */
+    public Date getEndDateInOldApi() {
+        return Date.from(endDate.toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
     public Flight getFlight() {
         return flight;
     }
@@ -71,7 +101,7 @@ public class Trip extends BaseEntity {
     }
 
     public void setAccommodationPrice(Double accommodation) {
-        if(accommodation != null && accommodation < 0) {
+        if (accommodation != null && accommodation < 0) {
             throw new IllegalArgumentException();
         }
         this.accommodationPrice = accommodation;
@@ -91,15 +121,6 @@ public class Trip extends BaseEntity {
 
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
-    }
-
-
-    public Double getTotalAccommodationPrice(){
-        return accommodationPrice * getAmountOfDays();
-    }
-
-    public int getAmountOfDays(){
-        return Period.between(startDate.toLocalDate(),endDate.toLocalDate()).getDays();
     }
 
     @Override

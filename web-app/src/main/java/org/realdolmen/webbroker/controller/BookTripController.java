@@ -21,29 +21,15 @@ public class BookTripController {
     private TripRepository tripRepo;
     @Inject
     private LoggedInUserController loggedInUserController;
-
-    private Booking booking;
+    @Inject
+    private CurrentBookingController currentBookingController;
 
     public String showSummary(Long id, int amountOfPersons){
-        booking = new Booking();
+        Booking booking = new Booking();
         booking.setTrip(tripRepo.find(id));
         booking.setNumberOfPassengers(amountOfPersons);
         booking.setBookingUser(loggedInUserController.getLoggedInUser());
+        currentBookingController.setBooking(booking);
         return "trip-summary";
     }
-
-    public String bookTrip(){
-        //TODO
-        return "booking-placed";
-    }
-
-    public Booking getBooking() {
-        return booking;
-    }
-
-    public void setBooking(Booking booking) {
-        this.booking = booking;
-    }
-
-
 }

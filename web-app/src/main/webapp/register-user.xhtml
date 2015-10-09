@@ -14,10 +14,12 @@
     <ui:define name="pageContent">
         <h:form>
             <h:panelGrid columns="2">
-                <f:facet name="footer">
+                <f:facet name="header">
+                <ui:fragment rendered="#{not empty registerController.errorMessage}">
                     <h:panelGroup style="display:block; text-align:center">
-                        <h:outputText value="#{registerController.errorMessage}" styleClass="error-message"/>
+                        <ct:alert kind="danger" text="#{registerController.errorMessage}" />
                     </h:panelGroup>
+                </ui:fragment>
                 </f:facet>
                 <h:outputLabel value="Enter your name: "/>
                 <h:inputText id="lastName" value="#{registerController.lastName}" styleClass="form-control"/>

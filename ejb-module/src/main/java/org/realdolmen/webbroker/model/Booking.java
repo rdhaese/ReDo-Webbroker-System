@@ -29,6 +29,21 @@ public class Booking extends BaseEntity{
     @ManyToMany (cascade = CascadeType.PERSIST)
     private List<Discount> discounts = new ArrayList<Discount>();
 
+    /**
+     * @return the price of the flight time the number of passengers
+     */
+    public Double getFlightPrice(){
+        return trip.getFlight().getPrice() * numberOfPassengers;
+    }
+
+    /**
+     * @return The total price of the booking -> total flight price + total accommodationPrice
+     */
+    public Double getTotalPrice(){
+        return getFlightPrice() + trip.getTotalAccommodationPrice();
+    }
+
+
     public User getBookingUser() {
         return bookingUser;
     }
@@ -67,14 +82,6 @@ public class Booking extends BaseEntity{
 
     public void setOverridePrice(Double overridePrice) {
         this.overridePrice = overridePrice;
-    }
-
-    public Double getFlightPrice(){
-        return trip.getFlight().getPrice() * numberOfPassengers;
-    }
-
-    public Double getTotalPrice(){
-        return getFlightPrice() * trip.getTotalAccommodationPrice();
     }
 
     @Override

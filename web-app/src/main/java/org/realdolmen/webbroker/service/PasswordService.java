@@ -7,6 +7,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
@@ -20,7 +21,7 @@ import java.util.Random;
  */
 @Stateless
 @LocalBean
-public class PasswordService {
+public class PasswordService implements Serializable {
 
     private static final int HASH_ITERATIONS = 65536;
 

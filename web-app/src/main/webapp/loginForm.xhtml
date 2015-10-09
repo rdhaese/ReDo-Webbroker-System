@@ -13,15 +13,16 @@
     <ui:define name="pageTitle">Log In</ui:define>
     <ui:define name="header"><ct:header title="Log In"/> </ui:define>
     <ui:define name="pageContent">
+        #{prevPage}
         <h:form>
             <h:panelGrid columns="2">
-                <c:if test="#{loginController.loginError}">
                 <f:facet name="header">
+                <ui:fragment rendered="#{loginController.loginError}">
                     <h:panelGroup style="display:block; text-align:center">
-                            <h:outputText value="The username or password is incorrect." styleClass="error-message"/>
+                        <ct:alert text="The username or password is incorrect." kind="danger"/>
                     </h:panelGroup>
+                </ui:fragment>
                 </f:facet>
-                </c:if>
 
                 <h:outputLabel for="usernameInput">Username:</h:outputLabel>
                 <h:inputText id="usernameInput" value="#{loginController.username}" styleClass="form-control margin"/>
