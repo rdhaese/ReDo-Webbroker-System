@@ -48,7 +48,7 @@ public class AccessFilterTest {
     public void setup() {
         Collection<String> securePages = new ArrayList<>();
         securePages.add("booking");
-        filter.setSecurePages(securePages);
+//        filter.setSecurePages(securePages);
     }
 
     @Test
