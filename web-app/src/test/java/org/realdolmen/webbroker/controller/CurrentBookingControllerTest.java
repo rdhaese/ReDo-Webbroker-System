@@ -7,6 +7,11 @@ import org.realdolmen.webbroker.model.Booking;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Unit test for the {@link CurrentBookingController}.
+ *
+ * @author Youri Flement
+ */
 public class CurrentBookingControllerTest {
 
     CurrentBookingController controller;
