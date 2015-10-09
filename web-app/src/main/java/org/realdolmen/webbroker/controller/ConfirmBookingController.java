@@ -42,7 +42,7 @@ public class  ConfirmBookingController implements Serializable {
     //TODO: what about concurrency ?
     @Transactional
     public String purchase() {
-        Booking booking = currentBookingController.getCurrentBooking();
+        Booking booking = currentBookingController.getBooking();
         Trip trip = booking.getTrip();
         Integer availableSeats = trip.getFlight().getAvailableSeats();
         if(availableSeats < booking.getNumberOfPassengers()) {
