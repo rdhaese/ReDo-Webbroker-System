@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pages>
+    <page path="index">
+        <roles>
+            <role name="everyone" />
+        </roles>
+    </page>
+    <page path="loginForm">
+        <roles>
+            <role name="everyone" />
+        </roles>
+    </page>
+    <page path="register-user">
+        <roles>
+            <role name="everyone" />
+        </roles>
+    </page>
+    <page path="search-destination">
+        <roles>
+            <role name="everyone" />
+        </roles>
+    </page>
+    <page path="search-trip">
+        <roles>
+            <role name="everyone" />
+        </roles>
+    </page>
+    <page path="found-trips">
+        <roles>
+            <role name="redoair" />
+            <role name="travelagency" />
+            <role name="user" />
+            <role name="airline" />
+        </roles>
+    </page>
+    <page path="trip-summary">
+        <roles>
+            <role name="redoair" />
+            <role name="travelagency" />
+            <role name="user" />
+            <role name="airline" />
+        </roles>
+    </page>
+    <page path="thank-you">
+        <roles>
+            <role name="redoair" />
+            <role name="travelagency" />
+            <role name="user" />
+            <role name="airline" />
+        </roles>
+    </page>
+    <page path="confirm-booking">
+        <roles>
+            <role name="redoair" />
+            <role name="travelagency" />
+            <role name="airline" />
+            <role name="user" />
+        </roles>
+    </page>
+    <page path="trip-manager">
+        <roles>
+            <role name="travelagency" />
+            <role name="redoair" />
+        </roles>
+    </page>
+    <page path="add-flight">
+        <roles>
+            <role name="airline" />
+            <role name="redoair" />
+        </roles>
+    </page>
+</pages>
