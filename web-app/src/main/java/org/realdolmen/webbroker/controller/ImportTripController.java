@@ -42,24 +42,26 @@ public class ImportTripController implements Serializable {
     @Inject
     XmlSerializer serializer;
 
-    private String errorMessage;
-
-    private String successMessage;
+    private boolean unableToParse = false;
+    private boolean unableToOpen = false;
+    private boolean noneSelected = false;
+    private boolean agencyIsNull = false;
+    private boolean flightNotFound = false;
+    private boolean addedSuccess = false;
+    private boolean multipleFound = false;
 
     public void upload() {
-        errorMessage = "";
-        successMessage = "";
         try {
             TripsXmlElement tripsXmlElement = serializer.unmarshalStream(TripsXmlElement.class, file.getInputStream());
             tripsXmlElement.getTrips().forEach(this::processTripElement);
         } catch (JAXBException e) {
-            errorMessage = "Unable to parse XML file.";
-            LOGGER.warn(errorMessage + ": " + file.getName());
+            unableToParse = true;
+            LOGGER.warn("Unable to parse XML file: " + file.getName());
         } catch (IOException e) {
-            errorMessage = "Unable to open XML file.";
-            LOGGER.warn(errorMessage + ": " + file.getName());
+            unableToOpen = true;
+            LOGGER.warn("Unable to open XML file: " + file.getName());
         } catch (NullPointerException e) {
-            errorMessage = "Please select a file.";
+            noneSelected = true;
         }
     }
 
@@ -67,20 +69,20 @@ public class ImportTripController implements Serializable {
         try {
             TravelAgency agency = travelAgencyRepository.getSingleTravelAgency(tripElement.getTravelAgency());
             if (agency == null) {
-                errorMessage = "Travel agency '" + tripElement.getTravelAgency() + "' was not found.";
+                agencyIsNull = true;
             } else {
                 FlightXmlElement flight1 = tripElement.getFlight();
                 Flight flight = flightRepository.getSingleFlight(flight1.getAirlineCompany(), flight1.getDepartureAirport(), flight1.getArrivalAirport(), flight1.getPrice(), flight1.getAvailableSeats());
                 if (flight == null) {
-                    errorMessage = "Flight between " + flight1.getArrivalAirport() + " and " + flight1.getDepartureAirport() + " was not found.";
+                    flightNotFound = true;
                 } else {
                     Trip trip = new Trip(flight, agency, tripElement.getAccommodationPrice(), tripElement.getStartDate(), tripElement.getEndDate());
                     tripRepository.add(trip);
-                    successMessage = "Trips were successfully added.";
+                    addedSuccess = true;
                 }
             }
         } catch (AmbiguousEntityException e) {
-            errorMessage = "Multiple flights or travel agencies were found for the input flights/travel agencies.";
+            multipleFound = true;
         }
     }
 
@@ -92,19 +94,59 @@ public class ImportTripController implements Serializable {
         this.file = file;
     }
 
-    public String getSuccessMessage() {
-        return successMessage;
+    public boolean isMultipleFound() {
+        return multipleFound;
     }
 
-    public void setSuccessMessage(String successMessage) {
-        this.successMessage = successMessage;
+    public void setMultipleFound(boolean multipleFound) {
+        this.multipleFound = multipleFound;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public boolean isUnableToParse() {
+        return unableToParse;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setUnableToParse(boolean unableToParse) {
+        this.unableToParse = unableToParse;
+    }
+
+    public boolean isUnableToOpen() {
+        return unableToOpen;
+    }
+
+    public void setUnableToOpen(boolean unableToOpen) {
+        this.unableToOpen = unableToOpen;
+    }
+
+    public boolean isNoneSelected() {
+        return noneSelected;
+    }
+
+    public void setNoneSelected(boolean noneSelected) {
+        this.noneSelected = noneSelected;
+    }
+
+    public boolean isAgencyIsNull() {
+        return agencyIsNull;
+    }
+
+    public void setAgencyIsNull(boolean agencyIsNull) {
+        this.agencyIsNull = agencyIsNull;
+    }
+
+    public boolean isFlightNotFound() {
+        return flightNotFound;
+    }
+
+    public void setFlightNotFound(boolean flightNotFound) {
+        this.flightNotFound = flightNotFound;
+    }
+
+    public boolean isAddedSuccess() {
+        return addedSuccess;
+    }
+
+    public void setAddedSuccess(boolean addedSuccess) {
+        this.addedSuccess = addedSuccess;
     }
 }

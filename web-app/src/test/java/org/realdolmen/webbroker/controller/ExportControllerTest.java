@@ -16,6 +16,7 @@ import javax.xml.bind.JAXBException;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.jgroups.util.Util.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
@@ -42,7 +43,7 @@ public class ExportControllerTest {
         controller.export(createMockContext());
 
         verify(serializer, times(1)).marshal(any(), any());
-        assertTrue(controller.getMessage().isEmpty());
+        assertFalse(controller.isUnableToExport());
     }
 
     @Test
@@ -56,7 +57,7 @@ public class ExportControllerTest {
     public void canHandleXmlException() throws Exception {
         doThrow(new JAXBException("")).when(serializer).marshal(any(), any());
         controller.export(createMockContext());
-        assertTrue(!controller.getMessage().isEmpty());
+        assertTrue(controller.isUnableToExport());
     }
 
     private List<Trip> createTrips() {

@@ -1,9 +1,11 @@
 package org.realdolmen.webbroker.controller;
 
+import org.realdolmen.webbroker.i18n.Text;
 import org.realdolmen.webbroker.model.user.User;
 import org.realdolmen.webbroker.repository.UserRepository;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedProperty;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
@@ -21,7 +23,6 @@ public class RegisterController implements Serializable {
 
     @Inject
     private UserRepository userRepo;
-
     @NotNull(message = "Last name is required!")
     private String lastName;
     @NotNull(message = "First name is required!")

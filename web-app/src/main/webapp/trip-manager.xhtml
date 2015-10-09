@@ -5,22 +5,30 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition template="template.xhtml">
-    <ui:define name="pageTitle">Import Trip</ui:define>
+    <ui:define name="pageTitle">#{text['page.title.importTrip']}</ui:define>
     <ui:define name="header">
-        <ct:header title="Trip manager"/>
+        <ct:header title="#{text['page.title.importTrip']}"/>
     </ui:define>
     <ui:define name="pageContent">
         <h:panelGrid columns="1" >
             <f:facet name="header">
-            <ui:fragment rendered="#{not empty importTripController.successMessage}">
+            <ui:fragment rendered="#{importTripController.addedSuccess}">
                 <h:panelGroup style="display:block; text-align:center">
-                <ct:alert kind="success" text="#{importTripController.successMessage}"/>
+                <ct:alert kind="success" text="#{text['tripManager.message.addedSucces']}"/>
                 </h:panelGroup>
             </ui:fragment>
-            <ui:fragment rendered="#{not empty importTripController.errorMessage}">
-                <ct:alert kind="danger" text="#{importTripController.errorMessage}" />
+            <ui:fragment rendered="#{importTripController.unableToParse}">
+                <h:panelGroup style="display:block; text-align:center">
+                <ct:alert kind="danger" text="#{text['tripManager.message.unableToParse']}" />
+                </h:panelGroup>
             </ui:fragment>
+                <ui:fragment rendered="#{importTripController.unableToOpen}">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <ct:alert kind="danger" text="#{text['tripManager.message.unableToOpen']}" />
+                    </h:panelGroup>
+                </ui:fragment>
             </f:facet>
+
             <h:form enctype="multipart/form-data">
                 <h:inputFile value="#{importTripController.file}" class="form-control"/>
                 <h:commandButton value="Import Trips From XML" action="#{importTripController.upload}" class="form-control"/>

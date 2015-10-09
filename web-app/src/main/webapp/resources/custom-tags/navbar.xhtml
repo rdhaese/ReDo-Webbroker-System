@@ -22,16 +22,16 @@
 
                     <ul class="nav navbar-nav">
 
-                        <li><h:link outcome="index" value="Home"/></li>
+                        <li><h:link outcome="index" value="#{text['navbar.home']}"/></li>
 
                         <c:if test="#{loggedInUserController.loggedIn}">
                             <c:if test="#{loggedInUserController.getRoll() eq 'AirlineCompanyEmployee' or loggedInUserController.getRoll() eq 'ReDoAirEmployee'}">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                        aria-haspopup="true"
-                                       aria-expanded="false">Airline Company <span class="caret"></span></a>
+                                       aria-expanded="false">#{text['navbar.airlineCompany']}<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><h:link outcome="add-flight" value="Add Flight"/></li>
+                                        <li><h:link outcome="add-flight" value="#{text['navbar.airlineCompany.addFlight']}"/></li>
                                     </ul>
                                 </li>
                             </c:if>
@@ -40,9 +40,9 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                        aria-haspopup="true"
-                                       aria-expanded="false">Travel Agency<span class="caret"></span></a>
+                                       aria-expanded="false">#{text['navbar.travelAgency']}<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><h:link outcome="trip-manager" value="Trip Manager"/></li>
+                                        <li><h:link outcome="trip-manager" value="#{text['navbar.travelAgency.tripManager']}"/></li>
                                     </ul>
                                 </li>
                             </c:if>
@@ -51,28 +51,28 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                        aria-haspopup="true"
-                                       aria-expanded="false">ReDo Air<span class="caret"></span></a>
+                                       aria-expanded="false">#{text['navbar.reDoAir']}<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><h:link outcome="#" value="TODO"/></li>
+                                        <li><h:link outcome="#" value="#{text['navbar.reDoAir.TODO']}"/></li>
                                     </ul>
                                 </li>
                             </c:if>
 
                             <li role="separator" class="divider"></li>
 
-                            <li><p class="navbar-text">Signed in as #{loggedInUserController.loggedInUser.userName}</p>
+                            <li><p class="navbar-text">#{text['navbar.signedInAs']} #{loggedInUserController.loggedInUser.userName}</p>
                             </li>
-                            <li><h:form><h:commandLink action="#{loggedInUserController.logout()}" value="Log Out"
+                            <li><h:form><h:commandLink action="#{loggedInUserController.logout()}" value="#{text['navbar.logOut']}"
                                                        styleClass="navbar-text"/></h:form></li>
                         </c:if>
 
                         <c:if test="#{!loggedInUserController.loggedIn}">
-                            <li><h:link outcome="loginForm" value="Log In"/></li>
+                            <li><h:link outcome="loginForm" value="#{text['navbar.logIn']}"/></li>
                         </c:if>
 
                         <li>
                             <h:form>
-                                <h:selectOneMenu value="#{localeBean.language}" onchange="submit()">
+                                <h:selectOneMenu value="#{localeBean.language}" onchange="submit()" styleClass="form-control">
                                     <f:selectItem itemValue="en" itemLabel="English" />
                                     <f:selectItem itemValue="nl" itemLabel="Nederlands" />
                                 </h:selectOneMenu>

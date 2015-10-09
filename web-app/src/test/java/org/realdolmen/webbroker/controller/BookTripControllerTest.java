@@ -44,7 +44,7 @@ public class BookTripControllerTest {
         String resultPage = bookTripController.showSummary(1L, 10);
         assertEquals("trip-summary", resultPage);
         verify(tripRepository, times(1)).find(1L);
-        verify(currentBookingController, times(1)).setBooking(any());
+        verify(currentBookingController, times(1)).setCurrentBooking(any());
         verify(loggedInUserController, times(1)).getLoggedInUser();
     }
 }

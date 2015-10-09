@@ -29,7 +29,7 @@ public class BookTripController {
         booking.setTrip(tripRepo.find(id));
         booking.setNumberOfPassengers(amountOfPersons);
         booking.setBookingUser(loggedInUserController.getLoggedInUser());
-        currentBookingController.setBooking(booking);
+        currentBookingController.setCurrentBooking(booking);
         return "trip-summary";
     }
 }

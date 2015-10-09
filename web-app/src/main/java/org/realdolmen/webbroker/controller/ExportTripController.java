@@ -36,7 +36,7 @@ public class ExportTripController implements Serializable {
     @Inject
     XmlSerializer serializer;
 
-    private String message = "";
+    private boolean unableToExport = false;
 
     /**
      * Export all trips from the database to an XML file.
@@ -56,7 +56,7 @@ public class ExportTripController implements Serializable {
             TripsXmlElement xmlTrips = tripsToXmlElement(allTrips);
             serializer.marshal(xmlTrips, output);
         } catch (JAXBException | IOException e) {
-            message = "Unable to export the trips as this time.";
+            unableToExport = true;
         }
 
         context.responseComplete();
@@ -119,8 +119,11 @@ public class ExportTripController implements Serializable {
         return element;
     }
 
-    public String getMessage() {
-        return message;
+    public boolean isUnableToExport() {
+        return unableToExport;
     }
 
+    public void setUnableToExport(boolean unableToExport) {
+        this.unableToExport = unableToExport;
+    }
 }

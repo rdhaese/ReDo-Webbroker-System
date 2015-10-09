@@ -9,48 +9,58 @@
 
 
 <ui:composition template="template.xhtml">
-    <ui:define name="pageTitle">Add Flight</ui:define>
-    <ui:define name="header"><ct:header title="Add Flight"/> </ui:define>
+    <ui:define name="pageTitle">#{text['page.title.addFlight']}</ui:define>
+    <ui:define name="header"><ct:header title="#{text['page.title.addFlight']}"/> </ui:define>
     <ui:define name="pageContent">
         <h:form>
             <h:panelGrid columns="2">
                 <f:facet name="header">
-                <ui:fragment rendered="#{not empty addFlightController.message}">
+                <ui:fragment rendered="#{addFlightController.depAndArrTheSame}">
                     <h:panelGroup style="display:block; text-align:center">
-                        <ct:alert text="#{addFlightController.message}" kind="danger" />
+                        <ct:alert text="#{text['addFlight.message.depAndArrTheSame']}" kind="danger" />
                     </h:panelGroup>
                 </ui:fragment>
+                    <ui:fragment rendered="#{addFlightController.error}">
+                        <h:panelGroup style="display:block; text-align:center">
+                            <ct:alert text="#{text['addFlight.message.error']}" kind="danger" />
+                        </h:panelGroup>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{addFlightController.success}">
+                        <h:panelGroup style="display:block; text-align:center">
+                            <ct:alert text="#{text['addFlight.message.success']}" kind="success" />
+                        </h:panelGroup>
+                    </ui:fragment>
                 </f:facet>
 
-                <h:outputLabel for="departure" value="Select departure airport: "/>
-                <h:selectOneMenu id="departure" value="#{addFlightController.departure_id}" styleClass="form-control">
+                <h:outputLabel for="departure" value="#{text['addFlight.selectDeparture']}"/>
+                <h:selectOneMenu id="departure" value="#{addFlightController.departure_id}" styleClass="form-control" validatorMessage="#{text['addFlight.valMessage.selectDeparture']}">
                     <f:selectItems value="#{addFlightController.getAirports()}" var="a"
                                    itemLabel="#{a.getName()}" itemValue="#{a.getId()}"/>
                 </h:selectOneMenu>
                 <h:inputHidden/>
                 <h:message for="departure" styleClass="error-message"/>
 
-                <h:outputLabel for="arrival" value="Select arrival airport: "/>
-                <h:selectOneMenu id="arrival" value="#{addFlightController.arrival_id}" styleClass="form-control">
+                <h:outputLabel for="arrival" value="#{text['addFlight.selectArrival']}"/>
+                <h:selectOneMenu id="arrival" value="#{addFlightController.arrival_id}" styleClass="form-control" validatorMessage="#{text['addFlight.valMessage.selectArrival']}">
                     <f:selectItems value="#{addFlightController.getAirports()}" var="a"
                                    itemLabel="#{a.getName()}" itemValue="#{a.getId()}"/>
                 </h:selectOneMenu>
                 <h:inputHidden/>
                 <h:message for="arrival" styleClass="error-message"/>
 
-                <h:outputLabel for="price" value="Give in price: "/>
-                <h:inputText id="price" value="#{addFlightController.price}" styleClass="form-control" converterMessage="Please fill in a number."/>
+                <h:outputLabel for="price" value="#{text['addFlight.price']}"/>
+                <h:inputText id="price" value="#{addFlightController.price}" styleClass="form-control" converterMessage="#{text['addFlight.conMessage.price']}" validatorMessage="#{text['addFlight.valMessage.price']}"/>
                 <h:inputHidden/>
                 <h:message for="price" styleClass="error-message"/>
 
-                <h:outputLabel for="seats" value="Give in amount of seats: "/>
-                <h:inputText id="seats" value="#{addFlightController.amountOfSeats}" styleClass="form-control" converterMessage="Please fill in a number."/>
+                <h:outputLabel for="seats" value="#{text['addFlight.amountOfSeats']}"/>
+                <h:inputText id="seats" value="#{addFlightController.amountOfSeats}" styleClass="form-control" converterMessage="#{text['addFlight.conMessage.numberOfSeats']}" validatorMessage="#{text['addFlight.valMessage.amountOfSeats']}"/>
                 <h:inputHidden/>
                 <h:message for="seats" styleClass="error-message"/>
 
                 <f:facet name="footer">
                     <h:panelGroup style="display:block; text-align:center">
-                        <h:commandButton value="Add Flight" action="#{addFlightController.addFlight()}" styleClass="form-control"/>
+                        <h:commandButton value="#{text['addFlight.button.addFlight']}" action="#{addFlightController.addFlight()}" styleClass="form-control"/>
                     </h:panelGroup>
                 </f:facet>
             </h:panelGrid>

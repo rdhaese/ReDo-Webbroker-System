@@ -9,8 +9,8 @@
 
 
 <ui:composition template="template.xhtml">
-    <ui:define name="pageTitle">Register User</ui:define>
-    <ui:define name="header"><ct:header title="Register User"/> </ui:define>
+    <ui:define name="pageTitle">#{text['page.title.register']}</ui:define>
+    <ui:define name="header"><ct:header title="#{text['page.title.register']}"/> </ui:define>
     <ui:define name="pageContent">
         <h:form>
             <h:panelGrid columns="2">
@@ -22,9 +22,9 @@
                 </ui:fragment>
                 </f:facet>
                 <h:outputLabel value="Enter your name: "/>
-                <h:inputText id="lastName" value="#{registerController.lastName}" styleClass="form-control"/>
+                <h:inputText id="lastName" value="#{registerController.lastName}" styleClass="form-control" validatorMessage="#{text['homepage.title']}"/>
                 <h:inputHidden/>
-                <h:message for="lastName" styleClass="error-message"/>
+                <h:message for="lastName" styleClass="error-message" />
 
                 <h:outputLabel value="Enter your first name: "/>
                 <h:inputText id="firstName" value="#{registerController.firstName}" styleClass="form-control"/>

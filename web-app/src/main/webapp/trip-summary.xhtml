@@ -9,27 +9,27 @@
 
 
 <ui:composition template="template.xhtml">
-    <ui:define name="pageTitle">Trip Summary</ui:define>
+    <ui:define name="pageTitle">#{text['page.title.tripSummary']}</ui:define>
     <ui:define name="header">
-        <ct:header title="Trip Summary"/>
+        <ct:header title="#{text['page.title.tripSummary']}"/>
     </ui:define>
     <ui:define name="pageContent">
         <h:panelGrid columns="2">
-            <h:outputLabel value="Departure from:" for="departure"/>
+            <h:outputLabel value="#{text['tripSummary.departureFrom']}" for="departure"/>
             <h:outputText id="departure"
                           value=" #{currentBookingController.booking.trip.flight.departure.name}"/>
-            <h:outputLabel value="Arrival to:" for="arrival"/>
+            <h:outputLabel value="#{text['tripSummary.arrivalTo']}" for="arrival"/>
             <h:outputText id="arrival"
                           value=" #{currentBookingController.booking.trip.flight.arrival.name}"/>
-            <h:outputLabel value="Travel agency:" for="travelAgency"/>
+            <h:outputLabel value="#{text['tripSummary.travelAgency']}" for="travelAgency"/>
             <h:outputText id="travelAgency"
                           value=" #{currentBookingController.booking.trip.travelAgency.name}"/>
-            <h:outputLabel value="Departure date:" for="depDate"/>
+            <h:outputLabel value="#{text['tripSummary.departureDate']}" for="depDate"/>
             <h:outputText id="depDate"
                           value="#{currentBookingController.booking.trip.getStartDateInOldApi()}">
                 <f:convertDateTime for="depDate" pattern="dd/MM/yyyy"/>
             </h:outputText>
-            <h:outputLabel value="Return date:" for="retDate"/>
+            <h:outputLabel value="#{text['tripSummary.returnDate']}" for="retDate"/>
             <h:outputText id="retDate"
                           value="#{currentBookingController.booking.trip.getEndDateInOldApi()}">
                 <f:convertDateTime for="retDate" pattern="dd/MM/yyyy"/>
@@ -38,14 +38,14 @@
                 <h:panelGroup style="display:block; text-align:center">
                     <h:form>
                         <c:if test="#{loggedInUserController.loggedIn}">
-                            <h:commandButton value="Go on" action="confirm-booking" styleClass="form-control"/>
+                            <h:commandButton value="#{text['tripSummary.button.goOn']}" action="confirm-booking" styleClass="form-control"/>
                         </c:if>
                         <c:if test="#{not loggedInUserController.loggedIn}">
-                            <h:commandButton value="You need to log in to book"
+                            <h:commandButton value="#{text['tripSummary.button.notLoggedIn']}"
                                              action="#{loginController.loginFromPreviousPage('trip-summary')}"
                                              styleClass="form-control"/>
                         </c:if>
-                        <h:commandButton value="Cancel" action="found-trips" styleClass="form-control"/>
+                        <h:commandButton value="#{text['tripSummary.button.cancel']}" action="found-trips" styleClass="form-control"/>
                     </h:form>
                 </h:panelGroup>
             </f:facet>

@@ -10,8 +10,8 @@
 
 
 <ui:composition template="template.xhtml">
-    <ui:define name="pageTitle">Log In</ui:define>
-    <ui:define name="header"><ct:header title="Log In"/> </ui:define>
+    <ui:define name="pageTitle">#{text['page.title.login']}</ui:define>
+    <ui:define name="header"><ct:header title="#{text['page.title.login']}"/> </ui:define>
     <ui:define name="pageContent">
         #{prevPage}
         <h:form>

@@ -18,6 +18,7 @@ import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static org.jgroups.util.Util.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyDouble;
@@ -59,13 +60,11 @@ public class ImportTripControllerTest {
 
         when(serializer.unmarshalStream(any(), any())).thenReturn(elements);
         when(travelAgencyRepository.getSingleTravelAgency(anyString())).thenReturn(new TravelAgency("Jetair"));
-        when(flightRepository.getSingleFlight(anyString(),anyString(), anyString(),anyDouble(),anyInt()))
+        when(flightRepository.getSingleFlight(anyString(), anyString(), anyString(), anyDouble(), anyInt()))
                 .thenReturn(EntityFactory.createFlight());
 
         controller.upload();
         verify(repository, times(2)).add(any());
-        assertTrue(controller.getErrorMessage().isEmpty());
-        assertTrue(!controller.getSuccessMessage().isEmpty());
     }
 
     @Test
@@ -79,8 +78,6 @@ public class ImportTripControllerTest {
 
         controller.upload();
         verify(repository, times(0)).add(any());
-        assertTrue(!controller.getErrorMessage().isEmpty());
-        assertTrue(controller.getSuccessMessage().isEmpty());
     }
 
     @Test
@@ -96,30 +93,25 @@ public class ImportTripControllerTest {
 
         controller.upload();
         verify(repository, times(0)).add(any());
-        assertTrue(!controller.getErrorMessage().isEmpty());
-        assertTrue(controller.getSuccessMessage().isEmpty());
     }
 
     @Test
     public void cannotUploadInvalidXmlFile() throws Exception {
         when(serializer.unmarshalStream(any(), any())).thenThrow(new JAXBException(""));
         controller.upload();
-        assertTrue(!controller.getErrorMessage().isEmpty());
-        assertTrue(controller.getSuccessMessage().isEmpty());
+        assertFalse(controller.isAddedSuccess());
     }
 
     @Test
     public void canHandleFileException() throws Exception {
         when(file.getInputStream()).thenThrow(new IOException());
         controller.upload();
-        assertTrue(!controller.getErrorMessage().isEmpty());
-        assertTrue(controller.getSuccessMessage().isEmpty());
+        assertFalse(controller.isAddedSuccess());
     }
 
     @Test
     public void mustSelectAFile() throws Exception {
         controller.upload();
-        assertTrue(!controller.getErrorMessage().isEmpty());
-        assertTrue(controller.getSuccessMessage().isEmpty());
+        assertFalse(controller.isAddedSuccess());
     }
 }
