@@ -13,8 +13,7 @@ public class CreditCardNumberValidator implements Validator {
 
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        String creditCardNumber = (String)value;
-        if(!isValid(creditCardNumber)) {
+        if(value == null || !isValid((String) value)) {
             FacesMessage message = new FacesMessage("cc validation");
             throw new ValidatorException(message);
         }
