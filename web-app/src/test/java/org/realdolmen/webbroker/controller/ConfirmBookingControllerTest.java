@@ -8,15 +8,10 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.realdolmen.util.EntityFactory;
 import org.realdolmen.webbroker.model.Booking;
-import org.realdolmen.webbroker.model.Trip;
 import org.realdolmen.webbroker.repository.BookingRepository;
 import org.realdolmen.webbroker.repository.FlightRepository;
 
-import java.util.ArrayList;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 /**
@@ -43,13 +38,7 @@ public class ConfirmBookingControllerTest {
 
     @Before
     public void setup() {
-        Trip trip = EntityFactory.createTrip();
-        booking = new Booking();
-        booking.setOverridePrice(100d);
-        booking.setTrip(trip);
-        booking.setNumberOfPassengers(20);
-        booking.setDiscounts(new ArrayList<>());
-
+        booking = EntityFactory.createBooking();
         when(currentBookingController.getBooking()).thenReturn(booking);
     }
 

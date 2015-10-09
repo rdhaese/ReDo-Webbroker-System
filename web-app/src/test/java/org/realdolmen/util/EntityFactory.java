@@ -4,6 +4,7 @@ import org.realdolmen.webbroker.model.*;
 import org.realdolmen.webbroker.model.user.User;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  * Factory to create entity objects to be used for testing purposes.
@@ -85,5 +86,14 @@ public class EntityFactory {
         discount.setIsPercentage(ispercentage);
         discount.setQuantity(quantity);
         return discount;
+    }
+
+    public static Booking createBooking() {
+        Booking booking = new Booking();
+        booking.setOverridePrice(100d);
+        booking.setTrip(createTrip());
+        booking.setNumberOfPassengers(20);
+        booking.setDiscounts(new ArrayList<>());
+        return booking;
     }
 }
