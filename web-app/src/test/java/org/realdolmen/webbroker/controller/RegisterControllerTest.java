@@ -7,10 +7,10 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.realdolmen.webbroker.model.user.User;
 import org.realdolmen.webbroker.repository.UserRepository;
+import org.realdolmen.webbroker.service.PasswordService;
+import org.realdolmen.webbroker.util.Pair;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 /**
@@ -25,19 +25,23 @@ public class RegisterControllerTest {
     @Mock
     UserRepository userRepo;
 
+    @Mock
+    PasswordService passwordService;
+
     @InjectMocks
     RegisterController controller;
 
     @Test
     public void canRegisterUser() throws Exception {
         when(userRepo.getUserByUsername("root")).thenReturn(null);
+        when(passwordService.createSecurePassword("password")).thenReturn(new Pair<>("salt","password"));
 
         controller.setFirstName("root");
         controller.setLastName("root");
         controller.setUserName("root");
         controller.setPassword("password");
 
-        assertEquals("register-succes", controller.registerUser());
+        assertEquals("register-success", controller.registerUser());
         assertNull(controller.getErrorMessage());
     }
 

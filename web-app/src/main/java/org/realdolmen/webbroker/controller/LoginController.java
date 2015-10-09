@@ -1,5 +1,6 @@
 package org.realdolmen.webbroker.controller;
 
+import org.realdolmen.webbroker.service.PasswordService;
 import org.realdolmen.webbroker.model.user.User;
 import org.realdolmen.webbroker.repository.UserRepository;
 import org.slf4j.Logger;
@@ -28,6 +29,9 @@ public class LoginController implements Serializable {
     @Inject
     LoggedInUserController loggedInUserController;
 
+    @Inject
+    PasswordService passwordService;
+
     @NotNull(message = "Please enter a username")
     private String username;
 
@@ -46,15 +50,13 @@ public class LoginController implements Serializable {
     public String login() {
         User user = userRepository.getUserByUsername(username);
 
-        // TODO: hashing and salting of input password
-        if(user == null || !password.equals(user.getPassword())) {
+        if(user == null || !passwordService.isCorrectPassword(user, password)) {
             LOGGER.warn("Attempted login for username: " + username);
             loginError = true;
             return "loginForm";
         } else {
             LOGGER.info("User '" + username + "' has logged in.");
             loggedInUserController.setLoggedInUser(user);
-            // TODO: return to page the user was on
             return "index";
         }
     }

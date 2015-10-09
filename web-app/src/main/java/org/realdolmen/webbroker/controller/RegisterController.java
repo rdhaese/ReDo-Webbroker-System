@@ -1,5 +1,7 @@
 package org.realdolmen.webbroker.controller;
 
+import org.realdolmen.webbroker.util.Pair;
+import org.realdolmen.webbroker.service.PasswordService;
 import org.realdolmen.webbroker.model.user.User;
 import org.realdolmen.webbroker.repository.UserRepository;
 
@@ -21,6 +23,9 @@ public class RegisterController implements Serializable {
 
     @Inject
     private UserRepository userRepo;
+
+    @Inject
+    PasswordService passwordService;
 
     @NotNull(message = "Last name is required!")
     private String lastName;
@@ -70,7 +75,11 @@ public class RegisterController implements Serializable {
         user.setLastName(lastName);
         user.setFirstName(firstName);
         user.setUserName(userName);
-        user.setPassword(password);
+
+        Pair<String, String> securePassword = passwordService.createSecurePassword(password);
+        user.setSalt(securePassword.getFirst());
+        user.setPassword(securePassword.getSecond());
+
         return user;
     }
 

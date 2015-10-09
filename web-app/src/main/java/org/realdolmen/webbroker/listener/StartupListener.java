@@ -1,5 +1,7 @@
 package org.realdolmen.webbroker.listener;
 
+import org.realdolmen.webbroker.util.Pair;
+import org.realdolmen.webbroker.service.PasswordService;
 import org.realdolmen.webbroker.exception.AmbiguousEntityException;
 import org.realdolmen.webbroker.model.*;
 import org.realdolmen.webbroker.model.user.AirlineCompanyEmployee;
@@ -45,6 +47,9 @@ public class StartupListener implements ServletContextListener {
 
     @Inject
     private FlightRepository flightRepository;
+
+    @Inject
+    PasswordService passwordService;
 
     @Inject
     private TripRepository tripRepository;
@@ -148,8 +153,9 @@ public class StartupListener implements ServletContextListener {
                 user.setUserName(userXmlElement.getUsername());
                 user.setFirstName(userXmlElement.getFirstname());
                 user.setLastName(userXmlElement.getLastname());
-                user.setPassword(userXmlElement.getPassword());
-                user.setSalt("no salt yet");
+                Pair<String, String> securePassword = passwordService.createSecurePassword(userXmlElement.getPassword());
+                user.setSalt(securePassword.getFirst());
+                user.setPassword(securePassword.getSecond());
                 entityManager.persist(user);
             }
         } catch (JAXBException e) {
