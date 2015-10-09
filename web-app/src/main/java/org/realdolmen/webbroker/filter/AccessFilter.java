@@ -114,6 +114,8 @@ public class AccessFilter implements Filter {
             return "travelagency";
         } else if(user instanceof ReDoAirEmployee) {
             return "redoair";
+        } else if(user == null) {
+            return null;
         }
 
         return "user";

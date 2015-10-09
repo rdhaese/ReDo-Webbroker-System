@@ -60,12 +60,14 @@
     </page>
     <page path="trip-manager">
         <roles>
+            <role name="travelagency" />
             <role name="redoair" />
         </roles>
     </page>
     <page path="add-flight">
         <roles>
-            <role name="travelagency" />
+            <role name="airline" />
+            <role name="redoair" />
         </roles>
     </page>
 </pages>
