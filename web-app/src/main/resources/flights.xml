@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flights>
+    <flight>
+        <airlineCompany>RyanAir</airlineCompany>
+        <departureAirport>Zaventem</departureAirport>
+        <arrivalAirport>Heathrow</arrivalAirport>
+        <price>150.00</price>
+        <availableSeats>10</availableSeats>
+    </flight>
+    <flight>
+        <airlineCompany>RyanAir</airlineCompany>
+        <departureAirport>Zaventem</departureAirport>
+        <arrivalAirport>New York Airport</arrivalAirport>
+        <price>750.00</price>
+        <availableSeats>100</availableSeats>
+    </flight>
+    <flight>
+        <airlineCompany>Sabena</airlineCompany>
+        <departureAirport>Heathrow</departureAirport>
+        <arrivalAirport>New York Airport</arrivalAirport>
+        <price>500.00</price>
+        <availableSeats>25</availableSeats>
+    </flight>
+</flights>

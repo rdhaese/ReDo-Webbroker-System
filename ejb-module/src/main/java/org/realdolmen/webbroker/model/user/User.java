@@ -7,6 +7,8 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Created by RDEAX37 on 2/10/2015.
+ * Entity representing a User
+ * @Author Robin D'Haese
  */
 @Entity(name = "users")
 @Inheritance
@@ -20,6 +22,17 @@ public class User extends BaseEntity {
     @NotNull
     private String password;
     private String salt;
+
+    public User() {
+    }
+
+    public User(String first, String last, String username, String password, String salt) {
+        this.firstName = first;
+        this.lastName = last;
+        this.userName = username;
+        this.password = password;
+        this.salt = salt;
+    }
 
     public String getUserName() {
         return userName;

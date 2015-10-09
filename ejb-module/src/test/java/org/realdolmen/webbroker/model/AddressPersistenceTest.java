@@ -9,6 +9,8 @@ import javax.validation.ConstraintViolationException;
 
 /**
  * Created by RDEAX37 on 5/10/2015.
+ * Persistence tests for {@link Address}
+ * @author Robin D'Haese
  */
 public class AddressPersistenceTest extends DataSetPersistenceTest {
 

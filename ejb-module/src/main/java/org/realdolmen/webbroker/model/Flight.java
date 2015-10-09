@@ -1,11 +1,14 @@
 package org.realdolmen.webbroker.model;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
- * Created by RDEAX37 on 2/10/2015.
+ * Entity representing a flight
+ * @Author Robin D'Haese
  */
 @Entity
 public class Flight extends BaseEntity {

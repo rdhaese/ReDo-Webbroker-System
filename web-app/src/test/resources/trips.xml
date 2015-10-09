@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<trips>
+    <trip>
+        <flight>
+            <airlineCompany>Virgin</airlineCompany>
+            <departureAirport>Airport1</departureAirport>
+            <arrivalAirport>Airport2</arrivalAirport>
+            <price>150.00</price>
+            <availableSeats>200</availableSeats>
+        </flight>
+        <travelagency>Jetair</travelagency>
+        <accommodationPrice>750.00</accommodationPrice>
+        <startDate>2015-01-01 12:10:10</startDate>
+        <endDate>2015-01-10 12:10:10</endDate>
+    </trip>
+    <trip>
+        <flight>
+            <airlineCompany>Virgin</airlineCompany>
+            <departureAirport>Airport1</departureAirport>
+            <arrivalAirport>Airport2</arrivalAirport>
+            <price>200.00</price>
+            <availableSeats>200</availableSeats>
+        </flight>
+        <travelagency>Jetair</travelagency>
+        <accommodationPrice>1250.00</accommodationPrice>
+        <startDate>2015-01-11 12:10:10</startDate>
+        <endDate>2015-01-21 12:10:10</endDate>
+    </trip>
+</trips>

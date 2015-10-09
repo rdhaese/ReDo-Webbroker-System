@@ -10,26 +10,19 @@
 
 
 <ui:composition template="template.xhtml" >
-    <ui:define name="pageTitle">Home</ui:define>
+    <ui:define name="pageTitle">#{text['page.title.homepage']}</ui:define>
     <ui:define name="header">
-        <ct:header title="ReDo Air" />
-        <c:if test="#{loggedInUserController.loggedIn}">
-            <h1>Welcome back #{loggedInUserController.loggedInUser.userName}!</h1>
-
-            <h:form>
-                <h:commandButton value="Logout" action="#{loggedInUserController.logout}" />
-            </h:form>
-        </c:if>
-        <c:if test="#{!loggedInUserController.loggedIn}">
-            <h:link value="Login" outcome="loginForm"/>
-        </c:if>
+        <ct:header title="#{text['page.title.homepage']}" />
     </ui:define>
     <ui:define name="pageContent">
 
-        Welcome to ReDo Air!
+        <div class="centered-content">
+        <h1>#{text['homepage.title']}</h1>
+        <h2>#{text['homepage.subtitle']}</h2>
 
-        <h:link styleClass="btn btn-primary btn-lg btn-block" value="Search a trip" outcome="search-trip" />
-        <h:link styleClass="btn btn-primary btn-lg btn-block" value="Search a destination" outcome="search-destination" />
+        <h:link styleClass="btn btn-primary btn-lg btn-block" value="#{text['button.search.trip']}" outcome="search-trip" />
+        <h:link styleClass="btn btn-primary btn-lg btn-block" value="#{text['button.search.destination']}" outcome="search-destination" />
+        </div>
 
     </ui:define>
 </ui:composition>

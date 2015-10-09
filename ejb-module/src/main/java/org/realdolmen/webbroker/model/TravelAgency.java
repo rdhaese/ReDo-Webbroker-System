@@ -5,12 +5,21 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Created by RDEAX37 on 2/10/2015.
+ * Entity representing a travel agency
+ * @Author Robin D'Haese
  */
 @Entity
 public class TravelAgency extends BaseEntity{
 
     @NotNull
     private String name;
+
+    public TravelAgency() {
+    }
+
+    public TravelAgency(String name) {
+        this.name = name;
+    }
 
     public String getName() {
         return name;

@@ -13,14 +13,17 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by RDEAX37 on 6/10/2015.
+ * Controller to add flights.
+ * @author Robin D'Haese
  */
 @Named
 @RequestScoped
-public class AddFlightController {
+public class AddFlightController implements Serializable {
 
     @Inject
     private AirportRepository airportRepo;
@@ -29,35 +32,46 @@ public class AddFlightController {
     @Inject
     private LoggedInUserController loggedInUserController;
 
-    @NotNull(message = "Departure airport should be picked.")
+    @NotNull
     private Long departure_id;
-    @NotNull(message = "Arrival airport should be picked.")
+    @NotNull
     private Long arrival_id;
-    @NotNull(message = "Price must be filled in.")
-    @Min(value = 0, message = "Price can't be lower than 0.")
+    @NotNull
+    @Min(value = 0)
     private Double price;
-    @NotNull(message = "Amount of seats must be filled in.")
-    @Min(value = 1, message = "Amount of seats can't be lower than 1.")
+    @NotNull
+    @Min(value = 1)
     private Integer amountOfSeats;
 
-    private String message;
+    private boolean depAndArrTheSame = false;
+    private boolean error = false;
+    private boolean success = false ;
 
+    /**
+     * Adds a flight if possible.
+     * If departure and arrival are the same or if adding to the persistence context fails, a message is set and no flight is added, form data is kept.
+     * If a flight is added successfully, a corresponding message is set and the form state is cleared.
+     * @return the next page to navigate to
+     */
     public String addFlight() {
         if (departure_id == arrival_id){
-            message = "Departure and arrival can't be the same";
+            depAndArrTheSame = true;
             return "add-flight";
         }
         try {
             flightRepo.add(createFlight());
         } catch (Exception e) {
-            message = "Something went wrong while adding the flight.";
+            error = true;
             return "add-flight";
         }
-        message = "Flight added successfully.";
+        success = true;
         clearFormState();
         return "add-flight";
     }
 
+    /**
+     * Clears the form state by setting all properties to null
+     */
     private void clearFormState() {
         departure_id = null;
         arrival_id = null;
@@ -65,6 +79,10 @@ public class AddFlightController {
         amountOfSeats = null;
     }
 
+    /**
+     * Creates a flight with the data from the properties and the logged in user.
+     * @return the created flight
+     */
     private Flight createFlight() {
         Flight flight = new Flight();
         flight.setDeparture(airportRepo.find(departure_id));
@@ -82,12 +100,28 @@ public class AddFlightController {
         return airportRepo.getAllAirports();
     }
 
-    public String getMessage() {
-        return message;
+    public boolean isDepAndArrTheSame() {
+        return depAndArrTheSame;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setDepAndArrTheSame(boolean depAndArrTheSame) {
+        this.depAndArrTheSame = depAndArrTheSame;
+    }
+
+    public boolean isError() {
+        return error;
+    }
+
+    public void setError(boolean error) {
+        this.error = error;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
     public Long getDeparture_id() {

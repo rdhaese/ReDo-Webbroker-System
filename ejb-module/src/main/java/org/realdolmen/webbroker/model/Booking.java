@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * Created by RDEAX37 on 2/10/2015.
+ * Entity represeting a booking
+ * @Author Robin D'Haese
  */
 @Entity
 public class Booking extends BaseEntity{
@@ -26,6 +28,21 @@ public class Booking extends BaseEntity{
     private Double overridePrice;
     @ManyToMany (cascade = CascadeType.PERSIST)
     private List<Discount> discounts = new ArrayList<Discount>();
+
+    /**
+     * @return the price of the flight time the number of passengers
+     */
+    public Double getFlightPrice(){
+        return trip.getFlight().getPrice() * numberOfPassengers;
+    }
+
+    /**
+     * @return The total price of the booking -> total flight price + total accommodationPrice
+     */
+    public Double getTotalPrice(){
+        return getFlightPrice() + trip.getTotalAccommodationPrice();
+    }
+
 
     public User getBookingUser() {
         return bookingUser;

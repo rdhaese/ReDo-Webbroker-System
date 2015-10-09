@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:cc="http://java.sun.com/jsf/composite" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+        >
+<cc:interface>
+
+</cc:interface>
+<cc:implementation>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div class="navbar-brand">
+                        <img src="resources/img/ReDoAir.png" alt="" class="redo-logo rounded-corners"/>
+                    </div>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav">
+
+                        <li><h:link outcome="index" value="#{text['navbar.home']}"/></li>
+
+                        <c:if test="#{loggedInUserController.loggedIn}">
+                            <c:if test="#{loggedInUserController.getRoll() eq 'AirlineCompanyEmployee' or loggedInUserController.getRoll() eq 'ReDoAirEmployee'}">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-haspopup="true"
+                                       aria-expanded="false">#{text['navbar.airlineCompany']}<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><h:link outcome="add-flight" value="#{text['navbar.airlineCompany.addFlight']}"/></li>
+                                    </ul>
+                                </li>
+                            </c:if>
+
+                            <c:if test="#{loggedInUserController.getRoll() eq 'TravelAgencyEmployee' or loggedInUserController.getRoll() eq 'ReDoAirEmployee'}">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-haspopup="true"
+                                       aria-expanded="false">#{text['navbar.travelAgency']}<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><h:link outcome="trip-manager" value="#{text['navbar.travelAgency.tripManager']}"/></li>
+                                    </ul>
+                                </li>
+                            </c:if>
+
+                            <c:if test="#{loggedInUserController.getRoll() eq 'ReDoAirEmployee'}">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-haspopup="true"
+                                       aria-expanded="false">#{text['navbar.reDoAir']}<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><h:link outcome="#" value="#{text['navbar.reDoAir.TODO']}"/></li>
+                                    </ul>
+                                </li>
+                            </c:if>
+
+                            <li role="separator" class="divider"></li>
+
+                            <li><p class="navbar-text">#{text['navbar.signedInAs']} #{loggedInUserController.loggedInUser.userName}</p>
+                            </li>
+                            <li><h:form><h:commandLink action="#{loggedInUserController.logout()}" value="#{text['navbar.logOut']}"
+                                                       styleClass="navbar-text"/></h:form></li>
+                        </c:if>
+
+                        <c:if test="#{!loggedInUserController.loggedIn}">
+                            <li><h:link outcome="loginForm" value="#{text['navbar.logIn']}"/></li>
+                        </c:if>
+
+                        <li>
+                            <h:form>
+                                <h:selectOneMenu value="#{localeBean.language}" onchange="submit()" styleClass="form-control">
+                                    <f:selectItem itemValue="en" itemLabel="English" />
+                                    <f:selectItem itemValue="nl" itemLabel="Nederlands" />
+                                </h:selectOneMenu>
+                            </h:form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</cc:implementation>
+</html>
+

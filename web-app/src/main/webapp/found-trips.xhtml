@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ct="http://java.sun.com/jsf/composite/custom-tags"
+      xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="template.xhtml">
+    <ui:define name="pageTitle">#{text['page.title.foundTrips']}</ui:define>
+    <ui:define name="header">
+        <ct:header title="#{text['page.title.foundTrips']}"/>
+    </ui:define>
+    <ui:define name="pageContent">
+
+        <h:dataTable value="#{searchTripController.foundTrips}" var="t"
+                     styleClass="table"
+                     headerClass="table-header"
+                     rowClasses="table-odd-row,table-even-row"
+                >
+
+            <h:column>
+                <f:facet name="header">#{text['foundTrips.column.departure']}</f:facet>
+                #{t.getFlight().getDeparture().getName()}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">#{text['foundTrips.column.arrival']}</f:facet>
+                #{t.getFlight().getArrival().getName()}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">#{text['foundTrips.column.departureDate']}</f:facet>
+                <h:outputText value="#{t.getStartDateInOldApi()}">
+                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                </h:outputText>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">#{text['foundTrips.column.returnDate']}</f:facet>
+                <h:outputText value="#{t.getEndDateInOldApi()}">
+                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                </h:outputText>
+            </h:column>
+
+            <h:column>
+                <h:form>
+                <h:commandButton value="#{text['foundTrips.button.book']}" action="#{bookTripController.showSummary(t.id, searchTripController.numberOfPersons)}" styleClass="form-control"/>
+                </h:form>
+            </h:column>
+        </h:dataTable>
+
+    </ui:define>
+</ui:composition>
+</html>

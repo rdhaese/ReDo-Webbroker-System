@@ -9,11 +9,11 @@
 
 
 <ui:composition template="template.xhtml">
-    <ui:define name="pageTitle">Register Success</ui:define>
-    <ui:define name="header"><ct:header title="Register Success"/></ui:define>
+    <ui:define name="pageTitle">#{text['page.title.registerSuccess']}</ui:define>
+    <ui:define name="header"><ct:header title="#{text['page.title.registerSuccess']}"/></ui:define>
     <ui:define name="pageContent">
-        Your registration process finished successfuly!
-        Please <a href="loginForm.xhtml">log in</a>.
+        <ct:alert text="#{text['registerSuccess.message']}" kind="success" />
+        <h:link value="#{text['registerSuccess.link.logIn']}" outcome="loginForm" />.
     </ui:define>
 </ui:composition>
 </html>

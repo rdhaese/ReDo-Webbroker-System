@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.realdolmen.webbroker.model.user.User;
 import org.realdolmen.webbroker.repository.UserRepository;
+import org.realdolmen.webbroker.service.PasswordService;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
@@ -20,13 +21,16 @@ import static org.mockito.Mockito.when;
 public class LoginControllerTest {
 
     @Mock
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     @Mock
-    private LoggedInUserController loggedInUserController;
+    LoggedInUserController loggedInUserController;
+
+    @Mock
+    PasswordService passwordService;
 
     @InjectMocks
-    private LoginController controller;
+    LoginController controller;
 
     @Test
     public void userCanLogin() throws Exception {
@@ -34,6 +38,9 @@ public class LoginControllerTest {
         userFromDatabase.setUserName("root");
         userFromDatabase.setPassword("password");
         when(userRepository.getUserByUsername("root")).thenReturn(userFromDatabase);
+        // assume the password service works correctly
+        when(passwordService.isCorrectPassword(userFromDatabase, "password")).thenReturn(true);
+
         controller.setUsername(userFromDatabase.getUserName());
         controller.setPassword(userFromDatabase.getPassword());
 

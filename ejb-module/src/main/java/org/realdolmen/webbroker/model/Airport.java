@@ -7,6 +7,8 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Created by RDEAX37 on 2/10/2015.
+ * Entity representing an airport
+ * @author Robin D'Haese
  */
 @Entity
 public class Airport extends BaseEntity {
@@ -18,6 +20,15 @@ public class Airport extends BaseEntity {
     private Address address;
     @NotNull
     private String name;
+
+    public Airport() {
+    }
+
+    public Airport(String name, Region region, Address address) {
+        this.name = name;
+        this.region = region;
+        this.address = address;
+    }
 
     public Region getRegion() {
         return region;

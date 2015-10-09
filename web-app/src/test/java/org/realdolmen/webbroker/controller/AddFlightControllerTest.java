@@ -15,10 +15,13 @@ import org.realdolmen.webbroker.repository.FlightRepository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.times;
 
 /**
  * Created by RDEAX37 on 6/10/2015.
+ * Test for {@link AddFlightController}
+ * @Author Robin D'Haese
  */
 @RunWith(MockitoJUnitRunner.class)
 public class AddFlightControllerTest {
@@ -39,10 +42,7 @@ public class AddFlightControllerTest {
     public void setUp(){
         flight = EntityFactory.createFlight();
     }
-    @Test
-    public void canAirportsBeGotten(){
 
-    }
 
     @Test
     public void isFlightAdded(){
@@ -74,15 +74,16 @@ public class AddFlightControllerTest {
     @Test
     public void departureAndArrivalCannotBeTheSame(){
         setFlightControllerState();
+        addFlightController.setDeparture_id(1L);
 
         addFlightController.addFlight();
         
-        String expectedMessage = "Departure and arrival can't be the same";
-        assertEquals(expectedMessage,addFlightController.getMessage());
+        assertTrue(addFlightController.isDepAndArrTheSame());
     }
 
     @Test
     public void isFormDataCleared(){
+        Mockito.when(loggedInUserController.getLoggedInUser()).thenReturn(getACEmp());
         setFlightControllerState();
 
         addFlightController.addFlight();

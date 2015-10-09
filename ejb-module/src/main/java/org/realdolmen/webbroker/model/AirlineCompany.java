@@ -5,13 +5,21 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Created by RDEAX37 on 2/10/2015.
+ * Entity representing an airline company
+ * @Authot Robin D'Haese
  */
-
 @Entity
 public class AirlineCompany extends BaseEntity{
 
     @NotNull
     private String name;
+
+    public AirlineCompany() {
+    }
+
+    public AirlineCompany(String name) {
+        this.name = name;
+    }
 
     public String getName() {
         return name;

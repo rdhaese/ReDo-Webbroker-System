@@ -13,6 +13,8 @@ import java.util.List;
 
 /**
  * Created by RDEAX37 on 6/10/2015.
+ * Persistence tests for {@link Booking}
+ * @author Robin D'Haese
  */
 public class BookingPersistenceTest extends DataSetPersistenceTest {
 
