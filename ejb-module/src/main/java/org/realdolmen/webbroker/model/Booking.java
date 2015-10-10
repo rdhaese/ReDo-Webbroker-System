@@ -30,17 +30,29 @@ public class Booking extends BaseEntity{
     private List<Discount> discounts = new ArrayList<Discount>();
 
     /**
-     * @return the price of the flight time the number of passengers
-     */
-    public Double getFlightPrice(){
-        return trip.getFlight().getPrice() * numberOfPassengers;
-    }
-
-    /**
      * @return The total price of the booking -> total flight price + total accommodationPrice
      */
-    public Double getTotalPrice(){
-        return getFlightPrice() + trip.getTotalAccommodationPrice();
+    public Double getTotalPriceWithDiscount(){
+        return trip.getTotalPrice() * numberOfPassengers - getTotalDiscount();
+    }
+
+    public Double getTotalPriceWithoutDiscount(){
+        return trip.getTotalPrice() * numberOfPassengers;
+    }
+
+    public Double getTotalDiscount(){
+        Double totalDiscount = 0D;
+        for (Discount discount : discounts){
+           totalDiscount += getDiscountTotalFor(discount);
+        }
+        return totalDiscount;
+    }
+
+    private Double getDiscountTotalFor(Discount discount) {
+        if (discount.isPercentage()){
+           return (getTotalPriceWithoutDiscount() / 100) * discount.getQuantity();
+        }
+        return discount.getQuantity();
     }
 
 

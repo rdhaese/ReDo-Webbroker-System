@@ -95,4 +95,9 @@ public class Flight extends BaseEntity {
         result = 31 * result + (getAvailableSeats() != null ? getAvailableSeats().hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString(){
+        return String.format("%s -> %s", departure, arrival);
+    }
 }

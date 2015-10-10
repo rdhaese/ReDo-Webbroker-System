@@ -75,4 +75,9 @@ public class Airport extends BaseEntity {
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString(){
+        return name;
+    }
 }

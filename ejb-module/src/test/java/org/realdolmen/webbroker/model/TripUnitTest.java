@@ -26,8 +26,9 @@ public class TripUnitTest {
     }
 
     @Test
-    public void isTotalAccommodationPriceCalculatedCorrectly(){
-        assertEquals(100D, trip.getTotalAccommodationPrice(), 0.001);
+    public void isTotalPriceCalculatedCorrectly(){
+        //Expected 10 *10 = 100
+        assertEquals(100D, trip.getTotalPrice(), 0.001);
     }
 
     @Test

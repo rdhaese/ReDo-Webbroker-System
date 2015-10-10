@@ -19,19 +19,21 @@ public class BookingUnitTest {
     @Before
     public void setUp(){
         booking = new Booking();
-        booking.setTrip(createTrip(createFlight()));
+        booking.setTrip(createTrip());
         booking.setNumberOfPassengers(10);
+        booking.getDiscounts().add(createDiscount(10D, true));
+        booking.getDiscounts().add(createDiscount(10D, false));
     }
 
-    private Flight createFlight() {
-        Flight flight = new Flight();
-        flight.setPrice(10D);
-        return flight;
+    private Discount createDiscount(Double quantity, boolean isPercentage){
+       Discount discount = new Discount();
+        discount.setQuantity(quantity);
+        discount.setIsPercentage(isPercentage);
+        return discount;
     }
 
-    private Trip createTrip(Flight flight) {
+    private Trip createTrip() {
         Trip trip = new Trip();
-        trip.setFlight(flight);
         trip.setAccommodationPrice(10D);
         trip.setStartDate(LocalDateTime.now());
         trip.setEndDate(LocalDateTime.now().plusDays(10));
@@ -39,12 +41,21 @@ public class BookingUnitTest {
     }
 
     @Test
-    public void isTheFlightPriceCalculatedCorrectly(){
-        assertEquals(100D ,booking.getFlightPrice(), 0.001);
+    public void isTotalDiscountCalculatedCorrectly(){
+        //expected 10 + (((10 * 10) * 10) / 100) * 10 = 110
+        assertEquals(110D, booking.getTotalDiscount(), 0.001);
     }
 
     @Test
-    public void isTheTotalPriceCalcualtedCorrectly(){
-        assertEquals(200D ,booking.getTotalPrice(), 0.001);
+    public void isTotalPriceWithoutDiscountCalculatedCorrectly(){
+        //expected (10 * 10) * 10 = 1000
+        assertEquals(1000D, booking.getTotalPriceWithoutDiscount(), 0.001);
+
+    }
+
+    @Test
+    public void isTotalPriceWithDiscountCalculatedCorrectly(){
+        //expected ((10 * 10) * 10) - (10 + (((10 * 10) * 10) / 100) * 10) = 890
+        assertEquals(890D, booking.getTotalPriceWithDiscount(), 0.001);
     }
 }

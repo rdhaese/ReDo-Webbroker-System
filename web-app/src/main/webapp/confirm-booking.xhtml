@@ -40,7 +40,7 @@
                              value="#{currentBookingController.currentBooking.trip.endDate.toString()}" styleClass="form-control"/>
 
                 <h:outputLabel for="totalPrice" value="#{text['confirmBooking.totalPrice']}" />
-                <h:outputText id="totalPrice" value="#{currentBookingController.currentBooking.totalPrice}"/>
+                <h:outputText id="totalPrice" value="#{currentBookingController.currentBooking.totalPriceWithoutDiscount}"/>
 
                 <h:outputLabel for="discountedPrice" value="#{text['confirmBooking.discountedPrice']}" styleClass="medium-padding-left"/>
                 <h:outputText id="discountedPrice" value="#{currentBookingController.currentBooking.totalPrice}"/>
