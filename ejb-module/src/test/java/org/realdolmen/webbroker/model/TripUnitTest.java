@@ -3,8 +3,10 @@ package org.realdolmen.webbroker.model;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.Period;
+import java.sql.Date;
 
 import static org.junit.Assert.assertEquals;
 
@@ -35,4 +37,5 @@ public class TripUnitTest {
     public void isAmountOfDaysCalculatedCorrectly(){
         assertEquals(10, trip.getAmountOfDays());
     }
+
 }

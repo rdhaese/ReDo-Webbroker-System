@@ -70,14 +70,16 @@ public class Trip extends BaseEntity {
      * @return the startDate, but converted to java.util.Date
      */
     public Date getStartDateInOldApi() {
-        return Date.from(startDate.toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        //plushours(12)is a workaround so the correct date is displayed
+        return java.sql.Date.valueOf(startDate.plusHours(12).toLocalDate());
     }
 
     /**
      * @return the endDate, but converted to java.util.Date
      */
     public Date getEndDateInOldApi() {
-        return Date.from(endDate.toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        //plushours(12)is a workaround so the correct date is displayed
+       return java.sql.Date.valueOf(endDate.plusHours(12).toLocalDate());
     }
 
     public Flight getFlight() {

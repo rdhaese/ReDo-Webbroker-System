@@ -25,6 +25,5 @@ public class CurrentBookingController implements Serializable {
 
     public void setCurrentBooking(Booking currentBooking) {
         this.currentBooking = currentBooking;
-
     }
 }

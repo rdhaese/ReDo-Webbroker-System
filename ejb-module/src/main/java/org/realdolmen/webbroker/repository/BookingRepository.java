@@ -18,4 +18,7 @@ public class BookingRepository {
         entityManager.persist(booking);
     }
 
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 }

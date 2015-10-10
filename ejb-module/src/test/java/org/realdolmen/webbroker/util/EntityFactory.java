@@ -86,4 +86,20 @@ public class EntityFactory {
         discount.setQuantity(quantity);
         return discount;
     }
+
+    public static Booking createBooking() {
+        Booking booking = new Booking();
+        booking.setBookingUser(EntityFactory.createUser("a", "a", "a", "aaaaaaa"));
+        booking.setNumberOfPassengers(10);
+        booking.setTrip(EntityFactory.createTrip());
+        return booking;
+    }
+
+    public static Discount createDiscount() {
+        Discount discount = new Discount();
+        discount.setName("testDiscount");
+        discount.setQuantity(5D);
+        discount.setIsPercentage(false);
+        return discount;
+    }
 }

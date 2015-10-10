@@ -10,7 +10,7 @@
             <availableSeats>10</availableSeats>
         </flight>
         <travelagency>travel agency A</travelagency>
-        <accommodationPrice>750.00</accommodationPrice>
+        <accommodationPrice>75.00</accommodationPrice>
         <startDate>2015-01-01 12:10:10</startDate>
         <endDate>2015-01-10 12:10:10</endDate>
     </trip>
@@ -23,7 +23,7 @@
             <availableSeats>100</availableSeats>
         </flight>
         <travelagency>travel agency B</travelagency>
-        <accommodationPrice>1250.00</accommodationPrice>
+        <accommodationPrice>90.00</accommodationPrice>
         <startDate>2015-01-11 12:10:10</startDate>
         <endDate>2015-01-21 12:10:10</endDate>
     </trip>

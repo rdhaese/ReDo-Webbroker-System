@@ -6,7 +6,6 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ct="http://java.sun.com/jsf/composite/custom-tags"
-      xmlns:p="http://primefaces.org/ui"
         >
 
 
@@ -17,67 +16,127 @@
     </ui:define>
     <ui:define name="pageContent">
         <ui:fragment rendered="#{currentBookingController.currentBooking eq null}">
-            <ct:alert kind="warning" text="#{text['confirmBooking.noBooking']}" />
+            <ct:alert kind="warning" text="#{text['confirmBooking.noBooking']}"/>
             <h:link outcome="index" value="#{text['confirmBooking.link.goHome']}"/>
         </ui:fragment>
         <ui:fragment rendered="#{currentBookingController.currentBooking ne null}">
-        <h:form>
-            <h:panelGrid columns="4">
-                <h:outputLabel for="airportArrival" value="#{text['confirmBooking.arrival']}"/>
-                <h:inputText disabled="true" id="airportArrival"
-                             value="#{currentBookingController.currentBooking.trip.flight.arrival.name}" styleClass="form-control"/>
+            <h:form>
+                <h:panelGrid columns="2" styleClass="tableStyle">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel for="airportArrival" value="#{text['confirmBooking.arrival']}"/>
+                        <h:inputText disabled="true" id="airportArrival"
+                                     value="#{currentBookingController.currentBooking.trip.flight.arrival.name}"
+                                     styleClass="form-control"/>
 
-                <h:outputLabel for="airportDeparture" value="#{text['confirmBooking.departure']}" styleClass="medium-padding-left"/>
-                <h:inputText disabled="true" id="airportDeparture"
-                             value="#{currentBookingController.currentBooking.trip.flight.departure.name}" styleClass="form-control"/>
+                        <h:outputLabel for="startDate" value="#{text['confirmBooking.from']}"/>
+                        <h:inputText disabled="true" id="startDate"
+                                     value="#{currentBookingController.currentBooking.trip.getStartDateInOldApi().toString()}"
+                                     styleClass="form-control"/>
 
-                <h:outputLabel for="startDate" value="#{text['confirmBooking.from']}"/>
-                <h:inputText disabled="true" id="startDate"
-                             value="#{currentBookingController.currentBooking.trip.startDate.toString()}" styleClass="form-control"/>
+                        <h:outputLabel for="amountOfPassengers" value="#{text['confirmBooking.amountOfPersons']}"/>
+                        <h:inputText disabled="true" id="amountOfPassengers"
+                                     value="#{currentBookingController.currentBooking.numberOfPassengers}"
+                                     styleClass="form-control"/>
+                    </h:panelGrid>
 
-                <h:outputLabel for="endDate" value="#{text['confirmBooking.to']}" styleClass="medium-padding-left"/>
-                <h:inputText disabled="true" id="endDate"
-                             value="#{currentBookingController.currentBooking.trip.endDate.toString()}" styleClass="form-control"/>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel for="airportDeparture" value="#{text['confirmBooking.departure']}"
+                                       styleClass="medium-padding-left"/>
+                        <h:inputText disabled="true" id="airportDeparture"
+                                     value="#{currentBookingController.currentBooking.trip.flight.departure.name}"
+                                     styleClass="form-control"/>
 
-                <h:outputLabel for="totalPrice" value="#{text['confirmBooking.totalPrice']}" />
-                <h:outputText id="totalPrice" value="#{currentBookingController.currentBooking.totalPriceWithoutDiscount}"/>
+                        <h:outputLabel for="endDate" value="#{text['confirmBooking.to']}"
+                                       styleClass="medium-padding-left"/>
+                        <h:inputText disabled="true" id="endDate"
+                                     value="#{currentBookingController.currentBooking.trip.getEndDateInOldApi().toString()}"
+                                     styleClass="form-control"/>
 
-                <h:outputLabel for="discountedPrice" value="#{text['confirmBooking.discountedPrice']}" styleClass="medium-padding-left"/>
-                <h:outputText id="discountedPrice" value="#{currentBookingController.currentBooking.totalPrice}"/>
-            </h:panelGrid>
-        </h:form>
+                        <h:outputLabel for="totalPrice" value="#{text['confirmBooking.totalPrice']}"/>
+                        <h:outputText id="totalPrice"
+                                      value="#{currentBookingController.currentBooking.totalPriceWithoutDiscount}"/>
 
-        <hr/>
+                    </h:panelGrid>
 
-        <h2>#{text['confirmBooking.paymentInfo']}</h2>
-        <h:form>
-            <h3><h:outputLabel for="creditcardPayment" value="#{text['confirmBooking.creditCard']}"/></h3>
-                <h:panelGrid id="creditcardPayment" columns="3" border="0">
-                    <h:outputLabel for="creditcardField" value="#{text['confirmBooking.creditCardNumber']}"/>
-                    <h:inputText id="creditcardField" value="#{confirmBookingController.creditcardNumber}" styleClass="form-control">
-                        <f:validator validatorId="org.realdolmen.CreditCardNumberValidator"/>
-                    </h:inputText>
-                    <h:message for="creditcardField" styleClass="error-message medium-padding-left"/>
+                    <h:commandButton value="#{text['confirmBooking.button.payByCreditCard']}"
+                                     action="#{confirmBookingController.setPaymentMethod('credit-card')}"
+                                     styleClass="form-control" disabled="#{confirmBookingController.paymentMethod eq 'credit-card'}"/>
 
-                    <h:outputLabel for="creditcardExpiryDateField" value="#{text['confirmBooking.expiryDate']}"/>
-                    <h:inputText id="creditcardExpiryDateField" value="#{confirmBookingController.creditcardExpiryDate}" styleClass="form-control">
-                        <f:validator validatorId="org.realdolmen.CreditCardExpiryDateValidator" />
-                    </h:inputText>
-                    <h:message for="creditcardExpiryDateField" styleClass="error-message medium-padding-left"/>
+                    <h:commandButton value="#{text['confirmBooking.button.payByEndorsement']}"
+                                     action="#{confirmBookingController.setPaymentMethod('endorsement')}"
+                                     styleClass="form-control" disabled="#{confirmBookingController.paymentMethod eq 'endorsement'}"/>
                 </h:panelGrid>
+            </h:form>
 
-            <hr />
+            <hr/>
 
-            <h3><h:outputLabel value="#{text['confirmBooking.endorsement']}" /></h3>
-                TODO
-
-            <h:commandButton value="#{text['confirmBooking.button.purchase']}" action="#{confirmBookingController.purchase()}" styleClass="form-control"/>
-
-            <ui:fragment rendered="#{confirmBookingController.noMoreSeats}">
-                <h:outputText value="#{text['confirmBooking.message.noMoreSeats']}" styleClass="alert alert-danger" role="alert"/>
+            <ui:fragment rendered="#{not empty confirmBookingController.paymentMethod}">
+                <h2>#{text['confirmBooking.paymentInfo']}</h2>
             </ui:fragment>
-        </h:form>
-    </ui:fragment>
+            <ui:fragment rendered="#{confirmBookingController.paymentMethod eq 'credit-card'}">
+                <h:form>
+                    <h:panelGrid id="creditcardPayment" columns="3" border="0">
+                        <f:facet name="header">
+                            <h3><h:outputLabel for="creditcardPayment" value="#{text['confirmBooking.creditCard']}"/>
+                            </h3>
+                            <ui:fragment rendered="#{confirmBookingController.noMoreSeats}">
+                                <ct:alert kind="danger" text="#{text['confirmBooking.message.noMoreSeats']}"/>
+                            </ui:fragment>
+                        </f:facet>
+
+                        <h:outputLabel value="#{text['confirmBooking.ccDiscountedPrice']}"/>
+                        <h:outputText value="#{currentBookingController.currentBooking.getTotalPriceWithDiscount()}"/>
+
+                        <p></p>
+
+                        <h:outputLabel for="creditcardField" value="#{text['confirmBooking.creditCardNumber']}"/>
+                        <h:inputText id="creditcardField" value="#{confirmBookingController.creditcardNumber}"
+                                     styleClass="form-control">
+                            <f:validator validatorId="org.realdolmen.CreditCardNumberValidator"/>
+                        </h:inputText>
+                        <h:message for="creditcardField" styleClass="error-message medium-padding-left"/>
+
+                        <h:outputLabel for="creditcardExpiryDateField" value="#{text['confirmBooking.expiryDate']}"/>
+                        <h:inputText id="creditcardExpiryDateField"
+                                     value="#{confirmBookingController.creditcardExpiryDate}" styleClass="form-control">
+                            <f:validator validatorId="org.realdolmen.CreditCardExpiryDateValidator"/>
+                        </h:inputText>
+                        <h:message for="creditcardExpiryDateField" styleClass="error-message medium-padding-left"/>
+
+                        <f:facet name="footer">
+                            <h:commandButton value="#{text['confirmBooking.button.purchase']}"
+                                             action="#{confirmBookingController.purchase()}" styleClass="form-control"/>
+                        </f:facet>
+                    </h:panelGrid>
+                </h:form>
+            </ui:fragment>
+
+            <ui:fragment rendered="#{confirmBookingController.paymentMethod eq 'endorsement'}">
+                <h:panelGrid columns="1">
+                    <f:facet name="header">
+                        <h3><h:outputLabel value="#{text['confirmBooking.endorsement']}"/></h3>
+                        <ui:fragment rendered="#{confirmBookingController.noMoreSeats}">
+                            <ct:alert kind="danger" text="#{text['confirmBooking.message.noMoreSeats']}"/>
+                        </ui:fragment>
+                    </f:facet>
+
+                    <h:outputText value="#{text['confirmBooking.pleasePayTo']}"/>
+                    <h:outputLabel value="#{text['confirmBooking.payToNumber']}"/>
+
+                    <hr/>
+
+                    <h:outputText value="#{text['confirmBooking.payWithinFiveDays']}"/>
+
+
+                    <f:facet name="footer">
+                        <h:form>
+                            <h:commandButton value="#{text['confirmBooking.button.reserve']}"
+                                             action="#{confirmBookingController.purchase()}" styleClass="form-control"/>
+                        </h:form>
+                    </f:facet>
+                </h:panelGrid>
+            </ui:fragment>
+        </ui:fragment>
     </ui:define>
 </ui:composition>
 </html>
