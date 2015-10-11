@@ -1,7 +1,5 @@
 package org.realdolmen.webbroker.validator;
 
-import org.realdolmen.webbroker.i18n.Text;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -11,7 +9,6 @@ import javax.faces.validator.ValidatorException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Enumeration;
 import java.util.Locale;
 import java.util.ResourceBundle;
 

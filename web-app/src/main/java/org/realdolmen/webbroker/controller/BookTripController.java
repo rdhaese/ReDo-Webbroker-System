@@ -1,7 +1,6 @@
 package org.realdolmen.webbroker.controller;
 
 import org.realdolmen.webbroker.model.Booking;
-import org.realdolmen.webbroker.model.Trip;
 import org.realdolmen.webbroker.repository.TripRepository;
 
 import javax.enterprise.context.RequestScoped;
@@ -23,6 +22,10 @@ public class BookTripController {
     private LoggedInUserController loggedInUserController;
     @Inject
     private CurrentBookingController currentBookingController;
+
+    public String test() {
+        return "trip-summary";
+    }
 
     public String showSummary(Long id, int amountOfPersons){
         Booking booking = new Booking();
