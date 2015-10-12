@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.realdolmen.util.EntityFactory;
 import org.realdolmen.webbroker.model.Booking;
+import org.realdolmen.webbroker.model.user.User;
 import org.realdolmen.webbroker.repository.BookingRepository;
 import org.realdolmen.webbroker.repository.FlightRepository;
 
@@ -31,15 +32,21 @@ public class ConfirmBookingControllerTest {
     @Mock
     FlightRepository flightRepository;
 
+    @Mock
+    LoggedInUserController loggedInUserController;
+
     @InjectMocks
     ConfirmBookingController controller;
 
     Booking booking;
+    User user;
 
     @Before
     public void setup() {
         booking = EntityFactory.createBooking();
+        user = EntityFactory.createUser("a", "b", "c", "password");
         when(currentBookingController.getCurrentBooking()).thenReturn(booking);
+        when(loggedInUserController.getLoggedInUser()).thenReturn(user);
     }
 
     @Test

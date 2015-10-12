@@ -7,7 +7,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.realdolmen.util.EntityFactory;
 import org.realdolmen.webbroker.model.Flight;
 import org.realdolmen.webbroker.model.user.AirlineCompanyEmployee;
 import org.realdolmen.webbroker.repository.AirportRepository;

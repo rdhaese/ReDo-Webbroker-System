@@ -24,10 +24,11 @@ public class BookingRepository {
         }
         booking.setDiscounts(mergedDiscounts);
         booking.setBookingUser(entityManager.merge(booking.getBookingUser()));
+        booking.getTrip().setFlight(entityManager.merge(booking.getTrip().getFlight()));
+        booking.getTrip().setTravelAgency(entityManager.merge(booking.getTrip().getTravelAgency()));
         booking.setTrip(entityManager.merge(booking.getTrip()));
         entityManager.persist(booking);
     }
-
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }

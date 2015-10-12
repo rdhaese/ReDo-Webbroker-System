@@ -2,7 +2,6 @@ package org.realdolmen.webbroker.controller;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.realdolmen.util.EntityFactory;
 import org.realdolmen.webbroker.model.Booking;
 
 import static org.junit.Assert.assertEquals;

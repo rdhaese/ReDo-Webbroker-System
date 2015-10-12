@@ -5,9 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.realdolmen.util.EntityFactory;
 import org.realdolmen.webbroker.repository.TripRepository;
 
 import static org.junit.Assert.assertEquals;
@@ -45,6 +43,5 @@ public class BookTripControllerTest {
         assertEquals("trip-summary", resultPage);
         verify(tripRepository, times(1)).find(1L);
         verify(currentBookingController, times(1)).setCurrentBooking(any());
-        verify(loggedInUserController, times(1)).getLoggedInUser();
     }
 }
