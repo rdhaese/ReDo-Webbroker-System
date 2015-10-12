@@ -71,15 +71,21 @@
                 </p:column>
 
                 <p:column filterBy="#{report.min}" headerText="#{text['reports.header.min']}" filterMatchMode="contains">
-                    <h:outputText value="#{report.min}" />
+                    <h:outputText value="#{report.min}">
+                        <f:convertNumber type="currency" currencySymbol="€" />
+                    </h:outputText>
                 </p:column>
 
                 <p:column filterBy="#{report.max}" headerText="#{text['reports.header.max']}" filterMatchMode="contains">
-                    <h:outputText value="#{report.max}" />
+                    <h:outputText value="#{report.max}">
+                        <f:convertNumber type="currency" currencySymbol="€" />
+                    </h:outputText>
                 </p:column>
 
                 <p:column filterBy="#{report.average}" headerText="#{text['reports.header.average']}" filterMatchMode="contains">
-                    <h:outputText value="#{report.average}" />
+                    <h:outputText value="#{report.average}">
+                        <f:convertNumber type="currency" currencySymbol="€" />
+                    </h:outputText>
                 </p:column>
             </p:dataTable>
         </h:form>
