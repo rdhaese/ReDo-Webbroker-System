@@ -26,7 +26,7 @@ public class ManageFlightsController implements Serializable {
     private PriceCalcService priceCalcService;
 
     private List<Flight> allFlights;
-
+    private List<Flight> filteredFlights;
 
     @PostConstruct
     public void initFlights(){
@@ -44,5 +44,17 @@ public class ManageFlightsController implements Serializable {
 
     public Double getTotalPriceFor(Flight flight){
         return priceCalcService.getTotalFlightPrice(flight);
+    }
+
+    public List<Flight> getFilteredFlights() {
+        return filteredFlights;
+    }
+
+    public void setFilteredFlights(List<Flight> filteredFlights) {
+        this.filteredFlights = filteredFlights;
+    }
+
+    public void setAllFlights(List<Flight> allFlights) {
+        this.allFlights = allFlights;
     }
 }
