@@ -32,8 +32,10 @@
 
                     <h:outputLabel for="startDate" value="#{text['confirmBooking.from']}"/>
                     <h:inputText disabled="true" id="startDate"
-                                 value="#{currentBookingController.currentBooking.trip.getStartDateInOldApi().toString()}"
-                                 styleClass="form-control"/>
+                                 value="#{currentBookingController.currentBooking.trip.getStartDateInOldApi()}"
+                                 styleClass="form-control">
+                        <f:convertDateTime for="startDate" pattern="dd/MM/yyyy"/>
+                    </h:inputText>
 
                     <h:outputLabel for="amountOfPassengers" value="#{text['confirmBooking.amountOfPersons']}"/>
                     <h:inputText disabled="true" id="amountOfPassengers"
@@ -51,12 +53,14 @@
                     <h:outputLabel for="endDate" value="#{text['confirmBooking.to']}"
                                    styleClass="medium-padding-left"/>
                     <h:inputText disabled="true" id="endDate"
-                                 value="#{currentBookingController.currentBooking.trip.getEndDateInOldApi().toString()}"
-                                 styleClass="form-control"/>
+                                 value="#{currentBookingController.currentBooking.trip.getEndDateInOldApi()}"
+                                 styleClass="form-control">
+                        <f:convertDateTime for="endDate" pattern="dd/MM/yyyy"/>
+                    </h:inputText>
 
                     <h:outputLabel for="totalPrice" value="#{text['confirmBooking.totalPrice']}"/>
                     <h:outputText id="totalPrice"
-                                  value="#{currentBookingController.currentBooking.totalPriceWithoutDiscount}"/>
+                                  value="#{confirmBookingController.getTotalPriceWithoutDiscountForCurrentBooking()}"/>
 
                 </h:panelGrid>
 
@@ -80,7 +84,7 @@
 
         <h:form>
             <ui:fragment rendered="#{confirmBookingController.paymentMethod eq 'credit-card'}">
-                <h:panelGrid id="creditcardPayment" columns="3" border="0">
+                <h:panelGrid id="creditcardPayment" columns="3" styleClass="tableStyle">
                     <f:facet name="header">
                         <h3><h:outputLabel for="creditcardPayment" value="#{text['confirmBooking.creditCard']}"/>
                         </h3>
@@ -90,7 +94,7 @@
                     </f:facet>
 
                     <h:outputLabel value="#{text['confirmBooking.ccDiscountedPrice']}"/>
-                    <h:outputText value="#{currentBookingController.currentBooking.getTotalPriceWithDiscount()}"/>
+                    <h:outputText value="#{confirmBookingController.getTotalPriceWithDiscountForCurrentBooking()}"/>
 
                     <p></p>
 

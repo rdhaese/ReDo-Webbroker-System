@@ -54,7 +54,7 @@
                 </p:column>
 
                 <p:column headerText="#{text['manageFlights.table.totalPrice']}">
-                    <h:outputText value="#{flight.getTotalPrice()}" />
+                    <h:outputText value="#{manageFlightsController.getTotalPriceFor(flight)}" />
                 </p:column>
 
             </p:dataTable>
