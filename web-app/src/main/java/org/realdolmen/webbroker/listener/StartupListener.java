@@ -1,6 +1,6 @@
 package org.realdolmen.webbroker.listener;
 
-import org.realdolmen.webbroker.util.Pair;
+import org.realdolmen.webbroker.repository.DiscountRepository;
 import org.realdolmen.webbroker.service.PasswordService;
 import org.realdolmen.webbroker.exception.AmbiguousEntityException;
 import org.realdolmen.webbroker.model.*;
@@ -11,6 +11,7 @@ import org.realdolmen.webbroker.model.user.User;
 import org.realdolmen.webbroker.repository.FlightRepository;
 import org.realdolmen.webbroker.repository.TravelAgencyRepository;
 import org.realdolmen.webbroker.repository.TripRepository;
+import org.realdolmen.webbroker.util.Pair;
 import org.realdolmen.webbroker.xml.XmlSerializer;
 import org.realdolmen.webbroker.xml.element.*;
 
@@ -37,22 +38,25 @@ import java.util.Map;
 public class StartupListener implements ServletContextListener {
 
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Inject
-    XmlSerializer serializer;
+    private XmlSerializer serializer;
 
     @Inject
-    TravelAgencyRepository travelAgencyRepository;
+    private TravelAgencyRepository travelAgencyRepository;
 
     @Inject
     private FlightRepository flightRepository;
 
     @Inject
-    PasswordService passwordService;
+    private PasswordService passwordService;
 
     @Inject
     private TripRepository tripRepository;
+
+    @Inject
+    private DiscountRepository discountRepository;
 
     @Override
     @Transactional
@@ -62,6 +66,32 @@ public class StartupListener implements ServletContextListener {
         initializeUsers();
         initializeFlights();
         initializeTrips();
+        initializeDiscounts();
+    }
+
+    private void initializeDiscounts() {
+        try {
+            InputStream file = getClass().getClassLoader().getResourceAsStream("discounts.xml");
+            DiscountsXmlElement xmlElement = serializer.unmarshalStream(DiscountsXmlElement.class, file);
+            for (DiscountXmlElement element : xmlElement.getDiscounts()) {
+                processDiscountElement(element);
+            }
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void processDiscountElement(DiscountXmlElement element) {
+        try {
+
+            Discount discount = new Discount();
+            discount.setIsPercentage(element.isPercentage());
+            discount.setName(element.getName());
+            discount.setQuantity(element.getQuantity());
+            discountRepository.add(discount);
+        } catch (AmbiguousEntityException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initializeTrips() {

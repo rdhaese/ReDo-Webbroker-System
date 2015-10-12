@@ -1,13 +1,11 @@
 package org.realdolmen.webbroker.repository;
 
-import org.realdolmen.webbroker.model.AirlineCompany;
 import org.realdolmen.webbroker.model.Airport;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.io.Serializable;
 import java.util.List;
 
@@ -40,5 +38,15 @@ public class AirportRepository implements Serializable {
 
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
+    }
+
+    public List<Airport> findAirportInRegion(String regionCode) {
+        return entityManager.createQuery("select a from Airport a where a.region.code = :code", Airport.class)
+                        .setParameter("code", regionCode).getResultList();
+    }
+
+    public List<Airport> getAirportsInContinent(String continent) {
+        return entityManager.createQuery("select a from Airport a where a.region.name = :continent", Airport.class)
+                .setParameter("continent", continent).getResultList();
     }
 }

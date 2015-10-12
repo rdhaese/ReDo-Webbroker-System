@@ -17,59 +17,109 @@
     <ui:define name="pageContent">
 
         <f:metadata>
-            <f:viewParam name="selectedDestination" value="#{searchTripController.destination_id}"/>
+            <f:viewParam name="selectedDestination" value="#{searchTripController.destinationId}"/>
         </f:metadata>
 
         <h:form>
-            <h:panelGrid columns="2">
-                <f:facet name="header">
-                <ui:fragment rendered="#{searchTripController.noTripsFound}">
-                    <h:panelGroup style="display:block; text-align:center">
-                        <ct:alert text="#{text['searchTrip.message.noTripsFound']}" kind="danger" />
-                    </h:panelGroup>
-                </ui:fragment>
-            </f:facet>
-            <h:outputLabel for="destination" value="#{text['searchTrip.destination']}"/>
-                <h:selectOneMenu id="destination" value="#{searchTripController.destination_id}"
-                                 styleClass="form-control" validatorMessage="#{text['searchTrip.valMessage.destination']}">
+            <h:panelGrid columns="3">
+                <h:outputLabel for="destination" value="#{text['searchTrip.destination']}"/>
+                <h:selectOneMenu id="destination" value="#{searchTripController.destinationId}" styleClass="form-control"
+                                 validatorMessage="#{text['searchTrip.valMessage.destination']}">
                     <f:selectItems value="#{searchTripController.getAirports()}" var="a"
                                    itemLabel="#{a.name}" itemValue="#{a.id}"/>
                 </h:selectOneMenu>
-                <h:inputHidden/>
                 <h:message for="destination" styleClass="error-message"/>
 
-                <h:outputLabel for="departureDate" value="#{text['searchTrip.departureDate']}" />
-                <h:inputText id="departureDate" value="#{searchTripController.departureDate}" styleClass="form-control"
-                             converterMessage="#{text['searchTrip.conMessage.departureDate']}" validatorMessage="#{text['searchTrip.valMessage.departureDate']}">
-                    <f:convertDateTime pattern="dd/MM/yyyy" for="departureDate"/>
-                </h:inputText>
-                <h:inputHidden/>
+                <h:outputLabel for="departureDate" value="#{text['searchTrip.departureDate']}"/>
+                <p:calendar id="departureDate" value="#{searchTripController.departureDate}"
+                            mode="popup" pattern="dd/MM/yyyy"
+                            converterMessage="#{text['searchTrip.conMessage.departureDate']}"
+                            validatorMessage="#{text['searchTrip.valMessage.departureDate']}"/>
                 <h:message for="departureDate" styleClass="error-message"/>
 
-                <h:outputLabel for="returnDate" value="#{text['searchTrip.returnDate']}" />
-                <h:inputText id="returnDate" value="#{searchTripController.arrivalDate}" styleClass="form-control"
-                             converterMessage="#{text['searchTrip.conMessage.arrivalDate']}" validatorMessage="#{text['searchTrip.valMessage.arrivalDate']}">
-                    <f:convertDateTime pattern="dd/MM/yyyy" for="returnDate"/>
-                </h:inputText>
-                <h:inputHidden/>
+                <h:outputLabel for="returnDate" value="#{text['searchTrip.returnDate']}"/>
+                <p:calendar id="returnDate" value="#{searchTripController.arrivalDate}"
+                            mode="popup" pattern="dd/MM/yyyy"
+                            converterMessage="#{text['searchTrip.conMessage.arrivalDate']}"
+                            validatorMessage="#{text['searchTrip.valMessage.arrivalDate']}"/>
                 <h:message for="returnDate" styleClass="error-message"/>
 
                 <h:outputLabel for="numberOfPersons" value="#{text['searchTrip.numberOfPersons']}"/>
                 <h:inputText id="numberOfPersons" value="#{searchTripController.numberOfPersons}"
-                             styleClass="form-control" converterMessage="#{text['searchTrip.conMessage.numberOfPersons']}" validatorMessage="#{text['searchTrip.valMessage.numberOfPersons']}"/>
-                <h:inputHidden/>
+                             styleClass="form-control"
+                             converterMessage="#{text['searchTrip.conMessage.numberOfPersons']}"
+                             validatorMessage="#{text['searchTrip.valMessage.numberOfPersons']}">
+                </h:inputText>
                 <h:message for="numberOfPersons" styleClass="error-message"/>
 
                 <f:facet name="footer">
                     <h:panelGroup style="display:block; text-align:center">
-                        <h:commandButton value="#{text['searchTrip.button.searchTrip']}" action="#{searchTripController.searchTrip()}"
-                                         styleClass="form-control"/>
+                        <p:commandButton ajax="true" action="#{searchTripController.findTrips}"
+                                         value="#{text['searchTrip.button.searchTrip']}"
+                                         process="@form"
+                                         update="results errormessage @form"
+                                         styleClass="btn btn-primary form-control"
+                                />
                     </h:panelGroup>
                 </f:facet>
             </h:panelGrid>
         </h:form>
 
+        <h:panelGroup id="errormessage">
+            <ui:fragment rendered="#{searchTripController.performedASearch and empty searchTripController.foundTrips}">
+                <h:panelGroup style="display:block; text-align:center">
+                    <ct:alert text="#{text['searchTrip.message.noTripsFound']}" kind="danger" />
+                </h:panelGroup>
+            </ui:fragment>
+        </h:panelGroup>
 
+        <hr />
+
+        <h:panelGroup id="results">
+            <ui:fragment rendered="#{not empty searchTripController.foundTrips}">
+                <h:dataTable  value="#{searchTripController.foundTrips}" var="t"
+                             styleClass="table"
+                             headerClass="table-header"
+                             rowClasses="table-odd-row,table-even-row"
+                        >
+
+                    <h:column>
+                        <f:facet name="header">#{text['foundTrips.column.departure']}</f:facet>
+                        #{t.getFlight().getDeparture().getName()}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">#{text['foundTrips.column.arrival']}</f:facet>
+                        #{t.getFlight().getArrival().getName()}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">#{text['foundTrips.column.departureDate']}</f:facet>
+                        <h:outputText value="#{t.getStartDateInOldApi()}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">#{text['foundTrips.column.returnDate']}</f:facet>
+                        <h:outputText value="#{t.getEndDateInOldApi()}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </h:column>
+
+                    <h:column>
+                        <h:form>
+                            <h:commandButton value="#{text['foundTrips.button.book']}"
+                                             action="#{bookTripController.showSummary()}"
+                                             styleClass="form-control">
+                                <f:param value="#{t.id}" name="tripId" />
+                                <f:param value="#{searchTripController.numberOfPersons}" name="persons" />
+                            </h:commandButton>
+                        </h:form>
+                    </h:column>
+                </h:dataTable>
+            </ui:fragment>
+        </h:panelGroup>
     </ui:define>
 </ui:composition>
 </html>

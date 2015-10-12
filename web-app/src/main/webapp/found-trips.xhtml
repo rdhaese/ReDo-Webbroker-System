@@ -15,7 +15,11 @@
         <ct:header title="#{text['page.title.foundTrips']}"/>
     </ui:define>
     <ui:define name="pageContent">
-
+        <ui:fragment rendered="#{empty searchTripController.foundTrips}">
+            <ct:alert kind="warning" text="#{text['foundTrips.noFoundTrips']}" />
+            <h:link outcome="index" value="#{text['foundTrips.link.goHome']}"/>
+        </ui:fragment>
+        <ui:fragment rendered="#{not empty searchTripController.foundTrips}">
         <h:dataTable value="#{searchTripController.foundTrips}" var="t"
                      styleClass="table"
                      headerClass="table-header"
@@ -52,7 +56,7 @@
                 </h:form>
             </h:column>
         </h:dataTable>
-
+        </ui:fragment>
     </ui:define>
 </ui:composition>
 </html>

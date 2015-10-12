@@ -27,6 +27,8 @@ public class Flight extends BaseEntity {
     @NotNull
     @Min(value = 0)
     private Integer availableSeats;
+    @Min(value= 0)
+    private Integer margin = 5; //standard margin = 5%
 
     public AirlineCompany getCompany() {
         return company;
@@ -56,6 +58,10 @@ public class Flight extends BaseEntity {
         return price;
     }
 
+    public Double getTotalPrice(){
+        return price + (price * (margin/ 100D));
+    }
+
     public void setPrice(Double price) {
         this.price = price;
     }
@@ -66,6 +72,14 @@ public class Flight extends BaseEntity {
 
     public void setAvailableSeats(Integer availableSeats) {
         this.availableSeats = availableSeats;
+    }
+
+    public Integer getMargin() {
+        return margin;
+    }
+
+    public void setMargin(Integer margin) {
+        this.margin = margin;
     }
 
     @Override
@@ -94,5 +108,10 @@ public class Flight extends BaseEntity {
         result = 31 * result + (getPrice() != null ? getPrice().hashCode() : 0);
         result = 31 * result + (getAvailableSeats() != null ? getAvailableSeats().hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString(){
+        return String.format("%s -> %s", departure, arrival);
     }
 }

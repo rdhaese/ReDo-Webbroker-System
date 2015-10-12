@@ -16,30 +16,32 @@
 
     </ui:define>
     <ui:define name="pageContent">
-        <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript" ></script>
+        #{text['searchdestination.infotext']}
 
-
-
-        <p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px">
-            <p:ajax event="pointSelect" listener="#{searchDestinationController.onPointSelect}"/>
-        </p:gmap>
-
-        <h:form>
+        <h:form id="selectedRegionForm" style="margin: 0 auto;">
             <h:panelGrid columns="2">
-                <h:outputLabel for="selectedDestination">Selected region:</h:outputLabel>
-                <h:selectOneMenu id="selectedDestination" value="#{searchDestinationController.selectedRegion}">
-                    <f:selectItems value="#{searchDestinationController.getAllRegions()}" var="region"
-                                   itemLabel="#{region.name}" itemValue="#{region.code}"/>
+                <h:outputLabel for="selectedDestination" value="#{text['searchdestination.selectedregion']}" />
+                <h:outputText id="selectedDestination" value="#{searchDestinationController.selectedRegion}" />
+
+                <h:outputLabel for="availableDestinations" value="#{text['searchdestination.availabledestination']}" />
+                <h:selectOneMenu id="availableDestinations" value="#{searchDestinationController.selectedDestination}">
+                    <f:selectItems value="#{searchDestinationController.availableDestinations}" var="a"
+                                   itemLabel="#{a.name}" itemValue="#{a.id}"/>
                 </h:selectOneMenu>
                 <h:panelGroup layout="block">
-                    <h:link styleClass="btn btn-primary btn-block" value="Search trips to this region"
-                            outcome="search-trip">
-                        <f:param name="selectedDestination" value="#{searchDestinationController.selectedRegion}"/>
-                    </h:link>
+                    <h:commandButton action="#{searchTripController.searchTripWithDestination(searchDestinationController.selectedDestination)}"
+                                     value="#{text['searchdestination.button.findtrip']}"
+                                    styleClass="btn btn-primary">
+                    </h:commandButton>
                 </h:panelGroup>
             </h:panelGrid>
         </h:form>
 
+        <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript" ></script>
+
+        <p:gmap center="41.381542, 2.122893" zoom="7" type="HYBRID" style="margin: 10px; width:100%; height:450px">
+            <p:ajax event="pointSelect" listener="#{searchDestinationController.onPointSelect}" update="selectedRegionForm"/>
+        </p:gmap>
 
     </ui:define>
 </ui:composition>

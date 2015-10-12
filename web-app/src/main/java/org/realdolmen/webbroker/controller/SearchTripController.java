@@ -5,7 +5,6 @@ import org.realdolmen.webbroker.model.Trip;
 import org.realdolmen.webbroker.repository.AirportRepository;
 import org.realdolmen.webbroker.repository.TripRepository;
 
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -28,59 +27,67 @@ public class SearchTripController implements Serializable {
 
     @Inject
     private AirportRepository airportRepo;
+
     @Inject
     private TripRepository tripRepo;
 
     @NotNull
-    private Long destination_id;
+    private Long destinationId;
+
     @NotNull
     private Date departureDate;
+
     @NotNull
     private Date arrivalDate;
+
     @NotNull
     @DecimalMin(value = "1")
     private Integer numberOfPersons;
 
-    private List<Trip> foundTrips = new ArrayList<Trip>();
-    private boolean noTripsFound = false;
+    private List<Trip> foundTrips = new ArrayList<>();
 
-    /**
-     * Collects all trips fitting the given constraints.
-     *
-     * @return the next page to navigate to -> found-trips; if no trips are found -> a message is set and the form is shown again.
-     */
-    public String searchTrip() {
-        fillFoundTrips();
-        if (foundTrips.size() == 0) {
-            noTripsFound = true;
-            return "search-trips";
-        }
-        return "found-trips";
+    private boolean performedASearch = false;
+
+    public boolean isPerformedASearch() {
+        return performedASearch;
     }
 
-    /**
-     * Gets all trips from the repo with the given arguments.
-     */
-    private void fillFoundTrips() {
-        Airport destination = airportRepo.find(destination_id);
+    public void setPerformedASearch(boolean performedASearch) {
+        this.performedASearch = performedASearch;
+    }
+
+    public List<Trip> getFoundTrips() {
+        return foundTrips;
+    }
+
+    public void setFoundTrips(List<Trip> foundTrips) {
+        this.foundTrips = foundTrips;
+    }
+
+    public void findTrips() {
+        Airport destination = airportRepo.find(destinationId);
         LocalDate depDate = new java.sql.Date(departureDate.getTime()).toLocalDate();
         LocalDate arrDate = new java.sql.Date(arrivalDate.getTime()).toLocalDate();
         foundTrips = tripRepo.searchTrips(destination, depDate, arrDate, numberOfPersons);
+        performedASearch = true;
     }
 
-    /**
-     * @return All airports from the persistence context.
-     */
     public List<Airport> getAirports() {
         return airportRepo.getAllAirports();
     }
 
-    public Long getDestination_id() {
-        return destination_id;
+    public String searchTripWithDestination(Long destinationId) {
+        this.destinationId = destinationId;
+
+        return "search-trip";
     }
 
-    public void setDestination_id(Long destination_id) {
-        this.destination_id = destination_id;
+    public Long getDestinationId() {
+        return destinationId;
+    }
+
+    public void setDestinationId(Long destinationId) {
+        this.destinationId = destinationId;
     }
 
     public Date getDepartureDate() {
@@ -107,19 +114,4 @@ public class SearchTripController implements Serializable {
         this.numberOfPersons = numberOfPersons;
     }
 
-    public List<Trip> getFoundTrips() {
-        return foundTrips;
-    }
-
-    public void setFoundTrips(List<Trip> foundTrips) {
-        this.foundTrips = foundTrips;
-    }
-
-    public boolean isNoTripsFound() {
-        return noTripsFound;
-    }
-
-    public void setNoTripsFound(boolean noTripsFound) {
-        this.noTripsFound = noTripsFound;
-    }
 }

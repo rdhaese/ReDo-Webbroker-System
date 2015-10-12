@@ -1,65 +1,69 @@
 package org.realdolmen.webbroker.controller;
 
 import org.primefaces.event.map.PointSelectEvent;
-import org.primefaces.json.JSONException;
-import org.primefaces.json.JSONObject;
-import org.realdolmen.webbroker.model.Region;
+import org.primefaces.model.map.LatLng;
+import org.realdolmen.webbroker.model.Airport;
+import org.realdolmen.webbroker.repository.AirportRepository;
 import org.realdolmen.webbroker.repository.RegionRepository;
+import org.realdolmen.webbroker.service.LocationService;
 
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.*;
-import java.net.URL;
-import java.nio.charset.Charset;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller for the search destination view.
+ *
+ * @author Youri Flement
+ */
 @Named
-@RequestScoped
+@javax.faces.view.ViewScoped
 public class SearchDestinationController implements Serializable {
 
-    private static final String API_KEY = "AIzaSyBPANm9y_qFBTMSrZORJmjA7tPXqv-NbXE";
     @Inject
-    RegionRepository repository;
+    RegionRepository regionRepository;
 
-    String selectedRegion = "";
+    @Inject
+    LocationService locationService;
 
-    public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
-        InputStream is = new URL(url).openStream();
-        try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-            String jsonText = readAll(rd);
-            JSONObject json = new JSONObject(jsonText);
-            return json;
-        } finally {
-            is.close();
-        }
-    }
+    @Inject
+    AirportRepository airportRepository;
 
-    private static String readAll(Reader rd) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        int cp;
-        while ((cp = rd.read()) != -1) {
-            sb.append((char) cp);
-        }
-        return sb.toString();
-    }
+    private String selectedRegion = "";
 
+    private List<Airport> availableDestinations = new ArrayList<>();
 
+    private Long selectedDestination = -1L;
+
+    /**
+     * Find the available destinations for the clicked location. If no locations are found, the
+     * a collection of available destinations is set to an empty list.
+     *
+     * @param event The event which encapsulates the clicked location.
+     */
     public void onPointSelect(PointSelectEvent event) {
-        String URL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + event.getLatLng().getLat() + "," + event.getLatLng().getLng() + "&key=" + API_KEY;
-        try {
-            JSONObject jsonObject = readJsonFromUrl(URL);
-            System.out.println(jsonObject.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        LatLng latLng = event.getLatLng();
+        String countryCode = locationService.latLongToCountryCode(latLng.getLat(), latLng.getLng());
+        selectedRegion = locationService.countryCodeToContinent(countryCode);
+        availableDestinations = airportRepository.getAirportsInContinent(selectedRegion);
     }
 
-    public List<Region> getAllRegions() {
-        return repository.getAllRegions();
+    public Long getSelectedDestination() {
+        return selectedDestination;
+    }
+
+    public void setSelectedDestination(Long selectedDestination) {
+        this.selectedDestination = selectedDestination;
+    }
+
+    public List<Airport> getAvailableDestinations() {
+        return availableDestinations;
+    }
+
+    public void setAvailableDestinations(List<Airport> availableDestinations) {
+        this.availableDestinations = availableDestinations;
     }
 
     public String getSelectedRegion() {

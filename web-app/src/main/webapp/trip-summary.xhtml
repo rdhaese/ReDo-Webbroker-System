@@ -17,7 +17,7 @@
             <h:link outcome="index" value="#{text['tripSummary.link.goHome']}"/>
         </ui:fragment>
         <ui:fragment rendered="#{currentBookingController.currentBooking ne null}">
-        <h:panelGrid columns="2">
+        <h:panelGrid columns="2" styleClass="tableStyle">
             <h:outputLabel value="#{text['tripSummary.departureFrom']}" for="departure"/>
             <h:outputText id="departure"
                           value=" #{currentBookingController.currentBooking.trip.flight.departure.name}"/>
@@ -37,6 +37,9 @@
                           value="#{currentBookingController.currentBooking.trip.getEndDateInOldApi()}">
                 <f:convertDateTime for="retDate" pattern="dd/MM/yyyy"/>
             </h:outputText>
+            <h:outputLabel value="#{text['tripSummary.amountOfPersons']}" for="amountOfPersons"/>
+            <h:outputText id="amountOfPersons"
+                          value=" #{currentBookingController.currentBooking.numberOfPassengers}"/>
             <f:facet name="footer">
                 <h:panelGroup style="display:block; text-align:center">
                     <h:form>
@@ -48,7 +51,7 @@
                                              action="#{loginController.loginFromPreviousPage('trip-summary')}"
                                              styleClass="form-control"/>
                         </c:if>
-                        <h:commandButton value="#{text['tripSummary.button.cancel']}" action="found-trips" styleClass="form-control"/>
+                        <h:commandButton value="#{text['tripSummary.button.cancel']}" action="search-trip" styleClass="form-control"/>
                     </h:form>
                 </h:panelGroup>
             </f:facet>

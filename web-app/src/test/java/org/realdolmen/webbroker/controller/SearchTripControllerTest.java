@@ -7,7 +7,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.realdolmen.util.EntityFactory;
-import org.realdolmen.webbroker.model.Airport;
 import org.realdolmen.webbroker.model.Trip;
 import org.realdolmen.webbroker.repository.AirportRepository;
 import org.realdolmen.webbroker.repository.TripRepository;
@@ -18,10 +17,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.jgroups.util.Util.assertTrue;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 /**
@@ -45,7 +42,7 @@ public class SearchTripControllerTest {
     public void setup() {
         controller.setArrivalDate(Date.from(LocalDate.of(2000, 10, 10).atStartOfDay(ZoneId.systemDefault()).toInstant()));
         controller.setDepartureDate(Date.from(LocalDate.of(2000, 10, 10).atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        controller.setDestination_id(1L);
+        controller.setDestinationId(1L);
         controller.setNumberOfPersons(5);
     }
 
@@ -53,12 +50,12 @@ public class SearchTripControllerTest {
     public void canTripsBeSearched() {
         when(airportRepo.find(1L)).thenReturn(EntityFactory.createAirport("a", EntityFactory.createAddress("a", "a", "a", "a", "a"), EntityFactory.createRegion()));
         when(tripRepo.searchTrips(any(), any(), any(), any())).thenReturn(createTripsList());
-        String resultPage = controller.searchTrip();
-        assertEquals("found-trips", resultPage);
+        controller.findTrips();
+        assertTrue(controller.getFoundTrips().size() > 0);
     }
 
     private List<Trip> createTripsList() {
-        List<Trip> trips = new ArrayList<Trip>();
+        List<Trip> trips = new ArrayList<>();
         trips.add(EntityFactory.createTrip());
         trips.add(EntityFactory.createTrip());
         trips.add(EntityFactory.createTrip());
@@ -66,11 +63,18 @@ public class SearchTripControllerTest {
     }
 
     @Test
-    public void isErrorMessageSetIfNoTripsFound() {
-        when(tripRepo.searchTrips(any(), any(), any(), any())).thenReturn(new ArrayList<Trip>());
-        String resultPage = controller.searchTrip();
-        assertEquals("search-trips", resultPage);
-        assertTrue(controller.isNoTripsFound());
+    public void canSearchTripWithArrivalId() throws Exception {
+        when(tripRepo.searchTrips(any(), any(), any(), any())).thenReturn(new ArrayList<>());
+        String s = controller.searchTripWithDestination(1L);
+        assertEquals("search-trip", s);
+        assertEquals(1L, controller.getDestinationId().longValue());
+    }
+
+    @Test
+    public void searchPerformedFlagIsSet() {
+        when(tripRepo.searchTrips(any(), any(), any(), any())).thenReturn(new ArrayList<>());
+        controller.findTrips();
+        assertTrue(controller.isPerformedASearch());
     }
 
     @Test

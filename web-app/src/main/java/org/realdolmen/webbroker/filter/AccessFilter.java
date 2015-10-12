@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBException;
@@ -27,7 +28,7 @@ import java.util.*;
  *
  * @author Youri Flement
  */
-//@WebFilter(urlPatterns = "/*")
+@WebFilter(urlPatterns = "/*")
 public class AccessFilter implements Filter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AccessFilter.class);
@@ -86,7 +87,7 @@ public class AccessFilter implements Filter {
         servletPath = servletPath.replace(".faces","");
 
         // allow access to style and images
-        if(servletPath.contains("png") || servletPath.contains("css")) {
+        if(servletPath.contains("js") || servletPath.contains("png") || servletPath.contains("css")) {
             return true;
         }
 

@@ -12,4 +12,20 @@
         <name>Europe</name>
         <code>EU</code>
     </region>
+    <region>
+        <name>Asia</name>
+        <code>AS</code>
+    </region>
+    <region>
+        <name>Africa</name>
+        <code>AF</code>
+    </region>
+    <region>
+        <name>Australia</name>
+        <code>AU</code>
+    </region>
+    <region>
+        <name>Antarctica</name>
+        <code>AQ</code>
+    </region>
 </regions>

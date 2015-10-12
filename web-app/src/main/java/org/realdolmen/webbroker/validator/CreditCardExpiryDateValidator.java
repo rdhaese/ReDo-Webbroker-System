@@ -1,7 +1,5 @@
 package org.realdolmen.webbroker.validator;
 
-import org.realdolmen.webbroker.i18n.Text;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -23,29 +21,42 @@ import java.util.ResourceBundle;
 public class CreditCardExpiryDateValidator implements Validator {
 
     private ResourceBundle bundle;
-
-    public CreditCardExpiryDateValidator(){
-        Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
-        bundle = ResourceBundle.getBundle("messages.text", locale);
-    }
-
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         String dateString = (String) value;
 
         if(dateString == null || dateString.length() != 5) {
-            throw new ValidatorException(new FacesMessage(bundle.getString("ccDateValidator.notEnoughCharacters")));
+            String message = "Credit card expiry date must have 5 characters";
+           try{
+                message = getBundle().getString("ccDateValidator.notEnoughCharacters");
+            } catch (Exception e){}
+            throw new ValidatorException(new FacesMessage(message));
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
         try {
             LocalDate parsedDate = LocalDate.parse("01/" + dateString, formatter);
             if(parsedDate.isBefore(LocalDate.now())) {
-                throw new ValidatorException(new FacesMessage(bundle.getString("ccDateValidator.expired")));
+                String message = "ccDateValidator.expired";
+               try {
+                    message = getBundle().getString("ccDateValidator.expired");
+                } catch (Exception e){}
+                throw new ValidatorException(new FacesMessage(message));
             }
         } catch (DateTimeParseException e) {
-            throw new ValidatorException(new FacesMessage(bundle.getString("ccDateValidator.wrongFormat")));
+            String message = "Credit card expiry date must follow the pattern: MM/yy. For example: 05/20";
+            try{
+                message =  getBundle().getString("ccDateValidator.wrongFormat");
+            } catch (Exception ex){}
+            throw new ValidatorException(new FacesMessage(message));
         }
     }
 
+    private ResourceBundle getBundle(){
+        if (bundle == null){
+            Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
+            bundle = ResourceBundle.getBundle("messages.text", locale);
+        }
+        return bundle;
+    }
 }

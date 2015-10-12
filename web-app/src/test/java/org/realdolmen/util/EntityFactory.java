@@ -4,13 +4,11 @@ import org.realdolmen.webbroker.model.*;
 import org.realdolmen.webbroker.model.user.User;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 /**
  * Factory to create entity objects to be used for testing purposes.
  *
  * @author Youri Flement
- * @author Robin D'Haese
  */
 public class EntityFactory {
 
@@ -21,6 +19,7 @@ public class EntityFactory {
         flight.setPrice(100.50);
         flight.setArrival(createAirport("Brussels Airport", createAddress("Belgium", "Schendelbeke", "9506", "Dagmoedstraat", "77"), createRegion()));
         flight.setDeparture(createAirport("Amsterdam Airport", createAddress("Netherlands", "Amsterdam", "020", "LuchthavenStraat", "1"), createRegion()));
+
         return flight;
     }
 
@@ -46,6 +45,14 @@ public class EntityFactory {
         airport.setAddress(address);
         airport.setRegion(region);
         return airport;
+    }
+
+    public static Address createAddress() {
+        return createAddress("country", "city", "postal", "street", "number");
+    }
+
+    public static Airport createAirport() {
+        return createAirport("name", createAddress(), createRegion());
     }
 
     public static Address createAddress(String country, String city, String postalCode, String street, String number) {
@@ -90,10 +97,17 @@ public class EntityFactory {
 
     public static Booking createBooking() {
         Booking booking = new Booking();
-        booking.setOverridePrice(100d);
-        booking.setTrip(createTrip());
-        booking.setNumberOfPassengers(20);
-        booking.setDiscounts(new ArrayList<>());
+        booking.setBookingUser(EntityFactory.createUser("a", "a", "a", "aaaaaaa"));
+        booking.setNumberOfPassengers(10);
+        booking.setTrip(EntityFactory.createTrip());
         return booking;
+    }
+
+    public static Discount createDiscount() {
+        Discount discount = new Discount();
+        discount.setName("testDiscount");
+        discount.setQuantity(5D);
+        discount.setIsPercentage(false);
+        return discount;
     }
 }

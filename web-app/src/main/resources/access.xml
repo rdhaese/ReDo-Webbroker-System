@@ -26,15 +26,12 @@
             <role name="everyone" />
         </roles>
     </page>
-    <page path="found-trips">
+    <page path="trip-summary">
         <roles>
-            <role name="redoair" />
-            <role name="travelagency" />
-            <role name="user" />
-            <role name="airline" />
+            <role name="everyone" />
         </roles>
     </page>
-    <page path="trip-summary">
+    <page path="found-trips">
         <roles>
             <role name="redoair" />
             <role name="travelagency" />
@@ -67,6 +64,11 @@
     <page path="add-flight">
         <roles>
             <role name="airline" />
+            <role name="redoair" />
+        </roles>
+    </page>
+    <page path="manage-flights">
+        <roles>
             <role name="redoair" />
         </roles>
     </page>

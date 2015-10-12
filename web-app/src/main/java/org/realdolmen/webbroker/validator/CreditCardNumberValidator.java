@@ -22,15 +22,14 @@ public class CreditCardNumberValidator implements Validator {
 
     private ResourceBundle bundle;
 
-    public CreditCardNumberValidator(){
-        Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
-        bundle = ResourceBundle.getBundle("messages.text", locale);
-    }
-
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         if(value == null || !isValid((String) value)) {
-            throw new ValidatorException(new FacesMessage(bundle.getString("ccNumberValidator.invalid")));
+            String message= "ccNumberValidator.invalid";
+            try {
+                message = getBundle().getString("ccNumberValidator.invalid");
+            } catch (Exception e){}
+            throw new ValidatorException(new FacesMessage(message));
         }
     }
 
@@ -54,5 +53,13 @@ public class CreditCardNumberValidator implements Validator {
 
         }
         return (sum % 10 == 0);
+    }
+
+    private ResourceBundle getBundle(){
+        if (bundle == null){
+            Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
+            bundle = ResourceBundle.getBundle("messages.text", locale);
+        }
+        return bundle;
     }
 }
