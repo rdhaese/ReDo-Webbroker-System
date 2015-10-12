@@ -19,30 +19,30 @@
 
         <h:form>
             <p:dataTable var="trip" value="#{reportsController.trips}" widgetVar="tripsTable"
-                         emptyMessage="No trips found with given criteria" filteredValue="#{reportsController.filteredTrips}">
+                         emptyMessage="#{text['reports.trips.nofound']}" filteredValue="#{reportsController.filteredTrips}">
 
                 <f:facet name="header">
                     <p:outputPanel>
-                        <h:outputText value="Search all fields:" />
-                        <p:inputText id="globalFilter" onkeyup="PF('tripsTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+                        <h:outputText value="#{text['reports.trips.search']}" />
+                        <p:inputText id="globalFilter" onkeyup="PF('tripsTable').filter()" style="width:150px" placeholder=""/>
                     </p:outputPanel>
                 </f:facet>
 
-                <p:column filterBy="#{trip.travelAgency.name}" headerText="Travel Agency" filterMatchMode="contains">
+                <p:column filterBy="#{trip.travelAgency.name}" headerText="#{text['reports.header.travelagency']}" filterMatchMode="contains">
                     <h:outputText value="#{trip.travelAgency.name}" />
                 </p:column>
 
-                <p:column filterBy="#{trip.flight.company.name}" headerText="Airline Company" filterMatchMode="contains">
+                <p:column filterBy="#{trip.flight.company.name}" headerText="#{text['reports.header.airlinecompany']}" filterMatchMode="contains">
                     <h:outputText value="#{trip.flight.company.name}" />
                 </p:column>
 
-                <p:column filterBy="#{trip.startDate}" headerText="Start date" filterFunction="#{reportsController.filterByDate}">
+                <p:column filterBy="#{trip.startDate}" headerText="#{text['reports.header.startdate']}" filterFunction="#{reportsController.filterByDate}">
                     <h:outputText value="#{trip.getStartDateInOldApi()}">
                         <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:outputText>
                 </p:column>
 
-                <p:column filterBy="#{trip.endDate}" headerText="End date" filterFunction="#{reportsController.filterByDate}">
+                <p:column filterBy="#{trip.endDate}" headerText="#{text['reports.header.enddate']}" filterFunction="#{reportsController.filterByDate}">
                     <h:outputText value="#{trip.getEndDateInOldApi()}">
                         <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:outputText>
@@ -50,7 +50,7 @@
 
                 <p:column filterBy="#{trip.flight.departure.region.name}" footerText="in" filterMatchMode="in">
                     <f:facet name="filter">
-                        <p:selectCheckboxMenu label="Departure" onchange="PF('tripsTable').filter()" panelStyle="width:200px" scrollHeight="150">
+                        <p:selectCheckboxMenu label="#{text['reports.header.departure']}" onchange="PF('tripsTable').filter()" panelStyle="width:200px" scrollHeight="150">
                             <f:selectItems value="#{reportsController.regions}" />
                         </p:selectCheckboxMenu>
                     </f:facet>
@@ -59,7 +59,7 @@
 
                 <p:column filterBy="#{trip.flight.arrival.region.name}" footerText="in" filterMatchMode="in">
                     <f:facet name="filter">
-                        <p:selectCheckboxMenu label="Destination" onchange="PF('tripsTable').filter()" panelStyle="width:200px" scrollHeight="150">
+                        <p:selectCheckboxMenu label="#{text['reports.header.destination']}" onchange="PF('tripsTable').filter()" panelStyle="width:200px" scrollHeight="150">
                             <f:selectItems value="#{reportsController.regions}" />
                         </p:selectCheckboxMenu>
                     </f:facet>
