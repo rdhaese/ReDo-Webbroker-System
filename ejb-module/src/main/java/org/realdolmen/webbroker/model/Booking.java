@@ -19,14 +19,14 @@ public class Booking extends BaseEntity{
     @OneToOne (cascade = CascadeType.ALL)
     private User bookingUser;
     @NotNull
-    @OneToOne (cascade = CascadeType.ALL)
+    @ManyToOne (cascade = CascadeType.ALL)
     private Trip trip;
     @NotNull
     @Min (value = 1)
     private Integer numberOfPassengers;
     @Min(value = 0)
     private Double overridePrice;
-    @ManyToMany (cascade = CascadeType.ALL)
+    @ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Discount> discounts = new ArrayList<Discount>();
 
     public User getBookingUser() {
