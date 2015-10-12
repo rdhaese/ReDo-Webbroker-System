@@ -26,6 +26,11 @@
             <role name="everyone" />
         </roles>
     </page>
+    <page path="trip-summary">
+        <roles>
+            <role name="everyone" />
+        </roles>
+    </page>
     <page path="found-trips">
         <roles>
             <role name="redoair" />

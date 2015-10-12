@@ -40,7 +40,7 @@ public class SearchTripControllerTest {
     public void setup() {
         controller.setArrivalDate(Date.from(LocalDate.of(2000, 10, 10).atStartOfDay(ZoneId.systemDefault()).toInstant()));
         controller.setDepartureDate(Date.from(LocalDate.of(2000, 10, 10).atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        controller.setDestination_id(1L);
+        controller.setDestinationId(1L);
         controller.setNumberOfPersons(5);
     }
 

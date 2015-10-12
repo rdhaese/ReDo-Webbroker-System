@@ -6,7 +6,6 @@ import org.realdolmen.webbroker.repository.AirportRepository;
 import org.realdolmen.webbroker.repository.TripRepository;
 
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.DecimalMin;
@@ -16,7 +15,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by RDEAX37 on 7/10/2015.
@@ -34,7 +32,7 @@ public class SearchTripController implements Serializable {
     private TripRepository tripRepo;
 
     @NotNull
-    private Long destination_id;
+    private Long destinationId;
 
     @NotNull
     private Date departureDate;
@@ -67,7 +65,7 @@ public class SearchTripController implements Serializable {
     }
 
     public void findTrips() {
-        Airport destination = airportRepo.find(destination_id);
+        Airport destination = airportRepo.find(destinationId);
         LocalDate depDate = new java.sql.Date(departureDate.getTime()).toLocalDate();
         LocalDate arrDate = new java.sql.Date(arrivalDate.getTime()).toLocalDate();
         foundTrips = tripRepo.searchTrips(destination, depDate, arrDate, numberOfPersons);
@@ -75,30 +73,21 @@ public class SearchTripController implements Serializable {
     }
 
     public List<Airport> getAirports() {
-        System.out.println(destination_id);
         return airportRepo.getAllAirports();
     }
 
-    public String test(Long id) {
-        this.destination_id = id;
+    public String searchTripWithDestination(Long destinationId) {
+        this.destinationId = destinationId;
 
         return "search-trip";
     }
 
-    public void test() {
-        Map<String,String> params =
-                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String action = params.get("myparam");
-        System.out.println(action);
-
+    public Long getDestinationId() {
+        return destinationId;
     }
 
-    public Long getDestination_id() {
-        return destination_id;
-    }
-
-    public void setDestination_id(Long destination_id) {
-        this.destination_id = destination_id;
+    public void setDestinationId(Long destinationId) {
+        this.destinationId = destinationId;
     }
 
     public Date getDepartureDate() {

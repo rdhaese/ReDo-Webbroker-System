@@ -17,15 +17,13 @@
     <ui:define name="pageContent">
 
         <f:metadata>
-            <f:viewParam name="selectedDestination" value="#{searchTripController.destination_id}"/>
+            <f:viewParam name="selectedDestination" value="#{searchTripController.destinationId}"/>
         </f:metadata>
-
-        <h1>ID: #{searchTripController.destination_id}</h1>
 
         <h:form>
             <h:panelGrid columns="3">
                 <h:outputLabel for="destination" value="#{text['searchTrip.destination']}"/>
-                <h:selectOneMenu id="destination" value="#{searchTripController.destination_id}" styleClass="form-control"
+                <h:selectOneMenu id="destination" value="#{searchTripController.destinationId}" styleClass="form-control"
                                  validatorMessage="#{text['searchTrip.valMessage.destination']}">
                     <f:selectItems value="#{searchTripController.getAirports()}" var="a"
                                    itemLabel="#{a.name}" itemValue="#{a.id}"/>
@@ -68,7 +66,9 @@
 
         <h:panelGroup id="errormessage">
             <ui:fragment rendered="#{searchTripController.performedASearch and empty searchTripController.foundTrips}">
-                    no trips found
+                <h:panelGroup style="display:block; text-align:center">
+                    <ct:alert text="#{text['searchTrip.message.noTripsFound']}" kind="danger" />
+                </h:panelGroup>
             </ui:fragment>
         </h:panelGroup>
 

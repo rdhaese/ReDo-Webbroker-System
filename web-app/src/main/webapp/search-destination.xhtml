@@ -16,24 +16,22 @@
 
     </ui:define>
     <ui:define name="pageContent">
-        Please select a continent on the map to find a destination.
+        #{text['searchdestination.infotext']}
 
         <h:form id="selectedRegionForm" style="margin: 0 auto;">
             <h:panelGrid columns="2">
-                <h:outputLabel for="selectedDestination">Selected region:</h:outputLabel>
+                <h:outputLabel for="selectedDestination" value="#{text['searchdestination.selectedregion']}" />
                 <h:outputText id="selectedDestination" value="#{searchDestinationController.selectedRegion}" />
-                <h:outputLabel for="availableDestinations">Available destinations:</h:outputLabel>
+
+                <h:outputLabel for="availableDestinations" value="#{text['searchdestination.availabledestination']}" />
                 <h:selectOneMenu id="availableDestinations" value="#{searchDestinationController.selectedDestination}">
                     <f:selectItems value="#{searchDestinationController.availableDestinations}" var="a"
-                               itemLabel="#{a.name}" itemValue="#{a.id}"/>
+                                   itemLabel="#{a.name}" itemValue="#{a.id}"/>
                 </h:selectOneMenu>
                 <h:panelGroup layout="block">
-                    <h:commandButton action="#{searchTripController.test(searchDestinationController.selectedDestination)}" value="Click me">
-
+                    <h:commandButton action="#{searchTripController.searchTripWithDestination(searchDestinationController.selectedDestination)}"
+                                     value="#{text['searchdestination.button.findtrip']}">
                     </h:commandButton>
-                    <h:link outcome="search-trip" value="Cl">
-                        <f:param name="selectedDestination" value="#{searchDestinationController.selectedDestination}" />
-                    </h:link>
                 </h:panelGroup>
             </h:panelGrid>
         </h:form>
