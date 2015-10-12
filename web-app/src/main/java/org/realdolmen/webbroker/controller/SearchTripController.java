@@ -55,7 +55,14 @@ public class SearchTripController implements Serializable {
             noTripsFound = true;
             return "search-trips";
         }
+        clearFromData();
         return "found-trips";
+    }
+
+    private void clearFromData() {
+        destination_id = null;
+        departureDate = null;
+        arrivalDate =null;
     }
 
     /**

@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
@@ -29,6 +30,8 @@ public class  ConfirmBookingController implements Serializable {
 
     @Inject
     private CurrentBookingController currentBookingController;
+    @Inject
+    private LoggedInUserController loggedInUserController;
 
     @Inject
    private BookingRepository bookingRepository;
@@ -56,7 +59,8 @@ public class  ConfirmBookingController implements Serializable {
     @Transactional
     public String purchase() {
         Booking booking = currentBookingController.getCurrentBooking();
-        Trip trip = booking.getTrip();
+        booking.setBookingUser(loggedInUserController.getLoggedInUser());
+        Trip trip =  booking.getTrip();
         Integer availableSeats = trip.getFlight().getAvailableSeats();
         if(availableSeats < booking.getNumberOfPassengers()) {
             noMoreSeats = true;
@@ -117,5 +121,9 @@ public class  ConfirmBookingController implements Serializable {
        }
         this.paymentMethod = paymentMethod;
         return "confirm-booking";
+    }
+
+    public void hello(){
+        System.out.println("HELLLLLLOOOOOO");
     }
 }
