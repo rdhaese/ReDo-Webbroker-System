@@ -27,6 +27,16 @@
     border-radius: 5px;
 }
 
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield {
+    background: #ffffff;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #313131;
+    margin-left: 5px;
+    margin-top: 4px;
+}
+
 .big-rounded-corners {
     -webkit-border-radius: 25px;
     -moz-border-radius: 25px;
