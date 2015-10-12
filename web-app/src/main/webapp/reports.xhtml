@@ -18,7 +18,7 @@
     <ui:define name="pageContent">
 
         <h:form>
-            <p:dataTable var="trip" value="#{reportsController.trips}" widgetVar="tripsTable"
+            <p:dataTable var="report" value="#{reportsController.trips}" widgetVar="tripsTable"
                          emptyMessage="#{text['reports.trips.nofound']}" filteredValue="#{reportsController.filteredTrips}">
 
                 <f:facet name="header">
@@ -28,52 +28,59 @@
                     </p:outputPanel>
                 </f:facet>
 
-                <p:column filterBy="#{trip.travelAgency.name}" headerText="#{text['reports.header.travelagency']}" filterMatchMode="contains">
-                    <h:outputText value="#{trip.travelAgency.name}" />
+                <p:column filterBy="#{report.trip.travelAgency.name}" headerText="#{text['reports.header.travelagency']}" filterMatchMode="contains">
+                    <h:outputText value="#{report.trip.travelAgency.name}" />
                 </p:column>
 
-                <p:column filterBy="#{trip.flight.company.name}" headerText="#{text['reports.header.airlinecompany']}" filterMatchMode="contains">
-                    <h:outputText value="#{trip.flight.company.name}" />
+                <p:column filterBy="#{report.trip.flight.company.name}" headerText="#{text['reports.header.airlinecompany']}" filterMatchMode="contains">
+                    <h:outputText value="#{report.trip.flight.company.name}" />
                 </p:column>
 
-                <p:column filterBy="#{trip.startDate}" headerText="#{text['reports.header.startdate']}" filterFunction="#{reportsController.filterByDate}">
-                    <h:outputText value="#{trip.getStartDateInOldApi()}">
+                <p:column filterBy="#{report.trip.startDate}" headerText="#{text['reports.header.startdate']}" filterFunction="#{reportsController.filterByDate}">
+                    <h:outputText value="#{report.trip.getStartDateInOldApi()}">
                         <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:outputText>
                 </p:column>
 
-                <p:column filterBy="#{trip.endDate}" headerText="#{text['reports.header.enddate']}" filterFunction="#{reportsController.filterByDate}">
-                    <h:outputText value="#{trip.getEndDateInOldApi()}">
+                <p:column filterBy="#{report.trip.endDate}" headerText="#{text['reports.header.enddate']}" filterFunction="#{reportsController.filterByDate}">
+                    <h:outputText value="#{report.trip.getEndDateInOldApi()}">
                         <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:outputText>
                 </p:column>
 
-                <p:column filterBy="#{trip.flight.departure.region.name}" footerText="in" filterMatchMode="in">
+                <p:column filterBy="#{report.trip.flight.departure.region.name}" filterMatchMode="in">
                     <f:facet name="filter">
                         <p:selectCheckboxMenu label="#{text['reports.header.departure']}" onchange="PF('tripsTable').filter()" panelStyle="width:200px" scrollHeight="150">
                             <f:selectItems value="#{reportsController.regions}" />
                         </p:selectCheckboxMenu>
                     </f:facet>
-                    <h:outputText value="#{trip.flight.departure.region.name}" />
+                    <h:outputText value="#{report.trip.flight.departure.region.name}" />
                 </p:column>
 
-                <p:column filterBy="#{trip.flight.arrival.region.name}" footerText="in" filterMatchMode="in">
+                <p:column filterBy="#{report.trip.flight.arrival.region.name}" filterMatchMode="in">
                     <f:facet name="filter">
                         <p:selectCheckboxMenu label="#{text['reports.header.destination']}" onchange="PF('tripsTable').filter()" panelStyle="width:200px" scrollHeight="150">
                             <f:selectItems value="#{reportsController.regions}" />
                         </p:selectCheckboxMenu>
                     </f:facet>
-                    <h:outputText value="#{trip.flight.arrival.region.name}" />
+                    <h:outputText value="#{report.trip.flight.arrival.region.name}" />
                 </p:column>
 
-                <p:column filterBy="#{trip.flight.margin}" headerText="#{text['reports.header.margin']}" filterMatchMode="contains">
-                    <h:outputText value="#{trip.flight.margin}" />
+                <p:column filterBy="#{report.trip.flight.margin}" headerText="#{text['reports.header.margin']}" filterMatchMode="contains">
+                    <h:outputText value="#{report.trip.flight.margin}" />
                 </p:column>
 
-                <p:column filterBy="#{trip.flight.margin}" headerText="#{text['reports.header.margin']}" filterMatchMode="contains">
-                    <h:outputText value="#{trip.flight.margin}" />
+                <p:column filterBy="#{report.min}" headerText="#{text['reports.header.min']}" filterMatchMode="contains">
+                    <h:outputText value="#{report.min}" />
                 </p:column>
 
+                <p:column filterBy="#{report.max}" headerText="#{text['reports.header.max']}" filterMatchMode="contains">
+                    <h:outputText value="#{report.max}" />
+                </p:column>
+
+                <p:column filterBy="#{report.average}" headerText="#{text['reports.header.average']}" filterMatchMode="contains">
+                    <h:outputText value="#{report.average}" />
+                </p:column>
             </p:dataTable>
         </h:form>
 

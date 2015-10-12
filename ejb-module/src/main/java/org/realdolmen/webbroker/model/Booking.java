@@ -26,7 +26,7 @@ public class Booking extends BaseEntity{
     private Integer numberOfPassengers;
     @Min(value = 0)
     private Double overridePrice;
-    @ManyToMany (cascade = CascadeType.ALL)
+    @ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Discount> discounts = new ArrayList<Discount>();
 
     public User getBookingUser() {

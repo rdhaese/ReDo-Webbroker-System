@@ -1,12 +1,14 @@
 package org.realdolmen.webbroker.controller;
 
 
+import org.realdolmen.webbroker.util.TripReport;
 import org.realdolmen.webbroker.model.Booking;
 import org.realdolmen.webbroker.model.Region;
 import org.realdolmen.webbroker.model.Trip;
 import org.realdolmen.webbroker.repository.BookingRepository;
 import org.realdolmen.webbroker.repository.RegionRepository;
 import org.realdolmen.webbroker.repository.TripRepository;
+import org.realdolmen.webbroker.service.PriceCalcService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -14,6 +16,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -22,9 +25,9 @@ import java.util.stream.Collectors;
 @RequestScoped
 public class ReportsController {
 
-    private List<Trip> trips;
+    private List<TripReport> trips;
 
-    private List<Trip> filteredTrips;
+    private List<TripReport> filteredTrips;
 
     @Inject
     TripRepository tripRepository;
@@ -40,18 +43,30 @@ public class ReportsController {
 
     @PostConstruct
     public void loadBookings() {
-        trips = tripRepository.getAllTrips();
+        trips = new ArrayList<>();
+        filteredTrips = new ArrayList<>();
+        List<Trip> allTrips = tripRepository.getAllTrips();
 
-
-        for (Trip trip : trips) {
+        for (Trip trip : allTrips) {
             List<Booking> bookingsWithTrip = bookingRepository.getBookingsWithTrip(trip);
-            int average = 0;
-            int max = 0;
-            int min = 0;
+            double average = 0;
+            double max = Double.MIN_VALUE;
+            double min = Double.MAX_VALUE;
 
             for (Booking booking : bookingsWithTrip) {
-                average
+                Double bookingPrice = priceCalcService.getTotalBookingPriceWithDiscount(booking);
+                average += bookingPrice;
+                if(bookingPrice > max) {
+                    max = bookingPrice;
+                }
+                if(bookingPrice < min) {
+                    min = bookingPrice;
+                }
             }
+            average = average / bookingsWithTrip.size();
+
+            TripReport report = new TripReport(trip, min, max, average);
+            trips.add(report);
         }
     }
 
@@ -66,19 +81,19 @@ public class ReportsController {
         return regionRepository.getAllRegions().stream().map(Region::getName).collect(Collectors.toList());
     }
 
-    public List<Trip> getTrips() {
+    public List<TripReport> getTrips() {
         return trips;
     }
 
-    public void setTrips(List<Trip> trips) {
+    public void setTrips(List<TripReport> trips) {
         this.trips = trips;
     }
 
-    public List<Trip> getFilteredTrips() {
+    public List<TripReport> getFilteredTrips() {
         return filteredTrips;
     }
 
-    public void setFilteredTrips(List<Trip> filteredTrips) {
+    public void setFilteredTrips(List<TripReport> filteredTrips) {
         this.filteredTrips = filteredTrips;
     }
 }
