@@ -64,7 +64,6 @@
     <page path="add-flight">
         <roles>
             <role name="airline" />
-            <role name="redoair" />
         </roles>
     </page>
     <page path="manage-flights">

@@ -49,9 +49,9 @@
                         <c:if test="#{not loggedInUserController.loggedIn}">
                             <h:commandButton value="#{text['tripSummary.button.notLoggedIn']}"
                                              action="#{loginController.loginFromPreviousPage('trip-summary')}"
-                                             styleClass="form-control"/>
+                                             styleClass="btn btn-primary form-control"/>
                         </c:if>
-                        <h:commandButton value="#{text['tripSummary.button.cancel']}" action="search-trip" styleClass="btn btn-primary form-control"/>
+                        <h:commandButton value="#{text['tripSummary.button.cancel']}" action="search-trip" styleClass="form-control"/>
                     </h:form>
                 </h:panelGroup>
             </f:facet>
