@@ -3,6 +3,7 @@ package org.realdolmen.webbroker.controller;
 import org.primefaces.event.RowEditEvent;
 import org.realdolmen.webbroker.model.Flight;
 import org.realdolmen.webbroker.repository.FlightRepository;
+import org.realdolmen.webbroker.service.PriceCalcService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -21,9 +22,11 @@ public class ManageFlightsController implements Serializable {
 
     @Inject
     private FlightRepository flightRepository;
+    @Inject
+    private PriceCalcService priceCalcService;
 
     private List<Flight> allFlights;
-
+    private List<Flight> filteredFlights;
 
     @PostConstruct
     public void initFlights(){
@@ -37,6 +40,18 @@ public class ManageFlightsController implements Serializable {
 
     public List<Flight> getAllFlights() {
         return allFlights;
+    }
+
+    public Double getTotalPriceFor(Flight flight){
+        return priceCalcService.getTotalFlightPrice(flight);
+    }
+
+    public List<Flight> getFilteredFlights() {
+        return filteredFlights;
+    }
+
+    public void setFilteredFlights(List<Flight> filteredFlights) {
+        this.filteredFlights = filteredFlights;
     }
 
     public void setAllFlights(List<Flight> allFlights) {
