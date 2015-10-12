@@ -32,4 +32,8 @@ public class BookingRepository {
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
+
+    public List<Booking> getAllBookings() {
+        return entityManager.createQuery("select b from Booking b", Booking.class).getResultList();
+    }
 }

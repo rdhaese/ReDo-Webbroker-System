@@ -19,7 +19,7 @@ public class Booking extends BaseEntity{
     @OneToOne (cascade = CascadeType.ALL)
     private User bookingUser;
     @NotNull
-    @OneToOne (cascade = CascadeType.ALL)
+    @ManyToOne (cascade = CascadeType.ALL)
     private Trip trip;
     @NotNull
     @Min (value = 1)
