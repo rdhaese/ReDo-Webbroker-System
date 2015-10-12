@@ -53,20 +53,6 @@ public class Trip extends BaseEntity {
     }
 
     /**
-     * @return the accommodationPrice multiplied with the amountOfDays
-     */
-    public Double getTotalPrice() {
-        return accommodationPrice * getAmountOfDays() + flight.getTotalPrice();
-    }
-
-    /**
-     * @return The difference in days between startDate and endDate
-     */
-    public int getAmountOfDays() {
-        return Period.between(startDate.toLocalDate(), endDate.toLocalDate()).getDays();
-    }
-
-    /**
      * @return the startDate, but converted to java.util.Date
      */
     public Date getStartDateInOldApi() {

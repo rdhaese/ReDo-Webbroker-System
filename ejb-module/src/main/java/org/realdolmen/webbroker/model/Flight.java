@@ -58,10 +58,6 @@ public class Flight extends BaseEntity {
         return price;
     }
 
-    public Double getTotalPrice(){
-        return price + (price * (margin/ 100D));
-    }
-
     public void setPrice(Double price) {
         this.price = price;
     }

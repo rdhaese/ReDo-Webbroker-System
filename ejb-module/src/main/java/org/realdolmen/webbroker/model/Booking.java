@@ -29,33 +29,6 @@ public class Booking extends BaseEntity{
     @ManyToMany (cascade = CascadeType.ALL)
     private List<Discount> discounts = new ArrayList<Discount>();
 
-    /**
-     * @return The total price of the booking -> total flight price + total accommodationPrice
-     */
-    public Double getTotalPriceWithDiscount(){
-        return trip.getTotalPrice() * numberOfPassengers - getTotalDiscount();
-    }
-
-    public Double getTotalPriceWithoutDiscount(){
-        return trip.getTotalPrice() * numberOfPassengers;
-    }
-
-    public Double getTotalDiscount(){
-        Double totalDiscount = 0D;
-        for (Discount discount : discounts){
-           totalDiscount += getDiscountTotalFor(discount);
-        }
-        return totalDiscount;
-    }
-
-    private Double getDiscountTotalFor(Discount discount) {
-        if (discount.isPercentage()){
-           return (getTotalPriceWithoutDiscount() / 100) * discount.getQuantity();
-        }
-        return discount.getQuantity();
-    }
-
-
     public User getBookingUser() {
         return bookingUser;
     }
