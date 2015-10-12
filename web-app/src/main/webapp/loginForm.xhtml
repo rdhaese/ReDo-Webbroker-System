@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:ct="http://java.sun.com/jsf/composite/custom-tags"
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<ui:composition template="template.xhtml">
+    <ui:define name="pageTitle">#{text['page.title.login']}</ui:define>
+    <ui:define name="header"><ct:header title="#{text['page.title.login']}"/> </ui:define>
+    <ui:define name="pageContent">
+        #{prevPage}
+        <h:form>
+            <h:panelGrid columns="2">
+                <f:facet name="header">
+                <ui:fragment rendered="#{loginController.loginError}">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <ct:alert text="#{text['logInForm.message.incorrect']}" kind="danger"/>
+                    </h:panelGroup>
+                </ui:fragment>
+                </f:facet>
+
+                <h:outputLabel for="usernameInput" value="#{text['logInForm.username']}"/>
+                <h:inputText id="usernameInput" value="#{loginController.username}" styleClass="form-control margin" validatorMessage="#{text['logInForm.valMessage.username']}"/>
+                <h:inputHidden/>
+                <h:message for="usernameInput" styleClass="error-message"/>
+
+                <h:outputLabel for="passwordInput" value="#{text['logInForm.password']}"/>
+                <h:inputSecret id="passwordInput" value="#{loginController.password}" styleClass="form-control margin" validatorMessage="#{text['logInForm.valMessage.password']}"/>
+                <h:inputHidden/>
+                <h:message for="passwordInput" styleClass="error-message"/>
+
+                <f:facet name="footer">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <h:commandButton action="#{loginController.login}" value="#{text['logInForm.button.logIn']}" styleClass="form-control margin"/>
+                        <h:link outcome="register-user" value="#{text['loginForm.link.register']}" styleClass="form-control margin"/>
+                    </h:panelGroup>
+                </f:facet>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
+
+
+
+
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<trips>
+    <trip>
+        <flight>
+            <airlineCompany>RyanAir</airlineCompany>
+            <departureAirport>Zaventem</departureAirport>
+            <arrivalAirport>Heathrow</arrivalAirport>
+            <price>150.00</price>
+            <availableSeats>10</availableSeats>
+        </flight>
+        <travelagency>travel agency A</travelagency>
+        <accommodationPrice>75.00</accommodationPrice>
+        <startDate>2015-01-01 12:10:10</startDate>
+        <endDate>2015-01-10 12:10:10</endDate>
+    </trip>
+    <trip>
+        <flight>
+            <airlineCompany>RyanAir</airlineCompany>
+            <departureAirport>Zaventem</departureAirport>
+            <arrivalAirport>New York Airport</arrivalAirport>
+            <price>750.00</price>
+            <availableSeats>100</availableSeats>
+        </flight>
+        <travelagency>travel agency B</travelagency>
+        <accommodationPrice>90.00</accommodationPrice>
+        <startDate>2015-01-11 12:10:10</startDate>
+        <endDate>2015-01-21 12:10:10</endDate>
+    </trip>
+</trips>

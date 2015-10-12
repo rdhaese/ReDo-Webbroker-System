@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<regions>
+    <region>
+        <name>North America</name>
+        <code>NA</code>
+    </region>
+    <region>
+        <name>South America</name>
+        <code>SA</code>
+    </region>
+    <region>
+        <name>Europe</name>
+        <code>EU</code>
+    </region>
+    <region>
+        <name>Asia</name>
+        <code>AS</code>
+    </region>
+    <region>
+        <name>Africa</name>
+        <code>AF</code>
+    </region>
+    <region>
+        <name>Australia</name>
+        <code>AU</code>
+    </region>
+    <region>
+        <name>Antarctica</name>
+        <code>AQ</code>
+    </region>
+</regions>

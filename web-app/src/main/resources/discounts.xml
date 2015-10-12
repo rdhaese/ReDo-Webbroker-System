@@ -1,0 +1,7 @@
+<discounts>
+    <discount>
+        <name>Credit Card</name>
+        <isPercentage>true</isPercentage>
+        <quantity>10</quantity>
+    </discount>
+</discounts>

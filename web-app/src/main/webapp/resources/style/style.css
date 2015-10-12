@@ -1,0 +1,94 @@
+.pageTitle {
+    color: darkgray;
+}
+
+.pageSubTitle {
+    color: gray;
+}
+
+.redo-logo{
+    width: 50px;
+    height: 25px;
+}
+
+.panel-heading a:after {
+    font-family:'Glyphicons Halflings';
+    content:"\e114";
+    float: right;
+    color: grey;
+}
+.panel-heading a.collapsed:after {
+    content:"\e080";
+}
+
+.rounded-corners {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield {
+    background: #ffffff;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #313131;
+    margin-left: 5px;
+    margin-top: 4px;
+}
+
+.big-rounded-corners {
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+}
+
+.small-padding-left {
+    padding-left: 2% ;
+}
+
+.medium-padding-left{
+    padding-left: 5% ;
+}
+
+.side-margins {
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.centered-content{
+    width: 50%;
+    text-align: center;
+    margin:0 auto;
+}
+
+.form-control {
+    margin: 5px;
+}
+
+.error-message{
+    color: red;
+}
+
+.small-vertical-padding {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.small-vertical-margin {
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.alert{
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 2px;
+}
+
+.tableStyle tr td{
+    padding: 10px;
+}
+
+

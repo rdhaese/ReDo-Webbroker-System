@@ -1,0 +1,128 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ct="http://java.sun.com/jsf/composite/custom-tags" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="template.xhtml">
+    <ui:define name="pageTitle">#{text['page.title.tripManager']}</ui:define>
+    <ui:define name="header">
+        <ct:header title="#{text['page.title.tripManager']}"/>
+    </ui:define>
+    <ui:define name="pageContent">
+
+        <h2>#{text['tripManager.subtitle.import']}</h2>
+        <p>
+            #{text['tripManager.info.part1']} <br />
+            #{text['tripManager.info.part2']}
+        </p>
+            <div class="panel panel-default" id="panel2">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-target="#collapseTwo" href="#collapseTwo" class="collapsed">
+                            #{text['tripManager.button.xsd']}
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified"&gt;
+    &lt;xs:element name="trips"&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:sequence&gt;
+                &lt;xs:element name="trip" maxOccurs="unbounded"&gt;
+                    &lt;xs:complexType&gt;
+                        &lt;xs:sequence&gt;
+                            &lt;xs:element name="flight"&gt;
+                                &lt;xs:complexType&gt;
+                                    &lt;xs:sequence&gt;
+                                        &lt;xs:element name="airlineCompany" type="xs:string"&gt;&lt;/xs:element&gt;
+                                        &lt;xs:element name="departureAirport" type="xs:string"&gt;&lt;/xs:element&gt;
+                                        &lt;xs:element name="arrivalAirport" type="xs:string"&gt;&lt;/xs:element&gt;
+                                        &lt;xs:element name="price" type="xs:int"&gt;&lt;/xs:element&gt;
+                                        &lt;xs:element name="availableSeats" type="xs:int"&gt;&lt;/xs:element&gt;
+                                    &lt;/xs:sequence&gt;
+                                &lt;/xs:complexType&gt;
+                            &lt;/xs:element&gt;
+                            &lt;xs:element name="travelagency" type="xs:string"&gt;&lt;/xs:element&gt;
+                            &lt;xs:element name="accommodationPrice" type="xs:int"&gt;&lt;/xs:element&gt;
+                            &lt;xs:element name="startDate" type="xs:string"&gt;&lt;/xs:element&gt;
+                            &lt;xs:element name="endDate" type="xs:string"&gt;&lt;/xs:element&gt;
+                        &lt;/xs:sequence&gt;
+                    &lt;/xs:complexType&gt;
+                &lt;/xs:element&gt;
+            &lt;/xs:sequence&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+&lt;/xs:schema&gt;
+                        </pre>
+                    </div>
+                </div>
+            </div>
+
+        <h:panelGrid columns="1">
+            <f:facet name="header">
+                <ui:fragment rendered="#{importTripController.addedSuccess}">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <ct:alert kind="success" text="#{text['tripManager.message.addedSucces']}"/>
+                    </h:panelGroup>
+                </ui:fragment>
+                <ui:fragment rendered="#{importTripController.unableToParse}">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <ct:alert kind="danger" text="#{text['tripManager.message.unableToParse']}"/>
+                    </h:panelGroup>
+                </ui:fragment>
+                <ui:fragment rendered="#{importTripController.unableToOpen}">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <ct:alert kind="danger" text="#{text['tripManager.message.unableToOpen']}"/>
+                    </h:panelGroup>
+                </ui:fragment>
+                <ui:fragment rendered="#{importTripController.noneSelected}">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <ct:alert kind="danger" text="#{text['tripManager.message.noneSelected']}"/>
+                    </h:panelGroup>
+                </ui:fragment>
+                <ui:fragment rendered="#{importTripController.agencyIsNull}">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <ct:alert kind="danger" text="#{text['tripManager.message.agencyIsNull']}"/>
+                    </h:panelGroup>
+                </ui:fragment>
+                <ui:fragment rendered="#{importTripController.flightNotFound}">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <ct:alert kind="danger" text="#{text['tripManager.message.flightNotFound']}"/>
+                    </h:panelGroup>
+                </ui:fragment>
+                <ui:fragment rendered="#{importTripController.multipleFound}">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <ct:alert kind="danger" text="#{text['tripManager.message.multipleFound']}"/>
+                    </h:panelGroup>
+                </ui:fragment>
+            </f:facet>
+
+            <h:form enctype="multipart/form-data">
+                <h:inputFile value="#{importTripController.file}" class="form-control"/>
+
+                <h:commandButton value="#{text['tripManager.button.import']}" action="#{importTripController.upload}"
+                                 class="btn btn-primary form-control"/>
+            </h:form>
+        </h:panelGrid>
+
+            <hr/>
+
+            <h2>#{text['tripManager.subtitle.export']}</h2>
+            <p>#{text['tripManager.info.export']}</p>
+
+            <ui:fragment rendered="#{exportTripController.unableToExport}">
+                <ct:alert kind="danger" text="#{text['tripManager.message.unableToExport']}"/>
+            </ui:fragment>
+            <h:form>
+                <h:commandButton ajax="false" value="#{text['tripManager.button.export']}"
+                                 action="#{exportTripController.export}" class="btn btn-primary"/>
+            </h:form>
+    </ui:define>
+</ui:composition>
+
+</html>

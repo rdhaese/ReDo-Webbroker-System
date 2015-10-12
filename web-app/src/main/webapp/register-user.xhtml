@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:ct="http://java.sun.com/jsf/composite/custom-tags"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<ui:composition template="template.xhtml">
+    <ui:define name="pageTitle">#{text['page.title.register']}</ui:define>
+    <ui:define name="header"><ct:header title="#{text['page.title.register']}"/> </ui:define>
+    <ui:define name="pageContent">
+        <h:form>
+            <h:panelGrid columns="2">
+                <f:facet name="header">
+                <ui:fragment rendered="#{registerController.errorRegistering}">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <ct:alert kind="danger" text="#{text['registerUser.errorRegistering']}" />
+                    </h:panelGroup>
+                </ui:fragment>
+                    <ui:fragment rendered="#{registerController.userNameAlreadyInUse}">
+                        <h:panelGroup style="display:block; text-align:center">
+                            <ct:alert kind="danger" text="#{text['registerUser.userNameAlreadyInUse']}" />
+                        </h:panelGroup>
+                    </ui:fragment>
+                </f:facet>
+                <h:outputLabel value="#{text['registerUser.lastName']}"/>
+                <h:inputText id="lastName" value="#{registerController.lastName}" styleClass="form-control" validatorMessage="#{text['registerUser.valMessage.lastName']}"/>
+                <h:inputHidden/>
+                <h:message for="lastName" styleClass="error-message" />
+
+                <h:outputLabel value="#{text['registerUser.firstName']}"/>
+                <h:inputText id="firstName" value="#{registerController.firstName}" styleClass="form-control" validatorMessage="#{text['registerUser.valMessage.firstName']}"/>
+                <h:inputHidden/>
+                <h:message for="firstName" styleClass="error-message"/>
+
+                <h:outputLabel value="#{text['registerUser.userName']}"/>
+                <h:inputText id="userName" value="#{registerController.userName}" styleClass="form-control" validatorMessage="#{text['registerUser.valMessage.userName']}"/>
+                <h:inputHidden/>
+                <h:message for="userName" styleClass="error-message"/>
+
+                <h:outputLabel value="#{text['registerUser.password']}"/>
+                <p:password id="password" value="#{registerController.password}" match="repeated_password"
+                            validatorMessage="#{text['registerUser.valMessage.password']}" requiredMessage="#{text['registerUser.reqMessage.password']}"
+                            required="true" styleClass="form-control"/>
+                <h:inputHidden/>
+                <p:password id="repeated_password" value="#{registerController.password}" styleClass="form-control"/>
+                <h:inputHidden/>
+                <h:message for="password" styleClass="error-message"/>
+                <f:facet name="footer">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <h:commandButton value="#{text['registerUser.button.register']}" action="#{registerController.registerUser()}" styleClass="btn btn-primary form-control"/>
+                    </h:panelGroup>
+                </f:facet>
+            </h:panelGrid>
+
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

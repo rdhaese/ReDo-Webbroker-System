@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+        >
+<cc:interface>
+    <cc:attribute name="kind" required="true" />
+    <cc:attribute name="text" required="true" />
+    <cc:attribute name="extra-css-classes" required="false" />
+</cc:interface>
+<cc:implementation>
+    <h:outputText value="#{cc.attrs.text}" styleClass="alert alert-#{cc.attrs.kind} small-vertical-padding #{cc.attrs.extra-css-classes}" role="alert"/>
+    <hr class="small-vertical-margin"/>
+</cc:implementation>
+</html>

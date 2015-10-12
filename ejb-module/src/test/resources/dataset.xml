@@ -1,0 +1,48 @@
+<!-- Used by DBUnit to fill database before a test -->
+<dataset>
+    <airlinecompany version="0" id="1" name="Virgin"/>
+    <airlinecompany version="0" id="2" name="Airbus"/>
+
+    <travelagency version="0" id="1" name="Jetair" />
+    <travelagency version="0" id="2" name="Thomas Cook" />
+
+    <users version="0" id="1" DTYPE="users" lastName="Flinstone" firstName="Fred" userName="fflinstone" password="azerty" />
+    <users version="0" id="2" DTYPE="users" lastName="Flinstone" firstName="Wilma" userName="wflinstone" password="qwerty" />
+    <users version="0" id="3" DTYPE="users" lastName="Detest" firstName="Jan" userName="jdetest" password="123456" />
+    <users version="0" id="4" DTYPE="users" lastName="Detest" firstName="Anne" userName="adetest" password="987654" />
+
+    <users version="0" id="5" DTYPE="AirlineCompanyEmployee" lastName="De Vlieger" firstName="Geert" userName="gdevlieger" password="wxcvbn" company_id="1" />
+    <users version="0" id="6" DTYPE="AirlineCompanyEmployee" lastName="De Vlieger" firstName="Els" userName="edevlieger" password="qsdfgh" company_id="2"/>
+
+    <users version="0" id="7" DTYPE="TravelAgencyEmployee" lastName="Van Ver" firstName="Jos" userName="jvanver" password="poiuyt" travelAgency_id="1" />
+    <users version="0" id="8" DTYPE="TravelAgencyEmployee" lastName="Van Ver" firstName="Gertrude" userName="gvanver" password="mlkjhg" travelAgency_id="2"/>
+
+    <users version="0" id="9" DTYPE="ReDoAirEmployee" lastName="Van Dicht" firstName="Jean" userName="jvandicht" password="nbvcxw" />
+    <users version="0" id="10" DTYPE="ReDoAirEmployee" lastName="Van Dicht" firstName="Frieda" userName="fvandicht" password="rtyfgh" />
+
+    <address version="0" id="1" country="Belgium" city="Gent" postalCode="9000" street="Kerkstraat" number="10" />
+    <address version="0" id="2" country="Belgium" city="Aalst" postalCode="9300" street="Stationsstraat" number="5" />
+
+    <region version="0" id="1000" name="Europe" code="EU" />
+    <region version="0" id="2000" name="North America" code="NA" />
+    <region version="0" id="3000" name="South America" code="SA" />
+
+    <discount version="0" id="5000" name="free" isPercentage="1" quantity="100" />
+    <discount version="0" id="6000" name="no discount" isPercentage="0" quantity="0" />
+
+    <airport version="0" id="1" name="Airport1" address_id="1" region_id="1000" />
+    <airport version="0" id="2" name="Airport2" address_id="2" region_id="2000" />
+
+    <flight version="0" id="1" company_id="1" departure_id="1" arrival_id="2" price="150" availableSeats="200"/>
+    <flight version="0" id="3" company_id="1" departure_id="1" arrival_id="2" price="200" availableSeats="200"/>
+    <flight version="0" id="4" company_id="1" departure_id="1" arrival_id="2" price="200" availableSeats="200"/>
+    <flight version="0" id="2" company_id="1" departure_id="2" arrival_id="1" price="160.5" availableSeats="200"/>
+
+    <trip version="0" id="7000" accommodationPrice="100" startDate="2000-10-10 12:10:10" endDate="2000-10-20 12:10:10" travelAgency_id="1" flight_id="1"/>
+    <trip version="0" id="8000" accommodationPrice="100" startDate="2000-10-10 12:10:10" endDate="2000-10-20 12:10:10" travelAgency_id="1" flight_id="2"/>
+
+    <booking version="0" id="1" trip_id="7000" bookingUser_id="1" numberOfPassengers="2" overridePrice="150" />
+    <booking version="0" id="2" trip_id="8000" bookingUser_id="2" numberOfPassengers="1"  />
+
+    <booking_discount Booking_id="1" discounts_id="5000" />
+</dataset>
