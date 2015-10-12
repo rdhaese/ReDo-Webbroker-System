@@ -13,12 +13,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller for the search destination view.
+ *
+ * @author Youri Flement
+ */
 @Named
 @javax.faces.view.ViewScoped
 public class SearchDestinationController implements Serializable {
 
     @Inject
-    RegionRepository repository;
+    RegionRepository regionRepository;
 
     @Inject
     LocationService locationService;
@@ -32,6 +37,12 @@ public class SearchDestinationController implements Serializable {
 
     private Long selectedDestination = -1L;
 
+    /**
+     * Find the available destinations for the clicked location. If no locations are found, the
+     * a collection of available destinations is set to an empty list.
+     *
+     * @param event The event which encapsulates the clicked location.
+     */
     public void onPointSelect(PointSelectEvent event) {
         LatLng latLng = event.getLatLng();
         String countryCode = locationService.latLongToCountryCode(latLng.getLat(), latLng.getLng());

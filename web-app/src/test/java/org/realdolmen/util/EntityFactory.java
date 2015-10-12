@@ -48,6 +48,14 @@ public class EntityFactory {
         return airport;
     }
 
+    public static Address createAddress() {
+        return createAddress("country", "city", "postal", "street", "number");
+    }
+
+    public static Airport createAirport() {
+        return createAirport("name", createAddress(), createRegion());
+    }
+
     public static Address createAddress(String country, String city, String postalCode, String street, String number) {
         Address address = new Address();
         address.setCountry(country);
