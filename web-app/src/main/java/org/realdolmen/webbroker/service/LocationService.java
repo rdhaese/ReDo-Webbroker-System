@@ -11,6 +11,11 @@ import javax.inject.Inject;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * Service which provides some functionality regarding geographic locations.
+ *
+ * @author Youri Flement
+ */
 @Stateless
 @LocalBean
 public class LocationService {
@@ -20,6 +25,14 @@ public class LocationService {
     @Inject
     JsonHelper helper;
 
+    /**
+     * Convert a latitude and longitude to a country code. If there is no country at the specified lat-lon, an empty
+     * String is returned.
+     *
+     * @param lat The latitude.
+     * @param lng The longitude.
+     * @return  The country at the specified lat-long or an empty String if no country was found.
+     */
     public String latLongToCountryCode(double lat, double lng) {
         String URL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&key=" + API_KEY;
         String countryCode = null;
@@ -45,6 +58,12 @@ public class LocationService {
         return countryCode;
     }
 
+    /**
+     * Get the continent of the country with the given country code.
+     *
+     * @param countryCode The code of the country.
+     * @return The continent in which the country lies or an empty String if the continent was not found.
+     */
     public String countryCodeToContinent(String countryCode) {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("regions.json");
         JSONObject regions = helper.readInputStreamToString(inputStream);
