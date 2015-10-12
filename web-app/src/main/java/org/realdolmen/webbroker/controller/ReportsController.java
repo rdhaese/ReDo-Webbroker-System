@@ -1,8 +1,10 @@
 package org.realdolmen.webbroker.controller;
 
 
+import org.realdolmen.webbroker.model.Booking;
 import org.realdolmen.webbroker.model.Region;
 import org.realdolmen.webbroker.model.Trip;
+import org.realdolmen.webbroker.repository.BookingRepository;
 import org.realdolmen.webbroker.repository.RegionRepository;
 import org.realdolmen.webbroker.repository.TripRepository;
 
@@ -28,11 +30,29 @@ public class ReportsController {
     TripRepository tripRepository;
 
     @Inject
+    BookingRepository bookingRepository;
+
+    @Inject
     RegionRepository regionRepository;
+
+    @Inject
+    PriceCalcService priceCalcService;
 
     @PostConstruct
     public void loadBookings() {
         trips = tripRepository.getAllTrips();
+
+
+        for (Trip trip : trips) {
+            List<Booking> bookingsWithTrip = bookingRepository.getBookingsWithTrip(trip);
+            int average = 0;
+            int max = 0;
+            int min = 0;
+
+            for (Booking booking : bookingsWithTrip) {
+                average
+            }
+        }
     }
 
     public boolean filterByDate(Object value, Object filter, Locale locale) {

@@ -66,6 +66,14 @@
                     <h:outputText value="#{trip.flight.arrival.region.name}" />
                 </p:column>
 
+                <p:column filterBy="#{trip.flight.margin}" headerText="#{text['reports.header.margin']}" filterMatchMode="contains">
+                    <h:outputText value="#{trip.flight.margin}" />
+                </p:column>
+
+                <p:column filterBy="#{trip.flight.margin}" headerText="#{text['reports.header.margin']}" filterMatchMode="contains">
+                    <h:outputText value="#{trip.flight.margin}" />
+                </p:column>
+
             </p:dataTable>
         </h:form>
 
