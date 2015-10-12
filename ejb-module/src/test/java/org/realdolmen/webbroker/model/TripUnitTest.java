@@ -25,12 +25,20 @@ public class TripUnitTest {
         trip.setAccommodationPrice(10D);
         trip.setStartDate(LocalDateTime.now());
         trip.setEndDate(LocalDateTime.now().plusDays(10));
+        trip.setFlight(createFlight());
+    }
+
+    private Flight createFlight() {
+        Flight flight = new Flight();
+        flight.setPrice(10D);
+        flight.setMargin(10);
+        return flight;
     }
 
     @Test
     public void isTotalPriceCalculatedCorrectly(){
-        //Expected 10 *10 = 100
-        assertEquals(100D, trip.getTotalPrice(), 0.001);
+        //Expected 10 * 10 + (10 + (10 / 10))= 111
+        assertEquals(111D, trip.getTotalPrice(), 0.001);
     }
 
     @Test

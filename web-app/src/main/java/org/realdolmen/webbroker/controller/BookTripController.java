@@ -36,7 +36,6 @@ public class BookTripController {
         Booking booking = new Booking();
         booking.setTrip(tripRepo.find(id));
         booking.setNumberOfPassengers(amountOfPersons);
-        booking.setBookingUser(loggedInUserController.getLoggedInUser());
         currentBookingController.setCurrentBooking(booking);
         return "trip-summary";
     }

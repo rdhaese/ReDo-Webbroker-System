@@ -16,17 +16,17 @@ import java.util.List;
 @Entity
 public class Booking extends BaseEntity{
     @NotNull
-    @OneToOne (cascade = CascadeType.PERSIST)
+    @OneToOne (cascade = CascadeType.ALL)
     private User bookingUser;
     @NotNull
-    @OneToOne (cascade = CascadeType.PERSIST)
+    @OneToOne (cascade = CascadeType.ALL)
     private Trip trip;
     @NotNull
     @Min (value = 1)
     private Integer numberOfPassengers;
     @Min(value = 0)
     private Double overridePrice;
-    @ManyToMany (cascade = CascadeType.PERSIST)
+    @ManyToMany (cascade = CascadeType.ALL)
     private List<Discount> discounts = new ArrayList<Discount>();
 
     /**

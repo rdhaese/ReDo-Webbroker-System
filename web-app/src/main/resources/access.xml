@@ -67,4 +67,9 @@
             <role name="redoair" />
         </roles>
     </page>
+    <page path="manage-flights">
+        <roles>
+            <role name="redoair" />
+        </roles>
+    </page>
 </pages>
