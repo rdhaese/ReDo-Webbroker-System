@@ -56,7 +56,7 @@ public class Trip extends BaseEntity {
      * @return the accommodationPrice multiplied with the amountOfDays
      */
     public Double getTotalPrice() {
-        return accommodationPrice * getAmountOfDays();
+        return accommodationPrice * getAmountOfDays() + flight.getTotalPrice();
     }
 
     /**

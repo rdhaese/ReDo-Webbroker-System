@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:ct="http://java.sun.com/jsf/composite/custom-tags"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="template.xhtml">
+    <ui:define name="pageTitle">#{text['page.title.manageFlights']}</ui:define>
+    <ui:define name="header"><ct:header title="#{text['page.title.manageFlights']}"/> </ui:define>
+    <ui:define name="pageContent">
+
+        <h:form id="form">
+            <p:dataTable id="flights" var="flight" value="#{manageFlightsController.getAllFlights()}" editable="true" style="margin-bottom:20px">
+                <f:facet name="header">
+                    #{text['manageFlights.table.title']}
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{manageFlightsController.onRowEdit}" />
+                <p:ajax event="rowEditCancel" />
+
+                <p:column headerText="#{text['manageFlights.table.company']}">
+                       <h:outputText value="#{flight.company.name}" />
+                </p:column>
+
+                <p:column headerText="#{text['manageFlights.table.departure']}">
+                        <h:outputText value="#{flight.departure.name}" />
+                </p:column>
+
+                <p:column headerText="#{text['manageFlights.table.arrival']}">
+                            <h:outputText value="#{flight.arrival.name}" />
+                </p:column>
+
+                <p:column headerText="#{text['manageFlights.table.numberOfSeats']}">
+                        <h:outputText value="#{flight.availableSeats}" />
+                </p:column>
+
+                <p:column headerText="#{text['manageFlights.table.price']}">
+                        <h:outputText value="#{flight.price}" />
+                </p:column>
+
+                <p:column headerText="#{text['manageFlights.table.margin']}">
+                    <p:cellEditor >
+                        <f:facet name="output"><h:outputText value="#{flight.margin}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{flight.margin}" style="width:96%" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column style="width:32px">
+                    <p:rowEditor/>
+                </p:column>
+
+                <p:column headerText="#{text['manageFlights.table.totalPrice']}">
+                    <h:outputText value="#{flight.getTotalPrice()}" />
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+</html>

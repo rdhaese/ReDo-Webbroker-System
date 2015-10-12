@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.realdolmen.util.EntityFactory;
 import org.realdolmen.webbroker.model.Trip;
 import org.realdolmen.webbroker.repository.AirportRepository;
 import org.realdolmen.webbroker.repository.TripRepository;

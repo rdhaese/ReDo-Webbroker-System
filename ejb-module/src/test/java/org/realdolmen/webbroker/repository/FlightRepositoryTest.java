@@ -55,4 +55,9 @@ public class FlightRepositoryTest extends DataSetPersistenceTest{
     public void cannotFindAmbiguousFlight() throws Exception {
         flightRepository.getSingleFlight("Virgin", "Airport1", "Airport2", 200d, 200);
     }
+
+    @Test
+    public void canAllFlightsBeFound(){
+        assertEquals(4, flightRepository.getAllFlights().size());
+    }
 }
