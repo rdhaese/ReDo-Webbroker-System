@@ -135,7 +135,7 @@
                 <c:set var="btnText" value="#{btnText = text['confirmBooking.button.purchase']}" scope="request"/>
             </c:if>
                 <h:commandButton id="purchase-button" value="#{btnText}"
-                                 action="#{confirmBookingController.purchase()}" styleClass="form-control"/>
+                                 action="#{confirmBookingController.purchase()}" styleClass="btn btn-primary form-control"/>
 
         </h:form>
         </ui:fragment>
