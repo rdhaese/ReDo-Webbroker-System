@@ -51,6 +51,7 @@ public class ImportTripController implements Serializable {
     private boolean multipleFound = false;
 
     public void upload() {
+        resetFlags();
         try {
             TripsXmlElement tripsXmlElement = serializer.unmarshalStream(TripsXmlElement.class, file.getInputStream());
             tripsXmlElement.getTrips().forEach(this::processTripElement);
@@ -148,5 +149,15 @@ public class ImportTripController implements Serializable {
 
     public void setAddedSuccess(boolean addedSuccess) {
         this.addedSuccess = addedSuccess;
+    }
+
+    private void resetFlags() {
+        unableToParse = false;
+        unableToOpen = false;
+        noneSelected = false;
+        agencyIsNull = false;
+        flightNotFound = false;
+        addedSuccess = false;
+        multipleFound = false;
     }
 }
