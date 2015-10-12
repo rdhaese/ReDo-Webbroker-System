@@ -4,8 +4,10 @@ import org.realdolmen.webbroker.model.Booking;
 import org.realdolmen.webbroker.repository.TripRepository;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Map;
 
 /**
  * Created by RDEAX37 on 8/10/2015.
@@ -23,8 +25,11 @@ public class BookTripController {
     @Inject
     private CurrentBookingController currentBookingController;
 
-    public String test() {
-        return "trip-summary";
+    public String showSummary() {
+        Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String persons = params.get("persons");
+        String id = params.get("tripId");
+        return showSummary(Long.parseLong(id), Integer.parseInt(persons));
     }
 
     public String showSummary(Long id, int amountOfPersons){

@@ -107,14 +107,14 @@
                     </h:column>
 
                     <h:column>
-                        <h:link outcome="trip-summary" value="Click me">
-                            <f:param value="1" name="tripid" />
-                            <f:param value="1" name="persons" />
-                        </h:link>
+                        <h:form>
                             <h:commandButton value="#{text['foundTrips.button.book']}"
-                                             action="#{bookTripController.test()}"
+                                             action="#{bookTripController.showSummary()}"
                                              styleClass="form-control">
+                                <f:param value="#{t.id}" name="tripId" />
+                                <f:param value="#{searchTripController.numberOfPersons}" name="persons" />
                             </h:commandButton>
+                        </h:form>
                     </h:column>
                 </h:dataTable>
             </ui:fragment>

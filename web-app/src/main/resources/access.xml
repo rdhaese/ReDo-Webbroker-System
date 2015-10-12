@@ -39,14 +39,6 @@
             <role name="airline" />
         </roles>
     </page>
-    <page path="trip-summary">
-        <roles>
-            <role name="redoair" />
-            <role name="travelagency" />
-            <role name="user" />
-            <role name="airline" />
-        </roles>
-    </page>
     <page path="thank-you">
         <roles>
             <role name="redoair" />
