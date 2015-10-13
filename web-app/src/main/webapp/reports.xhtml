@@ -17,7 +17,7 @@
     </ui:define>
     <ui:define name="pageContent">
 
-        <h:form>
+        <h:form style="width: 1300px !important; margin: 0 auto;">
             <p:dataTable var="report" value="#{reportsController.trips}" widgetVar="tripsTable"
                          emptyMessage="#{text['reports.trips.nofound']}" filteredValue="#{reportsController.filteredTrips}">
 
@@ -66,23 +66,25 @@
                     <h:outputText value="#{report.trip.flight.arrival.region.name}" />
                 </p:column>
 
-                <p:column filterBy="#{report.trip.flight.margin}" headerText="#{text['reports.header.margin']}" filterMatchMode="contains">
+                <p:column filterBy="#{report.trip.flight.margin}" headerText="#{text['reports.header.margin']}" style="width: 100px"
+                          filterStyle="width: 50px"
+                          filterMatchMode="contains">
                     <h:outputText value="#{report.trip.flight.margin}" />
                 </p:column>
 
-                <p:column filterBy="#{report.min}" headerText="#{text['reports.header.min']}" filterMatchMode="contains">
+                <p:column headerText="#{text['reports.header.min']}" style="width: 100px">
                     <h:outputText value="#{report.min}">
                         <f:convertNumber type="currency" currencySymbol="€" />
                     </h:outputText>
                 </p:column>
 
-                <p:column filterBy="#{report.max}" headerText="#{text['reports.header.max']}" filterMatchMode="contains">
+                <p:column headerText="#{text['reports.header.max']}" style="width: 100px">
                     <h:outputText value="#{report.max}">
                         <f:convertNumber type="currency" currencySymbol="€" />
                     </h:outputText>
                 </p:column>
 
-                <p:column filterBy="#{report.average}" headerText="#{text['reports.header.average']}" filterMatchMode="contains">
+                <p:column headerText="#{text['reports.header.average']}" style="width: 100px">
                     <h:outputText value="#{report.average}">
                         <f:convertNumber type="currency" currencySymbol="€" />
                     </h:outputText>

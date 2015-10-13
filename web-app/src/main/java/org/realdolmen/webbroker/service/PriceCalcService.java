@@ -13,7 +13,7 @@ import java.time.Period;
  * Created by RDEAX37 on 12/10/2015.
  * Class to use when you need to calculate prices
  *
- * @Author Robin D'Haese
+ * @author Robin D'Haese
  */
 @Stateless
 @LocalBean
@@ -61,7 +61,7 @@ public class PriceCalcService {
 
     /**
      * @param booking to calculate total discount for
-     * @return total of (for each discount -> total discount)
+     * @return total of (for each discount -&gt; total discount)
      */
     public Double getTotalDiscountForBooking(Booking booking) {
         Double totalDiscount = 0D;
