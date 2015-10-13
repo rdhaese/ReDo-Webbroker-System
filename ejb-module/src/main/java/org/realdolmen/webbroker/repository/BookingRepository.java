@@ -2,6 +2,7 @@ package org.realdolmen.webbroker.repository;
 
 import org.realdolmen.webbroker.model.Booking;
 import org.realdolmen.webbroker.model.Discount;
+import org.realdolmen.webbroker.model.Trip;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -31,5 +32,13 @@ public class BookingRepository {
     }
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
+    }
+
+    public List<Booking> getAllBookings() {
+        return entityManager.createQuery("select b from Booking b", Booking.class).getResultList();
+    }
+
+    public List<Booking> getBookingsWithTrip(Trip trip) {
+        return entityManager.createQuery("select b from Booking b where b.trip = :trip", Booking.class).setParameter("trip", trip).getResultList();
     }
 }

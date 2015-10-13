@@ -1,6 +1,6 @@
 package org.realdolmen.webbroker.listener;
 
-import org.realdolmen.webbroker.repository.DiscountRepository;
+import org.realdolmen.webbroker.repository.*;
 import org.realdolmen.webbroker.service.PasswordService;
 import org.realdolmen.webbroker.exception.AmbiguousEntityException;
 import org.realdolmen.webbroker.model.*;
@@ -8,9 +8,6 @@ import org.realdolmen.webbroker.model.user.AirlineCompanyEmployee;
 import org.realdolmen.webbroker.model.user.ReDoAirEmployee;
 import org.realdolmen.webbroker.model.user.TravelAgencyEmployee;
 import org.realdolmen.webbroker.model.user.User;
-import org.realdolmen.webbroker.repository.FlightRepository;
-import org.realdolmen.webbroker.repository.TravelAgencyRepository;
-import org.realdolmen.webbroker.repository.TripRepository;
 import org.realdolmen.webbroker.util.Pair;
 import org.realdolmen.webbroker.xml.XmlSerializer;
 import org.realdolmen.webbroker.xml.element.*;
@@ -26,6 +23,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,6 +55,9 @@ public class StartupListener implements ServletContextListener {
 
     @Inject
     private DiscountRepository discountRepository;
+
+    @Inject
+    private BookingRepository bookingRepository;
 
     @Override
     @Transactional
@@ -117,6 +118,12 @@ public class StartupListener implements ServletContextListener {
                 } else {
                     Trip trip = new Trip(flight, agency, tripElement.getAccommodationPrice(), tripElement.getStartDate(), tripElement.getEndDate());
                     tripRepository.add(trip);
+                    Booking booking = new Booking();
+                    booking.setNumberOfPassengers(5);
+                    booking.setDiscounts(new ArrayList<>());
+                    booking.setTrip(trip);
+                    booking.setBookingUser(new User("first", "last", "username", "password", "salt"));
+                    bookingRepository.addBooking(booking);
                 }
             }
         } catch (AmbiguousEntityException e) {

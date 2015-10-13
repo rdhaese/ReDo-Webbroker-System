@@ -25,7 +25,7 @@ import static org.mockito.Mockito.*;
  * Created by RDEAX37 on 7/10/2015.
  * Test for {@link SearchTripController}
  *
- * @Author Robin D'Haese
+ * @author Robin D'Haese
  */
 @RunWith(MockitoJUnitRunner.class)
 public class SearchTripControllerTest {

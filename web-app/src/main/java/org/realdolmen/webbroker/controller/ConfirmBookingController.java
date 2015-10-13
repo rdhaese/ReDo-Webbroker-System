@@ -6,6 +6,7 @@ import org.realdolmen.webbroker.model.Trip;
 import org.realdolmen.webbroker.repository.BookingRepository;
 import org.realdolmen.webbroker.repository.DiscountRepository;
 import org.realdolmen.webbroker.repository.FlightRepository;
+import org.realdolmen.webbroker.service.PriceCalcService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,6 +43,9 @@ public class  ConfirmBookingController implements Serializable {
     @Inject
     private DiscountRepository discountRepository;
 
+    @Inject
+    private PriceCalcService priceCalcService;
+
 
     //TODO REMOVE STATE BEFORE PRODUCTION (keep fields!//
     private String creditcardNumber = "67034200303993013";
@@ -74,6 +78,14 @@ public class  ConfirmBookingController implements Serializable {
             currentBookingController.setCurrentBooking(null);
             return "thank-you";
         }
+    }
+
+    public Double getTotalPriceWithDiscountForCurrentBooking(){
+        return priceCalcService.getTotalBookingPriceWithDiscount(currentBookingController.getCurrentBooking());
+    }
+
+    public Double getTotalPriceWithoutDiscountForCurrentBooking(){
+        return priceCalcService.getTotalBookingPriceWithoutDiscount(currentBookingController.getCurrentBooking());
     }
 
     public String getCreditcardNumber() {
@@ -121,9 +133,5 @@ public class  ConfirmBookingController implements Serializable {
        }
         this.paymentMethod = paymentMethod;
         return "confirm-booking";
-    }
-
-    public void hello(){
-        System.out.println("HELLLLLLOOOOOO");
     }
 }

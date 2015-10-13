@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
 
@@ -60,6 +61,10 @@ public class LoggedInUserController implements Serializable {
             LOGGER.warn("Logout of user even though there is no logged in user.");
         } else {
             LOGGER.info("User '" + loggedInUser.getUserName() + "' has logged out.");
+        }
+        FacesContext currentInstance = FacesContext.getCurrentInstance();
+        if(currentInstance != null) {
+            currentInstance.getExternalContext().invalidateSession();
         }
         loggedInUser = null;
         return "index";

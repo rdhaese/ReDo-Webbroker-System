@@ -14,7 +14,7 @@
     <ui:define name="pageContent">
 
         <h:form id="form">
-            <p:dataTable id="flights" var="flight" value="#{manageFlightsController.getAllFlights()}" editable="true" style="margin-bottom:20px">
+            <p:dataTable id="flights" var="flight" value="#{manageFlightsController.getAllFlights()}" editable="true" style="margin-bottom:20px" emptyMessage="#{text['manageFlights.table.emptyMessage']}" filteredValue="#{manageFlightsController.filteredFlights}">
                 <f:facet name="header">
                     #{text['manageFlights.table.title']}
                 </f:facet>
@@ -22,15 +22,15 @@
                 <p:ajax event="rowEdit" listener="#{manageFlightsController.onRowEdit}" />
                 <p:ajax event="rowEditCancel" />
 
-                <p:column headerText="#{text['manageFlights.table.company']}">
+                <p:column headerText="#{text['manageFlights.table.company']}" filterBy="#{flight.company.name}" filterMatchMode="contains">
                        <h:outputText value="#{flight.company.name}" />
                 </p:column>
 
-                <p:column headerText="#{text['manageFlights.table.departure']}">
+                <p:column headerText="#{text['manageFlights.table.departure']}" filterBy="#{flight.departure.name}" filterMatchMode="contains">
                         <h:outputText value="#{flight.departure.name}" />
                 </p:column>
 
-                <p:column headerText="#{text['manageFlights.table.arrival']}">
+                <p:column headerText="#{text['manageFlights.table.arrival']}" filterBy="#{flight.arrival.name}" filterMatchMode="contains">
                             <h:outputText value="#{flight.arrival.name}" />
                 </p:column>
 
@@ -54,7 +54,7 @@
                 </p:column>
 
                 <p:column headerText="#{text['manageFlights.table.totalPrice']}">
-                    <h:outputText value="#{flight.getTotalPrice()}" />
+                    <h:outputLabel value="#{manageFlightsController.getTotalPriceFor(flight)}" />
                 </p:column>
 
             </p:dataTable>
