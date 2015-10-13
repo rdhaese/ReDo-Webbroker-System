@@ -109,7 +109,7 @@ public class AccessFilter implements Filter {
 
     private String userToRole(User user) {
         if (user instanceof AirlineCompanyEmployee) {
-            return "airlinecompany";
+            return "airline";
         } else if (user instanceof TravelAgencyEmployee) {
             return "travelagency";
         } else if(user instanceof ReDoAirEmployee) {
