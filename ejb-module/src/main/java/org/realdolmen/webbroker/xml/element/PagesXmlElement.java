@@ -14,13 +14,13 @@ import java.util.List;
 public class PagesXmlElement {
 
     @XmlElement(name = "page")
-    private List<PageXmlElement> trips = null;
+    private List<PageXmlElement> pages = null;
 
-    public List<PageXmlElement> getTrips() {
-        return trips;
+    public List<PageXmlElement> getPages() {
+        return pages;
     }
 
-    public void setTrips(List<PageXmlElement> trips) {
-        this.trips = trips;
+    public void setPages(List<PageXmlElement> trips) {
+        this.pages = trips;
     }
 }

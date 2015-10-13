@@ -60,6 +60,7 @@ public class AddFlightController implements Serializable {
         }
         try {
             flightRepo.add(createFlight());
+
         } catch (Exception e) {
             error = true;
             return "add-flight";

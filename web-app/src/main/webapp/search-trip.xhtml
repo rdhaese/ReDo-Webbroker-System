@@ -21,7 +21,7 @@
         </f:metadata>
 
         <h:form>
-            <h:panelGrid columns="3">
+            <h:panelGrid columns="3" styleClass="tableStyle">
                 <h:outputLabel for="destination" value="#{text['searchTrip.destination']}"/>
                 <h:selectOneMenu id="destination" value="#{searchTripController.destinationId}" styleClass="form-control"
                                  validatorMessage="#{text['searchTrip.valMessage.destination']}">

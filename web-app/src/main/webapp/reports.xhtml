@@ -54,7 +54,7 @@
                             <f:selectItems value="#{reportsController.regions}" />
                         </p:selectCheckboxMenu>
                     </f:facet>
-                    <h:outputText value="#{report.trip.flight.departure.region.name}" />
+                    <h:outputText value="#{report.trip.flight.departure.name}" />
                 </p:column>
 
                 <p:column filterBy="#{report.trip.flight.arrival.region.name}" filterMatchMode="in">
@@ -63,7 +63,7 @@
                             <f:selectItems value="#{reportsController.regions}" />
                         </p:selectCheckboxMenu>
                     </f:facet>
-                    <h:outputText value="#{report.trip.flight.arrival.region.name}" />
+                    <h:outputText value="#{report.trip.flight.arrival.name}" />
                 </p:column>
 
                 <p:column filterBy="#{report.trip.flight.margin}" headerText="#{text['reports.header.margin']}" style="width: 100px"
