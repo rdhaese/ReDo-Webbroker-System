@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by RDEAX37 on 2/10/2015.
  * Entity represeting a booking
- * @Author Robin D'Haese
+ * @author Robin D'Haese
  */
 @Entity
 public class Booking extends BaseEntity{
@@ -19,14 +19,14 @@ public class Booking extends BaseEntity{
     @OneToOne (cascade = CascadeType.ALL)
     private User bookingUser;
     @NotNull
-    @OneToOne (cascade = CascadeType.ALL)
+    @ManyToOne (cascade = CascadeType.ALL)
     private Trip trip;
     @NotNull
     @Min (value = 1)
     private Integer numberOfPassengers;
     @Min(value = 0)
     private Double overridePrice;
-    @ManyToMany (cascade = CascadeType.ALL)
+    @ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Discount> discounts = new ArrayList<Discount>();
 
     public User getBookingUser() {

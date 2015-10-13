@@ -12,7 +12,7 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 /**
- * Class which can be used to get internationalized {@link String}s to be displayed on the front-end. <br/>
+ * Class which can be used to get internationalized {@link String}s to be displayed on the front-end.
  * This class attempts to load resources from the <code><b>messages</b></code> directory, with filenames starting
  * with <code><b>text</b></code> and which have the extension <code><b>properties</b></code>.
  *

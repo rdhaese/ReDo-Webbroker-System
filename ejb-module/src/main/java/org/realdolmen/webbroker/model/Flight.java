@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Entity representing a flight
- * @Author Robin D'Haese
+ * @author Robin D'Haese
  */
 @Entity
 public class Flight extends BaseEntity {

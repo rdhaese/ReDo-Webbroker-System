@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * Created by RDEAX37 on 2/10/2015.
  * Entity that forms the base for every other entity. Contains the id and version.
- * @Author Robin D'Haese
+ * @author Robin D'Haese
  */
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {

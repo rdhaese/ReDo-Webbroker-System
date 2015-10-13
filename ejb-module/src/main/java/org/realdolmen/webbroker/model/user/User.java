@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by RDEAX37 on 2/10/2015.
  * Entity representing a User
- * @Author Robin D'Haese
+ * @author Robin D'Haese
  */
 @Entity(name = "users")
 @Inheritance
@@ -63,8 +63,8 @@ public class User extends BaseEntity {
     }
 
     /**
-     * @param password
-     * @throws IllegalArgumentException If the password length is < 6
+     * @param password Password of the user.
+     * @throws IllegalArgumentException If the password length is less than 6
      */
     public void setPassword(String password) throws IllegalArgumentException{
         if ((password == null) || (password.length() >= 6)) {
