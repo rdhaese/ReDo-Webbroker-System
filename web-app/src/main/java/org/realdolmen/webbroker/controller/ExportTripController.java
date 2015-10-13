@@ -7,6 +7,8 @@ import org.realdolmen.webbroker.xml.XmlSerializer;
 import org.realdolmen.webbroker.xml.element.FlightXmlElement;
 import org.realdolmen.webbroker.xml.element.TripXmlElement;
 import org.realdolmen.webbroker.xml.element.TripsXmlElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
@@ -29,6 +31,8 @@ import java.util.List;
 public class ExportTripController implements Serializable {
 
     private static final String DEFAULT_FILE_NAME = "allTrips.xml";
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExportTripController.class);
+
 
     @Inject
     TripRepository tripRepository;
@@ -56,9 +60,10 @@ public class ExportTripController implements Serializable {
             TripsXmlElement xmlTrips = tripsToXmlElement(allTrips);
             serializer.marshal(xmlTrips, output);
         } catch (JAXBException | IOException e) {
+            LOGGER.warn("Something went wrong while exporting", e);
             unableToExport = true;
         }
-
+        LOGGER.info("Export complete");
         context.responseComplete();
     }
 

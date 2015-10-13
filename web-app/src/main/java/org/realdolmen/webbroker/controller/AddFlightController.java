@@ -7,6 +7,8 @@ import org.realdolmen.webbroker.model.user.AirlineCompanyEmployee;
 import org.realdolmen.webbroker.model.user.User;
 import org.realdolmen.webbroker.repository.AirportRepository;
 import org.realdolmen.webbroker.repository.FlightRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -24,6 +26,8 @@ import java.util.List;
 @Named
 @RequestScoped
 public class AddFlightController implements Serializable {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AddFlightController.class);
 
     @Inject
     private AirportRepository airportRepo;
@@ -59,10 +63,12 @@ public class AddFlightController implements Serializable {
             return "add-flight";
         }
         try {
-            flightRepo.add(createFlight());
-
+            Flight flight = createFlight();
+            flightRepo.add(flight);
+            LOGGER.info(String.format("Flight (%s) added by %s", flight, loggedInUserController.getLoggedInUser()));
         } catch (Exception e) {
             error = true;
+            LOGGER.warn("Could not add flight", e);
             return "add-flight";
         }
         success = true;

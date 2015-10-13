@@ -5,6 +5,8 @@ import org.realdolmen.webbroker.util.Pair;
 import org.realdolmen.webbroker.service.PasswordService;
 import org.realdolmen.webbroker.model.user.User;
 import org.realdolmen.webbroker.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -21,6 +23,8 @@ import java.io.Serializable;
 @Named
 @RequestScoped
 public class RegisterController implements Serializable {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegisterController.class);
 
     @Inject
     private UserRepository userRepo;
@@ -54,9 +58,12 @@ public class RegisterController implements Serializable {
         if (userRepo.getUserByUsername(userName) == null) {
             //Register user
             try {
-                userRepo.add(createUser());
+                User user = createUser();
+                userRepo.add(user);
+                LOGGER.info(String.format("Registered %s", user));
             } catch (Exception e) {
                 errorRegistering = true;
+                LOGGER.warn("Something went wrong while registering", e);
                 return "register-user";
             }
             return "register-success";

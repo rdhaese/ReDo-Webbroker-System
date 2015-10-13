@@ -57,10 +57,10 @@ public class ImportTripController implements Serializable {
             tripsXmlElement.getTrips().forEach(this::processTripElement);
         } catch (JAXBException e) {
             unableToParse = true;
-            LOGGER.warn("Unable to parse XML file: " + file.getName());
+            LOGGER.warn("Unable to parse XML file: " + file.getName(), e);
         } catch (IOException e) {
             unableToOpen = true;
-            LOGGER.warn("Unable to open XML file: " + file.getName());
+            LOGGER.warn("Unable to open XML file: " + file.getName(), e);
         } catch (NullPointerException e) {
             noneSelected = true;
         }
