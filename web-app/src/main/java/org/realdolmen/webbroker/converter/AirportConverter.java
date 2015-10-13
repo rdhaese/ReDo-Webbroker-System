@@ -1,7 +1,6 @@
 package org.realdolmen.webbroker.converter;
 
 import org.realdolmen.webbroker.model.Airport;
-import org.realdolmen.webbroker.model.Flight;
 import org.realdolmen.webbroker.repository.AirportRepository;
 
 import javax.faces.bean.ManagedBean;
@@ -10,14 +9,12 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 /**
  * Created by RDEAX37 on 6/10/2015.
  *
  * JSF Converter to convert airports from objects to id's and id's to objects.
- * @Author Robin D'Haese
+ * @author Robin D'Haese
  */
 @ManagedBean(name = "flightConverterBean")
 @FacesConverter(value = "flightConverter")

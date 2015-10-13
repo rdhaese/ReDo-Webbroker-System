@@ -8,14 +8,13 @@ import org.realdolmen.webbroker.model.Flight;
 import org.realdolmen.webbroker.model.Trip;
 
 import java.time.LocalDateTime;
-import java.time.Period;
 
 import static org.jgroups.util.Util.assertEquals;
 
 /**
  * Created by RDEAX37 on 12/10/2015.
  * Test for {@link PriceCalcService}
- * @Author Robin D'Haese
+ * @author Robin D'Haese
  */
 public class PriceCalcServiceTest {
 

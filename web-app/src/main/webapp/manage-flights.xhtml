@@ -22,29 +22,29 @@
                 <p:ajax event="rowEdit" listener="#{manageFlightsController.onRowEdit}" />
                 <p:ajax event="rowEditCancel" />
 
-                <p:column headerText="#{text['manageFlights.table.company']}" filterBy="#{flight.company.name}" filterMatchMode="contains">
+                <p:column headerText="#{text['manageFlights.table.company']}" filterBy="#{flight.company.name}" filterMatchMode="contains" sortBy="#{flight.company.name}">
                        <h:outputText value="#{flight.company.name}" />
                 </p:column>
 
-                <p:column headerText="#{text['manageFlights.table.departure']}" filterBy="#{flight.departure.name}" filterMatchMode="contains">
+                <p:column headerText="#{text['manageFlights.table.departure']}" filterBy="#{flight.departure.name}" filterMatchMode="contains" sortBy="#{flight.departure.name}">
                         <h:outputText value="#{flight.departure.name}" />
                 </p:column>
 
-                <p:column headerText="#{text['manageFlights.table.arrival']}" filterBy="#{flight.arrival.name}" filterMatchMode="contains">
+                <p:column headerText="#{text['manageFlights.table.arrival']}" filterBy="#{flight.arrival.name}" filterMatchMode="contains" sortBy="#{flight.arrival.name}">
                             <h:outputText value="#{flight.arrival.name}" />
                 </p:column>
 
-                <p:column headerText="#{text['manageFlights.table.numberOfSeats']}">
+                <p:column headerText="#{text['manageFlights.table.numberOfSeats']}" sortBy="#{flight.availableSeats}">
                         <h:outputText value="#{flight.availableSeats}" />
                 </p:column>
 
-                <p:column headerText="#{text['manageFlights.table.price']}">
-                        <h:outputText value="#{flight.price}" />
+                <p:column headerText="#{text['manageFlights.table.price']}" sortBy="#{flight.price}">
+                        <h:outputText value="#{flight.price}"><f:convertNumber type="currency" currencySymbol="&euro;"/></h:outputText>
                 </p:column>
 
-                <p:column headerText="#{text['manageFlights.table.margin']}">
+                <p:column headerText="#{text['manageFlights.table.margin']}" sortBy="#{flight.margin}">
                     <p:cellEditor >
-                        <f:facet name="output"><h:outputText value="#{flight.margin}" /></f:facet>
+                        <f:facet name="output"><h:outputText value="#{flight.margin / 100}"><f:convertNumber type="percent" /> </h:outputText></f:facet>
                         <f:facet name="input"><p:inputText value="#{flight.margin}" style="width:96%" /></f:facet>
                     </p:cellEditor>
                 </p:column>
@@ -53,8 +53,8 @@
                     <p:rowEditor/>
                 </p:column>
 
-                <p:column headerText="#{text['manageFlights.table.totalPrice']}">
-                    <h:outputLabel value="#{manageFlightsController.getTotalPriceFor(flight)}" />
+                <p:column headerText="#{text['manageFlights.table.totalPrice']}" sortBy="#{manageFlightsController.getTotalPriceFor(flight)}">
+                    <h:outputLabel value="#{manageFlightsController.getTotalPriceFor(flight)}"><f:convertNumber type="currency" currencySymbol="&euro;"/> </h:outputLabel>
                 </p:column>
 
             </p:dataTable>

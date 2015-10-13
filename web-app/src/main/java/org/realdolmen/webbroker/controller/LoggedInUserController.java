@@ -62,7 +62,10 @@ public class LoggedInUserController implements Serializable {
         } else {
             LOGGER.info("User '" + loggedInUser.getUserName() + "' has logged out.");
         }
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        FacesContext currentInstance = FacesContext.getCurrentInstance();
+        if(currentInstance != null) {
+            currentInstance.getExternalContext().invalidateSession();
+        }
         loggedInUser = null;
         return "index";
     }

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ct="http://java.sun.com/jsf/composite/custom-tags"
+      xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="template.xhtml">
+    <ui:define name="pageTitle">#{text['page.title.reports']}</ui:define>
+    <ui:define name="header">
+        <ct:header title="#{text['page.title.reports']}"/>
+
+    </ui:define>
+    <ui:define name="pageContent">
+
+        <h:form style="width: 1300px !important; margin: 0 auto;">
+            <p:dataTable var="report" value="#{reportsController.trips}" widgetVar="tripsTable"
+                         emptyMessage="#{text['reports.trips.nofound']}" filteredValue="#{reportsController.filteredTrips}">
+
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="#{text['reports.trips.search']}" />
+                        <p:inputText id="globalFilter" onkeyup="PF('tripsTable').filter()" style="width:150px" placeholder=""/>
+                    </p:outputPanel>
+                </f:facet>
+
+                <p:column filterBy="#{report.trip.travelAgency.name}" headerText="#{text['reports.header.travelagency']}" filterMatchMode="contains">
+                    <h:outputText value="#{report.trip.travelAgency.name}" />
+                </p:column>
+
+                <p:column filterBy="#{report.trip.flight.company.name}" headerText="#{text['reports.header.airlinecompany']}" filterMatchMode="contains">
+                    <h:outputText value="#{report.trip.flight.company.name}" />
+                </p:column>
+
+                <p:column filterBy="#{report.trip.startDate}" headerText="#{text['reports.header.startdate']}" filterFunction="#{reportsController.filterByDate}">
+                    <h:outputText value="#{report.trip.getStartDateInOldApi()}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+
+                <p:column filterBy="#{report.trip.endDate}" headerText="#{text['reports.header.enddate']}" filterFunction="#{reportsController.filterByDate}">
+                    <h:outputText value="#{report.trip.getEndDateInOldApi()}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+
+                <p:column filterBy="#{report.trip.flight.departure.region.name}" filterMatchMode="in">
+                    <f:facet name="filter">
+                        <p:selectCheckboxMenu label="#{text['reports.header.departure']}" onchange="PF('tripsTable').filter()" panelStyle="width:200px" scrollHeight="150">
+                            <f:selectItems value="#{reportsController.regions}" />
+                        </p:selectCheckboxMenu>
+                    </f:facet>
+                    <h:outputText value="#{report.trip.flight.departure.name}" />
+                </p:column>
+
+                <p:column filterBy="#{report.trip.flight.arrival.region.name}" filterMatchMode="in">
+                    <f:facet name="filter">
+                        <p:selectCheckboxMenu label="#{text['reports.header.destination']}" onchange="PF('tripsTable').filter()" panelStyle="width:200px" scrollHeight="150">
+                            <f:selectItems value="#{reportsController.regions}" />
+                        </p:selectCheckboxMenu>
+                    </f:facet>
+                    <h:outputText value="#{report.trip.flight.arrival.name}" />
+                </p:column>
+
+                <p:column filterBy="#{report.trip.flight.margin}" headerText="#{text['reports.header.margin']}" style="width: 100px"
+                          filterStyle="width: 50px"
+                          filterMatchMode="contains">
+                    <h:outputText value="#{report.trip.flight.margin}" />
+                </p:column>
+
+                <p:column headerText="#{text['reports.header.min']}" style="width: 100px">
+                    <h:outputText value="#{report.min}">
+                        <f:convertNumber type="currency" currencySymbol="€" />
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="#{text['reports.header.max']}" style="width: 100px">
+                    <h:outputText value="#{report.max}">
+                        <f:convertNumber type="currency" currencySymbol="€" />
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="#{text['reports.header.average']}" style="width: 100px">
+                    <h:outputText value="#{report.average}">
+                        <f:convertNumber type="currency" currencySymbol="€" />
+                    </h:outputText>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+</html>
