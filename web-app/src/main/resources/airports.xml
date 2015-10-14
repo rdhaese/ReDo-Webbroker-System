@@ -22,6 +22,31 @@
             <city>Heathrow</city>
         </address>
     </airport>
+
+    <airport>
+        <regionCode>EU</regionCode>
+        <name>Amsterdam</name>
+        <address>
+            <country>Netherlands</country>
+            <street>astraat</street>
+            <number>1</number>
+            <postalcode>8000</postalcode>
+            <city>Amsterdam</city>
+        </address>
+    </airport>
+    <airport>
+        <regionCode>EU</regionCode>
+        <name>Berlin</name>
+        <address>
+            <country>Germany</country>
+            <street>bstraat</street>
+            <number>1</number>
+            <postalcode>8000</postalcode>
+            <city>Berlin</city>
+        </address>
+    </airport>
+
+
     <airport>
         <regionCode>NA</regionCode>
         <name>New York Airport</name>
@@ -31,6 +56,64 @@
             <number>1</number>
             <postalcode>9000A</postalcode>
             <city>New York</city>
+        </address>
+    </airport>
+    <airport>
+        <regionCode>NA</regionCode>
+        <name>Washington</name>
+        <address>
+            <country>USA</country>
+            <street>wstreet</street>
+            <number>1</number>
+            <postalcode>9000A</postalcode>
+            <city>Washington</city>
+        </address>
+    </airport>
+    <airport>
+        <regionCode>AF</regionCode>
+        <name>Cape Town</name>
+        <address>
+            <country>South Africa</country>
+            <street>cstreet</street>
+            <number>1</number>
+            <postalcode>9000A</postalcode>
+            <city>Cape Town</city>
+        </address>
+    </airport>
+
+    <airport>
+        <regionCode>AS</regionCode>
+        <name>Tokyo</name>
+        <address>
+            <country>Japan</country>
+            <street>jstreet</street>
+            <number>1</number>
+            <postalcode>9000A</postalcode>
+            <city>Tokyo</city>
+        </address>
+    </airport>
+
+    <airport>
+        <regionCode>AS</regionCode>
+        <name>Peking</name>
+        <address>
+            <country>China</country>
+            <street>pstreet</street>
+            <number>1</number>
+            <postalcode>9000A</postalcode>
+            <city>Peking</city>
+        </address>
+    </airport>
+
+    <airport>
+        <regionCode>AU</regionCode>
+        <name>Canberra</name>
+        <address>
+            <country>Australia</country>
+            <street>astreet</street>
+            <number>1</number>
+            <postalcode>9000A</postalcode>
+            <city>Canberra</city>
         </address>
     </airport>
 </airports>
