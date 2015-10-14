@@ -44,7 +44,7 @@
                 <h:panelGroup style="display:block; text-align:center">
                     <h:form>
                         <c:if test="#{loggedInUserController.loggedIn}">
-                            <h:commandButton value="#{text['tripSummary.button.goOn']}" action="confirm-booking" styleClass="form-control"/>
+                            <h:commandButton value="#{text['tripSummary.button.goOn']}" action="confirm-booking" styleClass="btn btn-primary form-control"/>
                         </c:if>
                         <c:if test="#{not loggedInUserController.loggedIn}">
                             <h:commandButton value="#{text['tripSummary.button.notLoggedIn']}"

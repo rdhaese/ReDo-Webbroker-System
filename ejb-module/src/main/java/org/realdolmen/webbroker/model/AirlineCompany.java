@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by RDEAX37 on 2/10/2015.
  * Entity representing an airline company
- * @Authot Robin D'Haese
+ * @author Robin D'Haese
  */
 @Entity
 public class AirlineCompany extends BaseEntity{

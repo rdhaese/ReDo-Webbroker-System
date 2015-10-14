@@ -14,16 +14,16 @@ import org.realdolmen.webbroker.xml.element.TripsXmlElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.Part;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.io.Serializable;
 
-@ManagedBean
-@ViewScoped
+@Named
+@RequestScoped
 public class ImportTripController implements Serializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ImportTripController.class);
@@ -57,10 +57,10 @@ public class ImportTripController implements Serializable {
             tripsXmlElement.getTrips().forEach(this::processTripElement);
         } catch (JAXBException e) {
             unableToParse = true;
-            LOGGER.warn("Unable to parse XML file: " + file.getName());
+            LOGGER.warn("Unable to parse XML file: " + file.getName(), e);
         } catch (IOException e) {
             unableToOpen = true;
-            LOGGER.warn("Unable to open XML file: " + file.getName());
+            LOGGER.warn("Unable to open XML file: " + file.getName(), e);
         } catch (NullPointerException e) {
             noneSelected = true;
         }

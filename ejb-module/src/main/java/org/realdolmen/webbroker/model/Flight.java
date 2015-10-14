@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Entity representing a flight
- * @Author Robin D'Haese
+ * @author Robin D'Haese
  */
 @Entity
 public class Flight extends BaseEntity {
@@ -56,10 +56,6 @@ public class Flight extends BaseEntity {
 
     public Double getPrice() {
         return price;
-    }
-
-    public Double getTotalPrice(){
-        return price + (price * (margin/ 100D));
     }
 
     public void setPrice(Double price) {

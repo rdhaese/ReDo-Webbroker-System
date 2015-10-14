@@ -49,7 +49,7 @@ public class AccessFilter implements Filter {
 
         try {
             PagesXmlElement pagesXmlElement = serializer.unmarshalStream(PagesXmlElement.class, file);
-            for (PageXmlElement pageXmlElement : pagesXmlElement.getTrips()) {
+            for (PageXmlElement pageXmlElement : pagesXmlElement.getPages()) {
                 List<String> roles = new ArrayList<>();
                 for (RoleXmlElement roleXmlElement : pageXmlElement.getRoles().getRoles()) {
                     roles.add((roleXmlElement.getRole()));
@@ -94,7 +94,7 @@ public class AccessFilter implements Filter {
         Collection<String> allowedRoles = accessMap.get(servletPath);
         // block all access for paths we do not know
         if(allowedRoles == null) {
-            return false;
+            return true;
         }
 
         // allow access to pages that everyone can access
@@ -109,7 +109,7 @@ public class AccessFilter implements Filter {
 
     private String userToRole(User user) {
         if (user instanceof AirlineCompanyEmployee) {
-            return "airlinecompany";
+            return "airline";
         } else if (user instanceof TravelAgencyEmployee) {
             return "travelagency";
         } else if(user instanceof ReDoAirEmployee) {

@@ -66,9 +66,19 @@
             <role name="airline" />
         </roles>
     </page>
+    <page path="reports">
+        <roles>
+            <role name="redoair" />
+        </roles>
+    </page>
     <page path="manage-flights">
         <roles>
             <role name="redoair" />
+        </roles>
+    </page>
+    <page path="404">
+        <roles>
+        <role name="everyone" />
         </roles>
     </page>
 </pages>
