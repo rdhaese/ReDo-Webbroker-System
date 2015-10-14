@@ -6,7 +6,7 @@
             <airlineCompany>RyanAir</airlineCompany>
             <departureAirport>Zaventem</departureAirport>
             <arrivalAirport>Heathrow</arrivalAirport>
-            <price>150.00</price>
+            <price>50</price>
             <availableSeats>10</availableSeats>
         </flight>
         <travelagency>travel agency A</travelagency>
@@ -14,6 +14,74 @@
         <startDate>2016-01-01 12:10:10</startDate>
         <endDate>2016-01-10 12:10:10</endDate>
     </trip>
+
+    <trip>
+        <flight>
+            <airlineCompany>Sabena</airlineCompany>
+            <departureAirport>Heathrow</departureAirport>
+            <arrivalAirport>New York Airport</arrivalAirport>
+            <price>75</price>
+            <availableSeats>25</availableSeats>
+        </flight>
+        <travelagency>travel agency B</travelagency>
+        <accommodationPrice>50.00</accommodationPrice>
+        <startDate>2016-01-01 12:10:10</startDate>
+        <endDate>2016-01-08 12:10:10</endDate>
+    </trip>
+    <trip>
+        <flight>
+            <airlineCompany>RyanAir</airlineCompany>
+            <departureAirport>Peking</departureAirport>
+            <arrivalAirport>Heathrow</arrivalAirport>
+            <price>100</price>
+            <availableSeats>10</availableSeats>
+        </flight>
+        <travelagency>travel agency B</travelagency>
+        <accommodationPrice>80.00</accommodationPrice>
+        <startDate>2016-01-01 12:10:10</startDate>
+        <endDate>2016-01-08 12:10:10</endDate>
+    </trip>
+    <trip>
+        <flight>
+            <airlineCompany>RyanAir</airlineCompany>
+            <departureAirport>Berlin</departureAirport>
+            <arrivalAirport>Heathrow</arrivalAirport>
+            <price>60</price>
+            <availableSeats>10</availableSeats>
+        </flight>
+        <travelagency>travel agency A</travelagency>
+        <accommodationPrice>60.00</accommodationPrice>
+        <startDate>2016-01-01 12:10:10</startDate>
+        <endDate>2016-01-09 12:10:10</endDate>
+    </trip>
+    <trip>
+        <flight>
+            <airlineCompany>RyanAir</airlineCompany>
+            <departureAirport>Canberra</departureAirport>
+            <arrivalAirport>Heathrow</arrivalAirport>
+            <price>80</price>
+            <availableSeats>10</availableSeats>
+        </flight>
+        <travelagency>travel agency A</travelagency>
+        <accommodationPrice>60.00</accommodationPrice>
+        <startDate>2016-01-01 12:10:10</startDate>
+        <endDate>2016-01-10 12:10:10</endDate>
+    </trip>
+    <trip>
+        <flight>
+            <airlineCompany>RyanAir</airlineCompany>
+            <departureAirport>Washington</departureAirport>
+            <arrivalAirport>Heathrow</arrivalAirport>
+            <price>85</price>
+            <availableSeats>10</availableSeats>
+        </flight>
+        <travelagency>travel agency A</travelagency>
+        <accommodationPrice>60.00</accommodationPrice>
+        <startDate>2016-01-01 12:10:10</startDate>
+        <endDate>2016-01-10 12:10:10</endDate>
+    </trip>
+
+
     <trip>
         <flight>
             <airlineCompany>RyanAir</airlineCompany>

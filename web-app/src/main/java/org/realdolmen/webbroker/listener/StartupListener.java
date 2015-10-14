@@ -118,17 +118,27 @@ public class StartupListener implements ServletContextListener {
                 } else {
                     Trip trip = new Trip(flight, agency, tripElement.getAccommodationPrice(), tripElement.getStartDate(), tripElement.getEndDate());
                     tripRepository.add(trip);
-                    Booking booking = new Booking();
-                    booking.setNumberOfPassengers(5);
-                    booking.setDiscounts(new ArrayList<>());
-                    booking.setTrip(trip);
-                    booking.setBookingUser(new User("first", "last", "username", "password", "salt"));
-                    bookingRepository.addBooking(booking);
+                    addExampleBookingsForTrip(trip);
                 }
             }
         } catch (AmbiguousEntityException e) {
             e.printStackTrace();
         }
+    }
+
+    private void addExampleBookingsForTrip(Trip trip) {
+        Booking booking = new Booking();
+        booking.setNumberOfPassengers(1);
+        booking.setDiscounts(new ArrayList<>());
+        booking.setTrip(trip);
+        booking.setBookingUser(new User("first", "last", "username", "password", "salt"));
+        Booking booking2 = new Booking();
+        booking2.setNumberOfPassengers(2);
+        booking2.setDiscounts(new ArrayList<>());
+        booking2.setTrip(trip);
+        booking2.setBookingUser(new User("first", "last", "username2", "password", "salt"));
+        bookingRepository.addBooking(booking);
+        bookingRepository.addBooking(booking2);
     }
 
     // TODO: move these
